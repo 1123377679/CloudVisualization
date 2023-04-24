@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Random;
 
 @WebServlet("/CodeServlet")
@@ -52,10 +51,11 @@ public class CodeServlet extends HttpServlet {
             g.drawString(str, 1 + (width/2)*i, 30 + ran.nextInt(10));
             stringBuilder.append(str);
         }
-
         HttpSession session = req.getSession();
         //stringBuilder.toString():随机的4位数,利用stringBuilder.toString()将4位验证码存入session中
         session.setAttribute("syscode",stringBuilder.toString());
+        //打印验证码的内容，方便复制粘贴
+        System.out.println(stringBuilder.toString());
         //显示验证码图片
         ImageIO.write(bufferedImage, "jpg", resp.getOutputStream());
     }

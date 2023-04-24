@@ -9,11 +9,11 @@
     <style>
         .echars-login {
             position: absolute;
-            top: 26%;
-            left: 73%;
+            top: 24%;
+            left: 71%;
             color: white;
             text-decoration: none;
-            font-size:18px;
+            font-size: 18px;
         }
     </style>
 </head>

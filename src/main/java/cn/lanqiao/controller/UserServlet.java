@@ -4,8 +4,6 @@ import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.UserService;
 import cn.lanqiao.service.impl.UserServiceImpl;
 
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
