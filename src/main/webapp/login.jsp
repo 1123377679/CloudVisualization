@@ -57,3 +57,9 @@
         </script>
 </body>
 </html>
+<script>
+    function changeImage(img) {
+        //图片重新加载src地址，因为图片是一个GET请求，浏览器有缓存  time 表示是一个随机参数 ，防止浏览器缓存
+        img.src="/CodeServlet?time="+new Date();
+    }
+</script>
