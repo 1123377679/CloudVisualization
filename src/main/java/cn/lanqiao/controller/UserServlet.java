@@ -22,7 +22,6 @@ public class UserServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=utf-8");
         String value = req.getParameter("action");
-
         //验证码操作
         //获取前端验证码内容
         String usercode = req.getParameter("usercode");
