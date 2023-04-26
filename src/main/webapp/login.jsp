@@ -30,7 +30,7 @@
         <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
         <hr class="hr15">
         <%--  验证码  --%>
-        <input id="yanzhengm" style="width: 100px;" type="text" name="usercode" placeholder="请输入验证码" required/>
+        <input id="yanzhengm" style="width: 131px;" type="text" name="usercode" placeholder="请输入验证码" required/>
         <!--验证码图片-->
         <img src="/CodeServlet" onclick="changeImage(this);" style="position: relative;cursor: pointer;"/>
         <input value="登录" lay-submit lay-filter="login" style="width:100%;margin-top: 11px" type="submit">

@@ -1,3 +1,4 @@
+<%@ page import="cn.lanqiao.pojo.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html class="x-admin-sm">
@@ -54,9 +55,23 @@
             </dl>
         </li>
     </ul>
+<%--    用户信息名字的显示：      --%>
+<%
+    User loginUser = (User) session.getAttribute("loginUser");
+    String username = null;
+    if (loginUser != null) {
+        //拿到name存入username
+        username = loginUser.getPassword();
+    } else {
+        response.sendRedirect("/nologin.jsp");
+    }
+%>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">
+                <%=username%>
+            </a>
+
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
@@ -64,7 +79,7 @@
                 <dd>
                     <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
                 <dd>
-                    <a href="./login.html">退出</a></dd>
+                    <a href="#" onclick="logout();">退出</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index">
@@ -346,7 +361,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/Supermarket-welcome.jsp' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>
@@ -366,3 +381,11 @@ var _hmt = _hmt || []; (function() {
 </body>
 
 </html>
+<script>
+    function logout() {
+        if (confirm("你确定要退出系统吗？")){
+            //向后端发出退出请求
+            location.href = "/userServlet.do?action=logout";
+        }
+    }
+</script>

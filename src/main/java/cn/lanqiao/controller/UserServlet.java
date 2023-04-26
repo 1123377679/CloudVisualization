@@ -27,10 +27,11 @@ public class UserServlet extends HttpServlet {
         String usercode = req.getParameter("usercode");
         HttpSession session = req.getSession();
         String syscode = String.valueOf(session.getAttribute("syscode"));
-        if (usercode.equalsIgnoreCase(syscode)){
-            //登录操作
-            //equalsIgnoreCase:不区分大小写
-            if(value.equals("login")) {
+
+        //登录功能
+        if (value.equals("login" )) {
+                //equalsIgnoreCase:不区分大小写
+                if (usercode.equalsIgnoreCase(syscode)){
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
                 User user = new User(username, password);
@@ -39,6 +40,10 @@ public class UserServlet extends HttpServlet {
                     //登录成功
                     //跳转到Supermarket-index页面
                     resp.sendRedirect("/Supermarket-index.jsp");
+                    //个人信息名字：
+                    session.setAttribute("loginUser",login);
+                    //管理员名字：
+                    session.setAttribute("ManageUser",login);
                 } else {
 //            System.out.println("登录失败.");
                     //存值并且赋值
@@ -46,10 +51,16 @@ public class UserServlet extends HttpServlet {
                     //转页面
                     req.getRequestDispatcher("/login.jsp").forward(req,resp);
                     }
-                }
-            } else {
-            req.setAttribute("message","验证码错误");
-            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+                }else {
+                req.setAttribute("message","验证码错误");
+                req.getRequestDispatcher("/login.jsp").forward(req,resp);
+            }
+        }
+        if (value.equals("logout")) {
+            //取消session
+            session.invalidate();
+            //返回到登录页面
+            resp.sendRedirect("/login.jsp");
         }
     }
 }
