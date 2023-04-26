@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //有参的构造函数
 @AllArgsConstructor
-
-
 public class User {
     private Integer id;
     private String username;
