@@ -24,10 +24,10 @@
         <%--    欢迎管理员名字的显示：    --%>
         <%
             User manageUser = (User) session.getAttribute("ManageUser");
-            String username = null;
+            String manname = null;
             if (manageUser != null) {
                 //拿到name存入username
-                username = manageUser.getUsername();
+                manname = manageUser.getUsername();
             } else {
                 response.sendRedirect("/nologin.jsp");
             }
@@ -37,7 +37,7 @@
                 <div class="layui-card-body ">
                     <blockquote class="layui-elem-quote">欢迎管理员：
                         <span class="x-red">
-                            <%=username%>
+                            <%=manname%>
                         </span>！当前时间:2018-04-25 20:50:53
                     </blockquote>
                 </div>
