@@ -1,11 +1,12 @@
 package cn.lanqiao.dao.impl;
 
+import cn.lanqiao.dao.UserDao;
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;
 
-public class UserDaoImpl implements cn.lanqiao.dao.UserDao {
+public class UserDaoImpl implements UserDao {
 
     @Override
     public User login(User user) {

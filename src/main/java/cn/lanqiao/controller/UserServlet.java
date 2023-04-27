@@ -56,6 +56,7 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher("/login.jsp").forward(req,resp);
             }
         }
+        //退出功能
         if (value.equals("logout")) {
             //取消session
             session.invalidate();

@@ -27,7 +27,7 @@
             String manname = null;
             if (manageUser != null) {
                 //拿到name存入username
-                manname = manageUser.getPassword();
+                manname = manageUser.getUsername();
             } else {
                 response.sendRedirect("/nologin.jsp");
             }
