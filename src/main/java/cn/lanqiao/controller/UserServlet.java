@@ -63,5 +63,6 @@ public class UserServlet extends HttpServlet {
             //返回到登录页面
             resp.sendRedirect("/login.jsp");
         }
+
     }
 }

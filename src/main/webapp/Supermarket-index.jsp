@@ -100,7 +100,7 @@
                 <ul class="sub-menu">
                     <li>
                         <%--前端发送请求,需要后台拿到action=list数据--%>
-                        <a onclick="xadmin.add_tab('会员列表','/member-list.jsp')">
+                        <a onclick="xadmin.add_tab('会员列表','/MemberServlet.do?action=limit&pageIndex=1&pageSize=5')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite></a>
                     </li>
