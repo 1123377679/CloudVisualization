@@ -18,4 +18,29 @@ public class MemberServiceImpl implements MemberService {
     public List<User> getDepatrs(String name, Integer pageStart, Integer pageSize) {
         return memberDao.getDepatrs(name,pageStart,pageSize);
     }
+
+    @Override
+    public int addUser(User user) {
+        return memberDao.addUser(user);
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return memberDao.getUserById(id);
+    }
+
+    @Override
+    public int updateById(User user) {
+        return memberDao.updateById(user);
+    }
+
+    @Override
+    public int updatePwd(Integer userId, String newPwd) {
+        return memberDao.updatePwd(userId,newPwd);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return memberDao.deleteById(id);
+    }
 }

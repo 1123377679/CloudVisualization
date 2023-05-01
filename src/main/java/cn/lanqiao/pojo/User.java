@@ -27,4 +27,17 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+//    public User(Integer id, String username, String password, Integer sex, String birthday, String phone, String address, Integer type, Integer isdelete) {
+//        this.id = id;
+//        this.username = username;
+//        this.password = password;
+//        this.sex = sex;
+//        this.birthday = birthday;
+//        this.phone = phone;
+//        this.address = address;
+//        this.type = type;
+//        this.isdelete = isdelete;
+//    }
+
 }

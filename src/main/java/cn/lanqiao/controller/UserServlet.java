@@ -36,12 +36,12 @@ public class UserServlet extends HttpServlet {
                 String password = req.getParameter("password");
                 User user = new User(username, password);
                 User login = userService.login(user);
+                    //个人信息名字：
+                    session.setAttribute("loginUser",login);
                 if (login != null) {
                     //登录成功
                     //跳转到Supermarket-index页面
                     resp.sendRedirect("/Supermarket-index.jsp");
-                    //个人信息名字：
-                    session.setAttribute("loginUser",login);
                     //管理员名字：
                     session.setAttribute("ManageUser",login);
                 } else {
