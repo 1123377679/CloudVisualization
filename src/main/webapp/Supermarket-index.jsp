@@ -106,6 +106,27 @@
                     </li>
                 </ul>
             </li>
+        <%--供应商---------------------------------------------------------------------%>
+
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
+                    <cite>供应商管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('订单列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('订单列表1','SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>订单列表1</cite></a>
+                    </li>
+                </ul>
+            </li>
+
 
 
         <%--登陆日志-------------------------------------------------------------------%>
