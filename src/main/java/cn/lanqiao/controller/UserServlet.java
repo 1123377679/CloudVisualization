@@ -1,8 +1,14 @@
 package cn.lanqiao.controller;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
+import cn.lanqiao.pojo.LoginLog;
 import cn.lanqiao.pojo.User;
+import cn.lanqiao.service.LogService;
 import cn.lanqiao.service.UserService;
+import cn.lanqiao.service.impl.LogServiceImpl;
 import cn.lanqiao.service.impl.UserServiceImpl;
+import cn.lanqiao.utils.Address;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +22,11 @@ import java.io.IOException;
 @WebServlet("/userServlet.do")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
+    //添加用户登录的ip地址
+    //引入业务层
+    LogService logService = new LogServiceImpl();
+    //创建ip工具类
+    Address address = new Address();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //处理请求和响应乱码
@@ -37,6 +48,11 @@ public class UserServlet extends HttpServlet {
                 User user = new User(username, password);
                 User login = userService.login(user);
                 if (login != null) {
+                    //登录成功，记录日志到数据库
+                    //获取登录时间
+                    DateTime date = DateUtil.date();
+                    LoginLog log = new LoginLog(null,login.getUsername(),address.getAddress(),address.getIp(),String.valueOf(date),0);
+                    int i = logService.addLogs(log);
                     //登录成功
                     //跳转到Supermarket-index页面
                     resp.sendRedirect("/Supermarket-index.jsp");

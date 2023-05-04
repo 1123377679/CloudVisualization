@@ -104,8 +104,25 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite></a>
                     </li>
-<%--                </ul>--%>
-<%--            </li>--%>
+                </ul>
+            </li>
+
+
+        <%--登陆日志-------------------------------------------------------------------%>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                    <cite>用户登陆日志</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('用户登陆日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>用户登陆日志</cite></a>
+                    </li>
+                </ul>
+            </li>
+
 <%--            <li>--%>
 <%--                <a href="javascript:;">--%>
 <%--                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>--%>
@@ -174,7 +191,7 @@
 <%--                    </li>--%>
 <%--                </ul>--%>
 <%--            </li>--%>
-<%--        </ul>--%>
+        </ul>
     </div>
 </div>
 <!-- <div class="x-slide_left"></div> -->
