@@ -128,7 +128,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('账单管理','/xxx')">
+                        <a onclick="xadmin.add_tab('账单管理','/BillServlet.do?action=limit&pageIndex=1&pageSize=5')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>账单列表</cite></a>
                     </li>

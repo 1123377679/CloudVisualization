@@ -46,5 +46,10 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierDao.findById(id);
     }
 
+    @Override
+    public List<Supplier> selectAll(String name) {
+        return supplierDao.selectAll(name);
+    }
+
 
 }

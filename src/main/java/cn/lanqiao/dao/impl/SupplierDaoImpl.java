@@ -76,5 +76,15 @@ public class SupplierDaoImpl implements SupplierDao {
         }
     }
 
+    @Override
+    public List<Supplier> selectAll(String name) {
+        if (name != null && !"".equals(name)){
+            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0 and name like ?", "%" + name + "%");
+        }else {
+            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0");
+        }
+    }
+
+
 
 }

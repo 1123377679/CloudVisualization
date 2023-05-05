@@ -18,4 +18,7 @@ public interface SupplierService {
     int deleteById(String id);
 
     Supplier findById(String id);
+
+    //供应商列表查询
+    List<Supplier> selectAll(String name);
 }
