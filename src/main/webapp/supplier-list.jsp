@@ -107,7 +107,7 @@
                     </table>
                 </div>
 
-                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
+                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1" style="margin-left: 15px;">
                     <a href="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex-1}&pageSize=${requestScope.pageUtils.pageSize}"
                        class="layui-laypage-prev ${requestScope.pageUtils.pageIndex==1 ? 'layui-disabled':''}"
                        data-page="0"
@@ -134,14 +134,14 @@
 							</span>
                     <span class="layui-laypage-count">[共 ${requestScope.pageUtils.pageIndex}/${requestScope.pageUtils.pageCount} 条]</span>
                     <span class="layui-laypage-limits">
-							    <select lay-ignore="" onchange="goPage(this)">
-							        <option value="5" ${requestScope.pageUtils.pageSize==5 ? 'selected':""}>5条/页</option>
-									<option value="10" ${requestScope.pageUtils.pageSize==10 ? 'selected':""}>10 条/页</option>
-									<option value=20" ${requestScope.pageUtils.pageSize==20 ? 'selected':""}>20 条/页</option>
-									<option value="30" ${requestScope.pageUtils.pageSize==30 ? 'selected':""}>30 条/页</option>
-									<option value="40" ${requestScope.pageUtils.pageSize==40 ? 'selected':""}>40 条/页</option>
+							    <select lay-ignore="" onchange="goPage(this);">
+							        <option value="5" ${requestScope.pageUtils.pageSize==5?"selected":""}>5 条/页</option>
+									<option value="10" ${requestScope.pageUtils.pageSize==10?"selected":""}>10 条/页</option>
+									<option value="20" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
+									<option value="30" ${requestScope.pageUtils.pageSize==30?"selected":""}>30 条/页</option>
+									<option value="40" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
 							</select>
-							</span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -184,12 +184,13 @@
         }
         location.href = '/SupplierServlet.do?action=limit&pageIndex='+number +"&pageSize=${requestScope.pageUtils.pageSize}";
     }
-    //动态修改页面大小
-    function  goPage(select){
+    /**
+     * 动态修改页面大小
+     */
+    function goPage(select) {
         var pageSize = $(select).val();
-        location.href = '/SupplierServlet.do?action=limit&pageSize='+pageSize ;
+        location.href = "/SupplierServlet.do?action=limit&pageIndex=1&pageSize=" + pageSize;
     }
-
 </script>
 </html>
 <script>

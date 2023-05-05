@@ -38,7 +38,6 @@ public class UserServlet extends HttpServlet {
         String usercode = req.getParameter("usercode");
         HttpSession session = req.getSession();
         String syscode = String.valueOf(session.getAttribute("syscode"));
-
         //登录功能
         if (value.equals("login" )) {
                 //equalsIgnoreCase:不区分大小写

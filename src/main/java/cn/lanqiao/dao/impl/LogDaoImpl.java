@@ -35,6 +35,6 @@ public class LogDaoImpl implements LogDao {
 
     @Override
     public List<LoginLog> getDepatrs(Integer pageStart, Integer pageSize) {
-        return DButils.commonQuery(LoginLog.class,"select * from tb_loginlog limit ?,?",pageStart,pageSize);
+        return DButils.commonQuery(LoginLog.class,"select * from tb_loginlog order by logintime desc limit ?,?",pageStart,pageSize);
     }
 }
