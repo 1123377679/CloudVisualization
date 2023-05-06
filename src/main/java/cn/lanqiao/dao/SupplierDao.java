@@ -19,7 +19,12 @@ public interface SupplierDao {
     int deleteById(String id);
 
     Supplier findById(String id);
-
+    //校验用户名是否存在
+    int checkName(String name);
+    //校验用户电话号码
+    int checkPhone(String phone);
+    //校验联系人
+    int checkLiername(String liername);
     //供应商列表查询
     List<Supplier> selectAll(String name);
 

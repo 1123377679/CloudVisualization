@@ -77,6 +77,22 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
+    public int checkName(String name) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where name=?", name);
+    }
+
+    @Override
+    public int checkPhone(String phone) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where phone=?",phone);
+    }
+
+    @Override
+    public int checkLiername(String liername) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where linkman=?", liername);
+    }
+
+
+    @Override
     public List<Supplier> selectAll(String name) {
         if (name != null && !"".equals(name)){
             return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0 and name like ?", "%" + name + "%");

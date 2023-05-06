@@ -69,22 +69,45 @@ public class SupplierServlet extends HttpServlet {
             String description= req.getParameter("description");
             //前端的值给实体类
             Supplier supplier=new Supplier(null,name,linkman,phone,address,fax,description,0);
-            System.out.println(supplier);
             //存入数据库
             int i=supplierService.addSuppliers(supplier);
+            String suppliername1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            String supplierlinkman1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            String supplierphone1= "1[0-9]{10}";
             PrintWriter writer = resp.getWriter();
-            if (i>0){
-                writer.print("<script>"+
-                        "alert('用户添加成功');"+
-                        "window.parent.location='/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';"+
-                        "</script>");
+            if (suppliername1.matches(name)) {
+                if (supplierlinkman1.matches(linkman)){
+                    if (!supplierphone1.matches(phone)){
+                        if (i > 0) {
+                            writer.print("<script>" +
+                                    "alert('用户添加成功');" +
+                                    "window.parent.location='/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';" +
+                                    "</script>");
+                        } else {
+                            writer.print("<script>" +
+                                    "alert('用户添加失败');" +
+                                    "location.href='/supplier-add.jsp';" +
+                                    "</script>");
+                        }
+                    }else {
+                        writer.print("<script>" +
+                                "alert('电话格式有误');" +
+                                "location.href='/supplier-add.jsp';" +
+                                "</script>");
+                    }
+                }else {
+                    writer.print("<script>" +
+                            "alert('联系人格式有误');" +
+                            "location.href='/supplier-add.jsp';" +
+                            "</script>");
+                }
+
             }else {
-                writer.print("<script>"+
-                        "alert('用户添加失败');"+
-                        "location.href='/supplier-add.jsp';"+
+                writer.print("<script>" +
+                        "alert('用户名格式有误');" +
+                        "location.href='/supplier-add.jsp';" +
                         "</script>");
             }
-
         }
 
         //跳转修改页面并回显
@@ -100,7 +123,7 @@ public class SupplierServlet extends HttpServlet {
         }
         //修改功能
         if (value.equals("update")){
-           String id = req.getParameter("id");
+            String id = req.getParameter("id");
             //拿前端传过来的值
             String name= req.getParameter("name");
             String linkman= req.getParameter("linkman");
@@ -111,16 +134,41 @@ public class SupplierServlet extends HttpServlet {
             //前端的值给实体类
             Supplier supplier= new  Supplier(Integer.parseInt(id),name,linkman,phone,address,fax,description,0);
             int i = supplierService.updateById(supplier);
+            String suppliername1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            String supplierlinkman1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            String supplierphone1= "1[0-9]{10}";
             PrintWriter writer = resp.getWriter();
-            if (i>0){
-                writer.print("<script>"+
-                        "alert('用户修改成功');"+
-                        "window.parent.location='/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';"+
-                        "</script>");
+            if (suppliername1.matches(name)) {
+                if (supplierlinkman1.matches(linkman)){
+                    if (!supplierphone1.matches(phone)){
+                        if (i > 0) {
+                            writer.print("<script>" +
+                                    "alert('用户修改成功');" +
+                                    "window.parent.location='/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';" +
+                                    "</script>");
+                        } else {
+                            writer.print("<script>" +
+                                    "alert('用户修改失败');" +
+                                    "location.href='/supplier-edit.jsp';" +
+                                    "</script>");
+                        }
+                    }else {
+                        writer.print("<script>" +
+                                "alert('电话格式有误');" +
+                                "location.href='/supplier-edit.jsp';" +
+                                "</script>");
+                    }
+                }else {
+                    writer.print("<script>" +
+                            "alert('联系人格式有误');" +
+                            "location.href='/supplier-edit.jsp';" +
+                            "</script>");
+                }
+
             }else {
-                writer.print("<script>"+
-                        "alert('用户修改失败');"+
-                        "location.href='/supplier-add.jsp';"+
+                writer.print("<script>" +
+                        "alert('用户名格式有误');" +
+                        "location.href='/supplier-edit.jsp';" +
                         "</script>");
             }
         }
@@ -150,6 +198,64 @@ public class SupplierServlet extends HttpServlet {
                         "alert('用户删除失败');"+
                         "window.location.href='/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';"+
                         "</script>");
+            }
+        }
+        //检查用户名是否重复
+        if (value.equals("checkSupplierName")){
+            //前端通过Ajax携带过来的值
+            String suppliername = req.getParameter("suppliername");
+            String suppliername1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            //存储用户输入的名称
+            int i =supplierService.checkName(suppliername);
+            //判断
+            PrintWriter writer = resp.getWriter();
+            if (suppliername.matches(suppliername1)){
+                if (i>0){
+                    writer.print(1);
+                }else {
+                    writer.print(0);
+                }
+            }else {
+                writer.print(2);
+            }
+        }
+        //校验用户的电话
+        if (value.equals("checkSupplierPhone")){
+            //前端通过Ajax携带过来的值
+            String supplierphone = req.getParameter("supplierphone");
+            String supplierphone1= "1[0-9]{10}";
+            //存储用户输入的名称
+            int i =supplierService.checkPhone(supplierphone);
+            //判断
+            PrintWriter writer = resp.getWriter();
+            if (supplierphone.matches(supplierphone1)){
+                if (i>0){
+                    writer.print(1);
+                }else {
+                    writer.print(0);
+                }
+            }else {
+                writer.print(2);
+            }
+
+        }
+        //校验联系人
+        if (value.equals("checkSupplierLinkman")){
+            //前端通过Ajax携带过来的值
+            String supplierlinkman = req.getParameter("supplierlinkman");
+            String supplierlinkman1= "^[\\u4E00-\\u9FA5]{1,8}$";
+            //存储用户输入的名称
+            int i =supplierService.checkLiername(supplierlinkman);
+            //判断
+            PrintWriter writer = resp.getWriter();
+            if (supplierlinkman.matches(supplierlinkman1)){
+                if (i>0){
+                    writer.print(1);
+                }else {
+                    writer.print(0);
+                }
+            }else {
+                writer.print(2);
             }
         }
     }

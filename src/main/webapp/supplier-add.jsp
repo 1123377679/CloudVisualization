@@ -29,9 +29,7 @@
                 <div class="layui-input-inline">
                     <input type="text" id="name" name="name" required="" lay-verify="email" autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>请输入供应商名称
-                </div>
+                <div class="layui-form-mid" id="checkSuppliername" style="color:#999999">将会成为你唯一的登录名</div>
                 <div class="layui-form-item">
                     <label for="linkman" class="layui-form-label">
                         <span class="x-red">*</span>联系人
@@ -39,9 +37,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="linkman" name="linkman" required="" lay-verify="pass" autocomplete="off" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入联系人
-                    </div>
+                    <div class="layui-form-mid" id="checkSupplierlinkman" style="color:#999999">请输入联系人</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="phone" class="layui-form-label">
@@ -50,6 +46,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="phone" name="phone" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                     </div>
+                    <div class="layui-form-mid" id="checkSupplierphone" style="color:#999999">11位的阿拉伯数字</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="address" class="layui-form-label">
@@ -140,4 +137,92 @@
         var laydate = layui.laydate;
 
     });
+</script>
+<script>
+    //获取输入框
+    var Name=document.querySelector('#name');
+    //用户绑定焦点事件
+    Name.onblur = function checkSuppliername(){
+        //获取输入框中的内容
+        var suppliername =$("#name").val();
+        $.ajax({
+            type:"POST",
+            url:"/SupplierServlet.do",
+            //?????????????data打成date了
+            data:"action=checkSupplierName&suppliername="+suppliername,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if (result==1){
+                    $("#checkSuppliername").text("已经存在该供应商名称！");
+                    $("#checkSuppliername").css("color","red");
+                }else if(suppliername=="") {
+                    $("#checkSuppliername").text("不能为空");
+                    $("#checkSuppliername").css("color","red");
+                }else if (result==0){
+                    $("#checkSuppliername").text("√" );
+                    $("#checkSuppliername").css("color","green");
+                }else if (result==2){
+                    $("#checkSuppliername").text("格式错误");
+                    $("#checkSuppliername").css("color","red");
+                }
+
+            }
+        })
+    }
+    //获取输入框
+    var Linkman=document.querySelector('#linkman');
+    //用户绑定焦点事件
+    Linkman.onblur = function checkSupplierlinkman(){
+        //获取输入框中的内容
+        var supplierlinkman =$("#linkman").val();
+        $.ajax({
+            type:"POST",
+            url:"/SupplierServlet.do",
+            //?????????????data打成date了
+            data:"action=checkSupplierLinkman&supplierlinkman="+supplierlinkman,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if (result==0){
+                    $("#checkSupplierlinkman").text("√");
+                    $("#checkSupplierlinkman").css("color","green");
+                }else if(supplierlinkman=="") {
+                    $("#checkSupplierlinkman").text("不能为空");
+                    $("#checkSupplierlinkman").css("color","red");
+                } else if (result==2){
+                    $("#checkSupplierlinkman").text("格式错误");
+                    $("#checkSupplierlinkman").css("color","red");
+                }
+
+            }
+        })
+    }
+    var Phone=document.querySelector('#phone');
+    //用户绑定焦点事件
+    Phone.onblur = function checkSupplierphone(){
+        //获取输入框中的内容
+        var supplierphone =$("#phone").val();
+        $.ajax({
+            type:"POST",
+            url:"/SupplierServlet.do",
+            //?????????????data打成date了
+            data:"action=checkSupplierPhone&supplierphone="+supplierphone,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if (result==1){
+                    $("#checkSupplierphone").text("已经存在！");
+                    $("#checkSupplierphone").css("color","red");
+                }else if(supplierphone=="") {
+                    $("#checkSupplierphone").text("不能为空");
+                    $("#checkSupplierphone").css("color","red");
+                }else if (result==0){
+                    $("#checkSupplierphone").text("√" );
+                    $("#checkSupplierphone").css("color","green");
+                }else if (result==2){
+                    $("#checkSupplierphone").text("格式错误");
+                    $("#checkSupplierphone").css("color","red");
+                }
+
+            }
+        })
+    }
 </script>

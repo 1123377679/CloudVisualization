@@ -47,6 +47,22 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    public int checkName(String name) {
+        return supplierDao.checkName(name);
+    }
+
+    @Override
+    public int checkPhone(String phone) {
+        return supplierDao.checkPhone(phone);
+    }
+
+    @Override
+    public int checkLiername(String liername) {
+        return supplierDao.checkLiername(liername);
+    }
+
+
+    @Override
     public List<Supplier> selectAll(String name) {
         return supplierDao.selectAll(name);
     }
