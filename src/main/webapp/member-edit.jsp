@@ -22,20 +22,20 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" target="_parent" action="/MemberServlet.do?action=update&id=${requestScope.userById.id}" method="post">
+        <form class="layui-form" target="_parent" action="/MemberServlet.do?action=update&id=${requestScope.userById.id}" method="post" onsubmit="return checkAll();">
             <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">
                     <span class="x-red">*</span>用户姓名</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_email" name="userName" required="" lay-verify="email" autocomplete="off" class="layui-input" value="${requestScope.userById.username}"></div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>将会成为您唯一的登入名</div></div>
-<%--            <div class="layui-form-item">--%>
-<%--                <label for="L_pass" class="layui-form-label">--%>
-<%--                    <span class="x-red">*</span>密码</label>--%>
-<%--                <div class="layui-input-inline">--%>
-<%--                    <input type="text" id="L_pass" name="oldpassword" required="" lay-verify="pass" autocomplete="off" class="layui-input" value="${requestScope.userById.password}"></div>--%>
-<%--                <div class="layui-form-mid layui-word-aux">6到16个字符</div></div>--%>
+                    <input type="text" id="userName" name="userName" required="" lay-verify="email" autocomplete="off" class="layui-input" value="${requestScope.userById.username}">
+                </div>
+                <div class="layui-form-mid" id="userNameSpanDiv" style="color: #999999">将会成为您唯一的登录名</div>
+            <div class="layui-form-item" style="display: none">
+                <label for="L_pass" class="layui-form-label">
+                    <span class="x-red">*</span>密码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_pass" name="oldpassword" required="" lay-verify="pass" autocomplete="off" class="layui-input" value="${requestScope.userById.password}"></div>
+                <div class="layui-form-mid layui-word-aux">6到16个字符</div></div>
 <%--            <div class="layui-form-item">--%>
 <%--                <label for="L_repass" class="layui-form-label">--%>
 <%--                    <span class="x-red">*</span>确认密码</label>--%>
@@ -61,6 +61,7 @@
                     <span class="x-red">*</span>用户电话</label>
                 <div class="layui-input-inline">
                     <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input" value="${requestScope.userById.phone}"></div>
+                <div class="layui-form-mid" id="userNamePhoneSpan" style="color: #999999">11位数字</div>
             </div>
             <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label">
@@ -123,15 +124,16 @@
                     return false;
                 });
 
-        });</script>
+        });
+</script>
 <script>var _hmt = _hmt || []; (function() {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
-})();</script>
+})();
+</script>
 </body>
-
 </html>
 <script>
     layui.use(['form', 'util', 'laydate'], function(){
@@ -142,3 +144,76 @@
 
     });
 </script>
+<script>
+    //用户姓名
+    var userName = document.querySelector("#userName");
+    //文本框焦点事件
+    userName.onblur = function checkUserNameVal(){
+        //获取原用户
+        var userName = $("#userName").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserName&username="+userName,
+            dataType:"text",
+            success:function (result) {
+                if (result == 1) {
+                    $("#userNameSpanDiv").text("用户名已存在!");
+                    $("#userNameSpanDiv").css("color","red");
+                    return false;
+                } else if (userName == "") {
+                    $("#userNameSpanDiv").text("用户姓名不能为空！");
+                    $("#userNameSpanDiv").css("color", "red");
+                    return false;
+                } else if(result == 0){
+                    $("#userNameSpanDiv").text("√");
+                    $("#userNameSpanDiv").css("color","green");
+                    return true;
+                }else if(result == 2){
+                    $("#userNameSpanDiv").text("用户名必须是中文!");
+                    $("#userNameSpanDiv").css("color","red");
+                    return false;
+                }
+            }
+        });
+    }
+
+    //电话号码
+    var userphone = document.querySelector("#userphone");
+    //文本框焦点事件
+    userphone.onblur = function checkUserPhone(){
+        //获取原用户
+        var userphone = $("#userphone").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserPhone&userphone="+userphone,
+            dataType:"text",
+            success:function (result) {
+                if (result == 1) {
+                    $("#userNamePhoneSpan").text("用户电话号码已存在!");
+                    $("#userNamePhoneSpan").css("color","red");
+                    return false;
+                } else if (userphone == "") {
+                    $("#userNamePhoneSpan").text("用户电话号码不能为空！");
+                    $("#userNamePhoneSpan").css("color", "red");
+                    return false;
+                } else if(result == 0){
+                    $("#userNamePhoneSpan").text("√");
+                    $("#userNamePhoneSpan").css("color","green");
+                    return true;
+                }else if(result == 2){
+                    $("#userNamePhoneSpan").text("用户电话号码必须是11位的阿拉伯数字！");
+                    $("#userNamePhoneSpan").css("color","red");
+                    return false;
+                }
+            }
+        });
+    }
+    function checkAll(){
+        return checkUserPhone() && checkUserNameVal();
+    }
+</script>
+

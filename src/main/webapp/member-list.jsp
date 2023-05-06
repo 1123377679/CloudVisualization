@@ -43,11 +43,11 @@
           </form>
         </div>
         <div class="layui-card-header">
-          <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+          <button class="layui-btn layui-btn-danger"><i class="layui-icon"></i>批量删除</button>
           <button class="layui-btn" onclick="xadmin.open('添加用户','/member-add.jsp',600,400)"><i class="layui-icon"></i>添加</button>
           <button class="layui-btn"><i class="layui-icon"></i>下载模板</button>
           <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
-          <button class="layui-btn"><i class="layui-icon"></i>导出数据</button>
+          <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
         </div>
         <div class="layui-card-body layui-table-body layui-table-main">
           <table class="layui-table layui-form">
@@ -113,7 +113,9 @@
         <%--  左箭头      --%>
         <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1" style="margin-left: 15px;">
           <a href="/MemberServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex-1}&pageSize=${requestScope.pageUtils.pageSize}"
-             class="layui-laypage-prev ${requestScope.pageUtils.pageIndex == 1 ? 'layui-disabled':''}" data-page="0">
+             class="layui-laypage-prev ${requestScope.pageUtils.pageIndex == 1 ? 'layui-disabled':''}"
+             data-page="0"
+             ${requestScope.pageUtils.pageIndex == 1? 'onclick="return false;"':''}>
             <i class="layui-icon" >&lt;</i>
           </a>
           <c:forEach begin="${requestScope.pageUtils.numberStart}" end="${requestScope.pageUtils.numberEnd}" var="num" step="1">
@@ -126,7 +128,9 @@
           </c:forEach>
           <%--  右箭头      --%>
           <a href="/MemberServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex+1}&pageSize=${requestScope.pageUtils.pageSize}"
-             class="layui-laypage-next ${requestScope.pageUtils.pageIndex == requestScope.pageUtils.numberEnd ? 'layui-disabled':''}" data-page="2">
+             class="layui-laypage-next ${requestScope.pageUtils.pageIndex == requestScope.pageUtils.numberEnd ? 'layui-disabled':''}"
+             data-page="2"
+             ${requestScope.pageUtils.pageIndex == requestScope.pageUtils.numberEnd ? 'onclick="return false;"':''}>
             <i class="layui-icon">&gt;</i>
           </a>
           <%--     确定和输入跳转页面     --%>

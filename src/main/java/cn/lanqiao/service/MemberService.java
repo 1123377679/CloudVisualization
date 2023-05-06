@@ -19,4 +19,8 @@ public interface MemberService {
     int updatePwd(Integer userId,String newPwd);
     //删除功能
     int deleteById(String id);
+    //判断添加用户
+    int checkName(String name);
+    //判断用户的电话
+    int checkPhone(String phone);
 }

@@ -43,4 +43,14 @@ public class MemberServiceImpl implements MemberService {
     public int deleteById(String id) {
         return memberDao.deleteById(id);
     }
+
+    @Override
+    public int checkName(String name) {
+        return memberDao.checkName(name);
+    }
+
+    @Override
+    public int checkPhone(String phone) {
+        return memberDao.checkPhone(phone);
+    }
 }

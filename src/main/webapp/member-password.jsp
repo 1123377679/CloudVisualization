@@ -21,7 +21,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" action="/MemberServlet.do?action=updatepwd" method="post">
+        <form class="layui-form" action="/MemberServlet.do?action=updatepwd" method="post" onsubmit="return checkAll();">
             <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label">
                     <span class="x-red">*</span>旧密码</label>
@@ -67,11 +67,7 @@
 })();
 </script>
 
-<script type="text/javascript">
-    layui.use('layer', function () {
-        var $ = layui.jquery, layer = layui.layer;
-        //全局变量
-        var checkoldPassword = false;
+<script>
         //检查原密码合法性
         var oldPassword = document.querySelector('#oldPassword');
         //文本框焦点事件
@@ -88,19 +84,23 @@
                 success:function (result){
                     // alert("服务器响应的数据:"+result);
                     //根据后端响应的数据进行判断
-                    if (result== 1){
+                    if (result == 1){
                         $("#oldPasswordSpan").text("√");
                         $("#oldPasswordSpan").css("color","green");
+                        return true;
                     } else  if (oldPassword == ""){
                         $("#oldPasswordSpan").text("原密码不能为空!");
                         $("#oldPasswordSpan").css("color","red");
+                        return false;
                     } else {
                             $("#oldPasswordSpan").text("原密码填写错误!");
                             $("#oldPasswordSpan").css("color","red");
+                        return false;
                     }
                 }
             });
         }
+
         //新密码框
         var newPassword = document.querySelector('#newPassword');
         //鼠标离开焦点事件
@@ -112,11 +112,14 @@
             if (newPassword == ""){
                 $("#newPasswordSpan").text("新密码不能为空!");
                 $("#newPasswordSpan").css("color","red");
+                return false;
             } else if (newPassword == oldPassword){
                 $("#newPasswordSpan").text("新密码不能和原密码相同!");
                 $("#newPasswordSpan").css("color","red");
+                return false;
             } else {$("#newPasswordSpan").text("√");
                 $("#newPasswordSpan").css("color","green");
+                return true;
             }
         }
 
@@ -128,21 +131,21 @@
             //确认新密码
             var confirmPassword = $("#confirmPassword").val();
             if (confirmPassword == ""){
-                $("#reconfirmPassword").text("新密码不能为空!");
+                $("#reconfirmPassword").text("确认密码不能为空!");
                 $("#reconfirmPassword").css("color","red");
+                return false;
             } else if (newPassword != confirmPassword) {
                 $("#reconfirmPassword").text("两次密码输入不相同!");
                 $("#reconfirmPassword").css("color", "red");
-            } else {
+                return false;
+            }  else {
                 $("#reconfirmPassword").text("√");
                 $("#reconfirmPassword").css("color", "green");
+                return true;
             }
         }
 
-        function checkAll(){
-            return checkoldPassword&&checkNewPassword()&&checkerNewPassword();
-        }
-    });
+
 </script>
 </body>
 

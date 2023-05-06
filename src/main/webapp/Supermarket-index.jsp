@@ -209,15 +209,13 @@ var _hmt = _hmt || []; (function() {
     hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
-})();</script>
-</body>
-
-</html>
-<script>
-    function logout() {
-        if (confirm("你确定要退出系统吗？")){
-            //向后端发出退出请求
-            location.href = "/userServlet.do?action=logout";
-        }
+})();
+function logout() {
+    if (confirm("你确定要退出系统吗？")){
+        //向后端发出退出请求
+        location.href = "/userServlet.do?action=logout";
     }
+}
 </script>
+</body>
+</html>

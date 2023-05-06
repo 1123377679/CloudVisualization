@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 //getset方法
 @Data
-//参数的构造函数
+//无参数的构造函数
 @NoArgsConstructor
 //有参的构造函数
 @AllArgsConstructor
@@ -27,6 +27,7 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
 
 //    public User(Integer id, String username, String password, Integer sex, String birthday, String phone, String address, Integer type, Integer isdelete) {
 //        this.id = id;
