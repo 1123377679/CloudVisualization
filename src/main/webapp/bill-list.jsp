@@ -266,6 +266,14 @@
         var pageSize = $(select).val();
         location.href = "/BillServlet.do?action=limit&pageIndex=1&pageSize=" + pageSize;
     }
+
+    <%--导出数据--%>
+    function exportExcel(){
+        // 搜索的关键字
+        var name = $('#name').val();
+        //发送请求到后台导出excel数据
+        location.href = "/SupplierServlet.do?action=exportException&name="+name;
+    }
 </script>
 
 </html>

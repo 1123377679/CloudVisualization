@@ -1,6 +1,7 @@
 package cn.lanqiao.dao;
 
 import cn.lanqiao.pojo.Bill;
+import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.User;
 
 import java.util.List;
@@ -18,5 +19,6 @@ public interface BillDao {
     int updaeteById(Bill bill);
     //根据id删除
     int deleteById(String id);
-
+    //查询所有的数据
+    List<Bill> selectAll();
 }

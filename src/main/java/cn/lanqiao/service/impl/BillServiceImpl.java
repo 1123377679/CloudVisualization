@@ -50,5 +50,10 @@ public class BillServiceImpl implements BillService {
         return billDao.deleteById(id);
     }
 
+    @Override
+    public List<Bill> selectAll() {
+        return billDao.selectAll();
+    }
+
 
 }

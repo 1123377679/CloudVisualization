@@ -81,4 +81,9 @@ public class BillDaoImpl implements BillDao {
     public int deleteById(String id) {
         return DButils.commonUpdate("update tb_bills set isdelete = 1 where id = ? ",id);
     }
+
+    @Override
+    public List<Bill> selectAll() {
+        return DButils.commonQuery(Bill.class,"select * from tb_bills");
+    }
 }
