@@ -19,11 +19,11 @@ public class LogServiceImpl implements LogService {
     public int deleteLogs(String id) {
         return logDao.deleteLogs(id);
     }
-//
-//    @Override
-//    public List<LoginLog> queryMyLogs(String username) {
-//        return logDao.queryMyLogs(username);
-//    }
+
+    @Override
+    public List<LoginLog> queryMyLogs() {
+        return logDao.queryMyLogs();
+    }
 
     @Override
     public int getTotalCount() {

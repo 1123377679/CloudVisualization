@@ -36,9 +36,9 @@
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn"><i class="layui-icon"></i>下载模板</button>
-                    <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
                     <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
+                    <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
+                    <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -105,11 +105,11 @@
                     <span class="layui-laypage-count">[当前${requestScope.pageUtils.pageIndex}/${requestScope.pageUtils.pageCount}]</span>
                     <span class="layui-laypage-limits">
 							    <select lay-ignore="" onchange="goPage(this)">
-									<option value="5" ${requestScope.pageUtils.pageSize==5?"selected":""}>5 条/页</option>
-									<option value="10" ${requestScope.pageUtils.pageSize==10?"selected":""}>10 条/页</option>
-									<option value="20" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
-									<option value="30" ${requestScope.pageUtils.pageSize==30?"selected":""}>30 条/页</option>
-									<option value="40" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
+									<option value="5" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
+									<option value="10" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
+									<option value="20" ${requestScope.pageUtils.pageSize==60?"selected":""}>60 条/页</option>
+									<option value="30" ${requestScope.pageUtils.pageSize==80?"selected":""}>80 条/页</option>
+									<option value="40" ${requestScope.pageUtils.pageSize==100?"selected":""}>100 条/页</option>
 							</select>
                     </span>
                 </div>
@@ -120,10 +120,36 @@
 </div>
 </body>
 <script>
-    layui.use(['laydate','form'], function(){
+    layui.use(['laydate','form','upload'], function(){
         var laydate = layui.laydate;
         var  form = layui.form;
+        var upload = layui.upload;
+        // 指定允许上传的文件类型
+        upload.render({
+            elem: '#test3'//id
+            ,url: '/LogServlet.do?action=excelImport' //此处配置你自己的上传接口即可
+            ,accept: 'file' //普通文件
+            ,multiple:true
+            //这里需要返回JSON数据，不然会报接口格式返回有误
+            ,done: function(res){
+                console.log(res);
+                //如果上传成功
+                if(res.code == 200){
+                    layer.msg('上传成功',{
 
+                    },function (){
+                        window.location.reload();
+                    });
+                }else if (res.code == 500){
+                    //上传失败
+                    layer.msg('上传失败',{
+
+                    },function (){
+                        window.location.reload();
+                    });
+                }
+            }
+        });
 
         // 监听全选
         form.on('checkbox(checkall)', function(data){
@@ -148,6 +174,17 @@
 
 
     });
+    <%--导出数据--%>
+    function exportExcel(){
+        // 搜索的关键字
+        var name = $('#name').val();
+        //发送请求到后台导出excel数据
+        location.href = "/LogServlet.do?action=exportExcel";
+    }
+    <%--下载模板--%>
+    function downloadExcelModel(){
+        location.href = "/LogServlet.do?action=downloadExcelModel";
+    }
 </script>
 <script>
     function deleteUsers(id){
