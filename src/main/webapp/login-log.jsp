@@ -91,8 +91,11 @@
                         </c:if>
                     </c:forEach>
                     <a href="/LogServlet.do?action=mylogs&pageIndex=${requestScope.pageUtils.pageIndex+1}&pageSize=${requestScope.pageUtils.pageSize}"
-                       class="layui-laypage-next ${requestScope.pageUtils.pageIndex==requestScope.pageUtils.numberEnd?'layui-disabled':''}"
-                       style="${requestScope.pageUtils.pageIndex==requestScope.pageUtils.pageCount?'disabled:true;':''}" data-page="2" ${requestScope.pageUtils.pageIndex==1?'onclick="return false;"':''}>
+                       class="layui-laypage-next
+                       ${requestScope.pageUtils.pageIndex == requestScope.pageUtils.numberEnd ? 'layui-disabled':''}"
+                       data-page="2"
+                    ${requestScope.pageUtils.pageIndex == requestScope.pageUtils.numberEnd ? 'onclick="return false;"' : ''}
+                    >
                         <i class="layui-icon">&gt;</i>
                     </a>
                     <span class="layui-laypage-skip">到第
