@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -21,123 +22,81 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-        <!DOCTYPE html>
-        <html>
-        <head lang="en">
-            <meta charset="UTF-8">
-            <title>超市账单管理系统</title>
-            <link rel="stylesheet" href="/css/public.css"/>
-            <link rel="stylesheet" href="/css/style.css"/>
-        </head>
-        <body>
-        <!--头部-->
-        <header class="publicHeader">
-            <h1>超市账单管理系统</h1>
-
-            <div class="publicHeaderR">
-                <p><span>下午好！</span><span style="color: #fff21b"> Admin</span> , 欢迎你！</p>
-                <a href="login.html">退出</a>
+        <form class="layui-form" method="post" action="/MemberServlet.do?action=add">
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>用户姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="username" name="username" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                <div class="layui-form-mid" id="userNameSpan" style="color: #999999">将会成为您唯一的登录名</div>
             </div>
-        </header>
-        <!--时间-->
-        <section class="publicTime">
-            <span id="time">2015年1月1日 11:11  星期一</span>
-            <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
-        </section>
-        <!--主体内容-->
-        <section class="publicMian ">
-            <div class="left">
-                <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
-                <nav>
-                    <ul class="list">
-                        <li><a href="billList.html">账单管理</a></li>
-                        <li ><a href="providerList.html">供应商管理</a></li>
-                        <li id="active"><a href="userList.html">用户管理</a></li>
-                        <li><a href="password.html">密码修改</a></li>
-                        <li><a href="login.html">退出系统</a></li>
-                    </ul>
-                </nav>
+            <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">
+                    <span class="x-red">*</span>用户密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" id="oldpassword" name="oldpassword" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
+                <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                <div class="layui-form-mid" id="userNameWord" style="color: #999999">6到16个字符</div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>确认密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" id="newpassword" name="newpassword" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                <div class="layui-form-mid" id="userNameWordSpan" style="color: #999999">6到16个字符</div>
             </div>
-            <div class="right">
-                <div class="location">
-                    <strong>你现在所在的位置是:</strong>
-                    <span>用户管理页面 >> 用户添加页面</span>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="1" title="男" checked="">
+                    <input type="radio" name="sex" value="0" title="女">
                 </div>
-                <div class="providerAdd">
-                    <form action="#">
-
-
-                        <div>
-                            <label for="userName">用户名称：</label>
-                            <input type="text" name="userName" id="userName"/>
-                            <span >*请输入用户名称</span>
-                        </div>
-                        <div>
-                            <label for="userpassword">用户密码：</label>
-                            <input type="text" name="userpassword" id="userpassword"/>
-                            <span>*密码长度必须大于6位小于20位</span>
-
-                        </div>
-                        <div>
-                            <label for="userRemi">确认密码：</label>
-                            <input type="text" name="userRemi" id="userRemi"/>
-                            <span>*请输入确认密码</span>
-                        </div>
-                        <div>
-                            <label >用户性别：</label>
-
-                            <select name="sex">
-                                <option value="man">男</option>
-                                <option value="woman">女</option>
-                            </select>
-                            <span></span>
-                        </div>
-                        <div>
-                            <label for="data">出生日期：</label>
-                            <input type="text" name="birthday" id="data"/>
-                            <span >*</span>
-                        </div>
-                        <div>
-                            <label for="userphone">用户电话：</label>
-                            <input type="text" name="userphone" id="userphone"/>
-                            <span >*</span>
-                        </div>
-                        <div>
-                            <label for="userAddress">用户地址：</label>
-                            <input type="text" name="userAddress" id="userAddress"/>
-                        </div>
-                        <div>
-                            <label >用户类别：</label>
-                            <input type="radio" name="userlei" value="管理员"/>管理员
-                            <input type="radio" name="userlei" value="经理"/>经理
-                            <input type="radio" name="userlei" value="普通用户"/>普通用户
-                        </div>
-                        <div class="providerAddBtn">
-                            <!--<a href="#">保存</a>-->
-                            <!--<a href="userList.html">返回</a>-->
-                            <input type="button" value="保存" onclick="history.back(-1)"/>
-                            <input type="button" value="返回" onclick="history.back(-1)"/>
-                        </div>
-                    </form>
-                </div>
-
             </div>
-        </section>
-        <footer class="footer">
-        </footer>
-        <script src="/js/time.js"></script>
-
-        </body>
-        </html>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">生日日期</label>
+                    <div class="layui-input-inline">
+                        <input type="date" name="birthday" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>用户电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                <div class="layui-form-mid" id="userNamePhone" style="color: #999999">11位数字</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label">
+                    <span class="x-red">*</span>用户地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户类别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="userlei" value="1" title="管理员" checked="">
+                    <input type="radio" name="userlei" value="2" title="经理">
+                    <input type="radio" name="userlei" value="3" title="普通用户">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label"></label>
+                <button class="layui-btn" lay-filter="add" type="submit">点击添加</button>
+            </div>
+        </form>
     </div>
 </div>
-<script>layui.use(['form', 'layer','jquery'],
+<script>
+    layui.use(['form', 'layer','jquery'],
     function() {
         $ = layui.jquery;
         var form = layui.form,
             layer = layui.layer;
-
         //自定义验证规则
         form.verify({
             nikename: function(value) {
@@ -152,7 +111,6 @@
                 }
             }
         });
-
         //监听提交
         form.on('submit(add)',
             function(data) {
@@ -164,15 +122,120 @@
                     function() {
                         //关闭当前frame
                         xadmin.close();
-
                         // 可以对父窗口进行刷新
                         xadmin.father_reload();
                     });
                 return false;
             });
-
     });
 </script>
 </body>
-
 </html>
+<script>
+    //用户姓名
+    var username = document.querySelector("#username");
+    //文本框焦点事件
+    username.onblur = function checkUserName(){
+        //获取原用户
+        var username = $("#username").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserName&username="+username,
+            dataType:"text",
+            success:function (result) {
+                if (result == 1) {
+                    $("#userNameSpan").text("用户姓名已存在!");
+                    $("#userNameSpan").css("color","red");
+                } else if (username == "") {
+                    $("#userNameSpan").text("用户姓名不能为空！");
+                    $("#userNameSpan").css("color", "red");
+                } else if(result == 0){
+                    $("#userNameSpan").text("√");
+                    $("#userNameSpan").css("color","green");
+                }else if(result == 2){
+                    $("#userNameSpan").text("用户姓名必须是中文!");
+                    $("#userNameSpan").css("color","red");
+                }
+            }
+        });
+    }
+
+    //用户密码
+    var oldpassword = document.querySelector("#oldpassword");
+    //文本框焦点事件
+    oldpassword.onblur = function checkUserWord(){
+        //获取原用户
+        var oldpassword = $("#oldpassword").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserWord&oldpassword="+oldpassword,
+            dataType:"text",
+            success:function (result) {
+                if (oldpassword == "") {
+                    $("#userNameWord").text("用户密码不能为空！");
+                    $("#userNameWord").css("color", "red");
+                } else if(result == 0){
+                    $("#userNameWord").text("√");
+                    $("#userNameWord").css("color","green");
+                }else if(result == 2){
+                    $("#userNameWord").text("用户密码必须是6到16个字符!");
+                    $("#userNameWord").css("color","red");
+                }
+            }
+        });
+    }
+
+    //确认密码
+    var newpassword = document.querySelector('#newpassword');
+    newpassword.onblur = function checkerNewPassword() {
+        //用户密码
+        var oldpassword = $("#oldpassword").val();
+        //确认密码
+        var newpassword = $("#newpassword").val();
+        if (newpassword == ""){
+            $("#userNameWordSpan").text("确认密码不能为空!");
+            $("#userNameWordSpan").css("color","red");
+        } else if (oldpassword != newpassword) {
+            $("#userNameWordSpan").text("两次密码输入不相同!");
+            $("#userNameWordSpan").css("color", "red");
+        }  else {
+            $("#userNameWordSpan").text("√");
+            $("#userNameWordSpan").css("color", "green");
+        }
+    }
+
+    //电话号码
+    var userphone = document.querySelector("#userphone");
+    //文本框焦点事件
+    userphone.onblur = function checkUserPhone(){
+        //获取原用户
+        var userphone = $("#userphone").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserPhone&userphone="+userphone,
+            dataType:"text",
+            success:function (result) {
+                if (result == 1) {
+                    $("#userNamePhone").text("用户电话已存在!");
+                    $("#userNamePhone").css("color","red");
+                } else if (userphone == "") {
+                    $("#userNamePhone").text("用户电话不能为空！");
+                    $("#userNamePhone").css("color", "red");
+                } else if(result == 0){
+                    $("#userNamePhone").text("√");
+                    $("#userNamePhone").css("color","green");
+                }else if(result == 2){
+                    $("#userNamePhone").text("用户电话必须是11位的阿拉伯数字！");
+                    $("#userNamePhone").css("color","red");
+                }
+            }
+        });
+    }
+</script>
+

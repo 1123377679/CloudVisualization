@@ -272,7 +272,7 @@
         // 搜索的关键字
         var name = $('#name').val();
         //发送请求到后台导出excel数据
-        location.href = "/SupplierServlet.do?action=exportException&name="+name;
+        location.href = "/BillServlet.do?action=exportException&name="+name;
     }
 </script>
 
