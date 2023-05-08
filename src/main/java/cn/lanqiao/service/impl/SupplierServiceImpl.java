@@ -3,12 +3,13 @@ package cn.lanqiao.service.impl;
 import cn.lanqiao.dao.SupplierDao;
 import cn.lanqiao.dao.impl.SupplierDaoImpl;
 import cn.lanqiao.pojo.Supplier;
+import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.SupplierService;
 
 import java.util.List;
 
 public class SupplierServiceImpl implements SupplierService {
-   SupplierDao supplierDao=new SupplierDaoImpl();
+    SupplierDao supplierDao=new SupplierDaoImpl();
 
     @Override
     public int getTotalCount() {
@@ -42,11 +43,6 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier findById(String id) {
-        return supplierDao.findById(id);
-    }
-
-    @Override
     public int checkName(String name) {
         return supplierDao.checkName(name);
     }
@@ -57,14 +53,18 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public int checkLiername(String liername) {
-        return supplierDao.checkLiername(liername);
+    public int checkLinkman(String linkman) {
+        return supplierDao.checkLinkman(linkman);
     }
 
+    @Override
+    public Supplier findById(String id) {
+        return supplierDao.findById(id);
+    }
 
     @Override
-    public List<Supplier> selectAll(String name) {
-        return supplierDao.selectAll(name);
+    public List<Supplier> selectAllSupplier() {
+        return supplierDao.selectAllSupplier();
     }
 
 

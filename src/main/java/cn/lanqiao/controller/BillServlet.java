@@ -13,6 +13,7 @@ import cn.lanqiao.utils.DateUtils;
 import cn.lanqiao.utils.ExprotCellStyle;
 import cn.lanqiao.utils.PageUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -51,7 +52,7 @@ public class BillServlet extends HttpServlet {
             int totalCount = billService.getTotalCount();
             System.out.println("总条数：" + totalCount);
             //供应商数据回显
-            List<Supplier> suppliersList = supplierService.selectAll(null);
+            List<Supplier> suppliersList = supplierService.selectAllSupplier();
             //供应商的集合存储转发
             req.setAttribute("suppliersList",suppliersList);//
             //每页的数据
@@ -103,7 +104,7 @@ public class BillServlet extends HttpServlet {
             Bill bliiById = billService.getBillById(id);
 
             //供应商数据回显
-            List<Supplier> suppliersList = supplierService.selectAll(null);
+            List<Supplier> suppliersList = supplierService.selectAllSupplier();
 
             //供应商的集合存储转发
             req.setAttribute("suppliersList",suppliersList);//
@@ -186,7 +187,7 @@ public class BillServlet extends HttpServlet {
             //System.out.println("前端发送了下拉框请求");
             //查询供应商
             //这是一个Java对象
-            List<Supplier> suppliersList = supplierService.selectAll(null);
+            List<Supplier> suppliersList = supplierService.selectAllSupplier();
             //通过fastJson转换字符串
             String jsonString = JSONObject.toJSONString(suppliersList);
             //System.out.println(jsonString);

@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!--[if lt IE 9]>
@@ -37,22 +38,22 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
                     <%--供应商搜索回显--%>
-                        <form class="layui-form layui-col-space5" action="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex}&pageSize=${requestScope.pageUtils.pageSize}" method="post">
-                            <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                            </div>
-                            <div class="layui-inline layui-show-xs-block">
-                                <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                            </div>
-                        </form>
+                    <form class="layui-form layui-col-space5" action="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex}&pageSize=${requestScope.pageUtils.pageSize}" method="post">
+                        <div class="layui-inline layui-show-xs-block">
+                            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline layui-show-xs-block">
+                            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        </div>
+                    </form>
                 </div>
                 <%--供应商操作表格--%>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加用户','/supplier-add.jsp',600,400)"><i class="layui-icon"></i>添加</button>
-                    <button class="layui-btn"><i class="layui-icon"></i>下载模板</button>
-                    <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
                     <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
+                    <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
+                    <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
                 </div>
                 <div class="layui-card-body layui-table-body layui-table-main">
                     <table class="layui-table layui-form">
@@ -80,7 +81,7 @@
                         <c:forEach items="${requestScope.pageUtils.records}" var="p">
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="id" value="1"   lay-skin="primary">
+                                    <input type="checkbox" name="id" value="${p.id}"   lay-skin="primary">
                                 </td>
                                 <td>${p.id}</td>
                                 <td>${p.name}</td>
@@ -107,7 +108,7 @@
                     </table>
                 </div>
 
-                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1" style="margin-left: 15px;">
+                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
                     <a href="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex-1}&pageSize=${requestScope.pageUtils.pageSize}"
                        class="layui-laypage-prev ${requestScope.pageUtils.pageIndex==1 ? 'layui-disabled':''}"
                        data-page="0"
@@ -125,7 +126,7 @@
                     <a href="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex+1}&pageSize=${requestScope.pageUtils.pageSize}"
                        class="layui-laypage-next ${requestScope.pageUtils.pageIndex==requestScope.pageUtils.numberEnd ? 'layui-disabled':''}"
                        data-page="2"
-                       ${ requestScope.pageUtils.pageIndex==requestScope.pageUtils.numberEnd ? 'onclick="return false;"':''}>
+                    ${ requestScope.pageUtils.pageIndex==requestScope.pageUtils.numberEnd ? 'onclick="return false;"':''}>
                         <i class="layui-icon">&gt;</i>
                     </a>
                     <span class="layui-laypage-skip">到第
@@ -134,14 +135,14 @@
 							</span>
                     <span class="layui-laypage-count">[共 ${requestScope.pageUtils.pageIndex}/${requestScope.pageUtils.pageCount} 条]</span>
                     <span class="layui-laypage-limits">
-							    <select lay-ignore="" onchange="goPage(this);">
-							        <option value="5" ${requestScope.pageUtils.pageSize==5?"selected":""}>5 条/页</option>
-									<option value="10" ${requestScope.pageUtils.pageSize==10?"selected":""}>10 条/页</option>
-									<option value="20" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
-									<option value="30" ${requestScope.pageUtils.pageSize==30?"selected":""}>30 条/页</option>
-									<option value="40" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
+							    <select lay-ignore="" onchange="goPage(this)">
+							        <option value="5" ${requestScope.pageUtils.pageSize==5 ? 'selected':""}>5条/页</option>
+									<option value="10" ${requestScope.pageUtils.pageSize==10 ? 'selected':""}>10 条/页</option>
+									<option value=20" ${requestScope.pageUtils.pageSize==20 ? 'selected':""}>20 条/页</option>
+									<option value="30" ${requestScope.pageUtils.pageSize==30 ? 'selected':""}>30 条/页</option>
+									<option value="40" ${requestScope.pageUtils.pageSize==40 ? 'selected':""}>40 条/页</option>
 							</select>
-                    </span>
+							</span>
                 </div>
             </div>
         </div>
@@ -154,8 +155,13 @@
         // 搜索的关键字
         var name = $('#name').val();
         //发送请求到后台导出excel数据
-        location.href = "/ExcelServlet?action=exportException&name="+name;
+        location.href = "/SupplierServlet.do?action=exportException&name="+name;
     }
+    <%--下载模板--%>
+    function downloadExcelModel(){
+        location.href = "/SupplierServlet.do?action=downloadExcelModel";
+    }
+
     <%--删除--%>
     function deleteUsers(id){
         layer.msg(' 确定要删除吗?', {
@@ -184,19 +190,70 @@
         }
         location.href = '/SupplierServlet.do?action=limit&pageIndex='+number +"&pageSize=${requestScope.pageUtils.pageSize}";
     }
-    /**
-     * 动态修改页面大小
-     */
-    function goPage(select) {
+    //动态修改页面大小
+    function  goPage(select){
         var pageSize = $(select).val();
-        location.href = "/SupplierServlet.do?action=limit&pageIndex=1&pageSize=" + pageSize;
+        location.href = '/SupplierServlet.do?action=limit&pageSize='+pageSize ;
     }
+
 </script>
 </html>
 <script>
-    layui.use(['laydate','form'], function(){
+    ///批量删除
+    function delAll() {
+        layer.msg(' 确定要删除吗?', {
+            time: 20000, //20s后自动关闭
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                var id = [];//先定义一个空的数组
+                if ($("input[type='checkbox']:checked").length > 0) {
+                    $("input[type='checkbox']:checked").each(function (i) {
+                        id[i] = $(this).val();
+                    })
+                    // self.location = '/LogServlet.do?action=delAll&checkId='+checkId;//确定按钮跳转地址
+                    window.location.href = '/SupplierServlet.do?action=delAll&id=' + id;//确定按钮跳转地址
+                    //$("input[type='checkbox]:checked")拿到已经勾选的东西，然后再each循环
+                    //或者$("input[name=check]")
+                } else {
+                    alert("请选择你要删除的信息");
+                    window.location.href = '/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5';
+                }
+            }
+        });
+    }
+
+    layui.use(['laydate','form','upload'], function(){
         var laydate = layui.laydate;
         var  form = layui.form;
+        var upload = layui.upload;
+        // 指定允许上传的文件类型
+        upload.render({
+            elem: '#test3'//id
+            ,url: '/SupplierServlet.do?action=excelImport' //此处配置你自己的上传接口即可
+            ,accept: 'file' //普通文件
+            ,multiple:true
+            //这里需要返回JSON数据，不然会报接口格式返回有误
+            ,done: function(res){
+                console.log(res);
+                //如果上传成功
+                if(res.code == 200){
+                    layer.msg('上传成功',{
+
+                    },function (){
+                        window.location.reload();
+                    });
+                }else if (res.code == 500){
+                    //上传失败
+                    layer.msg('上传失败',{
+
+                    },function (){
+                        window.location.reload();
+                    });
+                }
+            }
+        });
+
+
         // 监听全选
         form.on('checkbox(checkall)', function(data){
 

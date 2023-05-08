@@ -2,6 +2,7 @@ package cn.lanqiao.dao.impl;
 
 import cn.lanqiao.dao.SupplierDao;
 import cn.lanqiao.pojo.Supplier;
+import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;
@@ -27,12 +28,12 @@ public class SupplierDaoImpl implements SupplierDao {
     @Override
     public int addSupplier(Supplier supplier) {
         return DButils.commonInsert("insert into tb_supplier values(null,?,?,?,?,?,?,0)",
-              supplier.getName(),
-              supplier.getLinkman(),
-              supplier.getPhone(),
-              supplier.getAddress(),
-              supplier.getFax(),
-              supplier.getDescription());
+                supplier.getName(),
+                supplier.getLinkman(),
+                supplier.getPhone(),
+                supplier.getAddress(),
+                supplier.getFax(),
+                supplier.getDescription());
 
 
 
@@ -67,6 +68,21 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
+    public int checkName(String name) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where name=?", name);
+    }
+
+    @Override
+    public int checkPhone(String phone) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where phone=?", phone);
+    }
+
+    @Override
+    public int checkLinkman(String linkman) {
+        return DButils.commonQueryCount("select  count(*) from tb_supplier where linkman=?", linkman);
+    }
+
+    @Override
     public Supplier findById(String id) {
         ArrayList<Supplier> suppliers = DButils.commonQuery(Supplier.class, "select * from tb_supplier where id=?", id);
         if (suppliers.size()>0){
@@ -77,30 +93,9 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public int checkName(String name) {
-        return DButils.commonQueryCount("select  count(*) from tb_supplier where name=?", name);
+    public List<Supplier> selectAllSupplier() {
+        return DButils.commonQuery(Supplier.class ,"select * from tb_supplier");
     }
-
-    @Override
-    public int checkPhone(String phone) {
-        return DButils.commonQueryCount("select  count(*) from tb_supplier where phone=?",phone);
-    }
-
-    @Override
-    public int checkLiername(String liername) {
-        return DButils.commonQueryCount("select  count(*) from tb_supplier where linkman=?", liername);
-    }
-
-
-    @Override
-    public List<Supplier> selectAll(String name) {
-        if (name != null && !"".equals(name)){
-            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0 and name like ?", "%" + name + "%");
-        }else {
-            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0");
-        }
-    }
-
 
 
 }

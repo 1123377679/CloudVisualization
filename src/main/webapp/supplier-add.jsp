@@ -22,7 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" action="/SupplierServlet.do?action=add" method="post">
+        <form class="layui-form" action="/SupplierServlet.do?action=add" method="post" onsubmit="return checkSupplierAll()">
             <div class="layui-form-item">
                 <label for="name" class="layui-form-label">
                     <span class="x-red">*</span>供应商名称</label>
@@ -155,15 +155,23 @@
                 if (result==1){
                     $("#checkSuppliername").text("已经存在该供应商名称！");
                     $("#checkSuppliername").css("color","red");
+                    checkSupplierPhone =false;
+
                 }else if(suppliername=="") {
                     $("#checkSuppliername").text("不能为空");
                     $("#checkSuppliername").css("color","red");
+                    checkSupplierPhone =false;
+
                 }else if (result==0){
                     $("#checkSuppliername").text("√" );
                     $("#checkSuppliername").css("color","green");
+                    checkSupplierPhone =true;
+
                 }else if (result==2){
                     $("#checkSuppliername").text("格式错误");
                     $("#checkSuppliername").css("color","red");
+                    checkSupplierPhone =false;
+
                 }
 
             }
@@ -185,17 +193,25 @@
                 if (result==0){
                     $("#checkSupplierlinkman").text("√");
                     $("#checkSupplierlinkman").css("color","green");
+                    checkSupplierPhone =true;
+
                 }else if(supplierlinkman=="") {
                     $("#checkSupplierlinkman").text("不能为空");
                     $("#checkSupplierlinkman").css("color","red");
+                    checkSupplierPhone =false;
+
                 } else if (result==2){
                     $("#checkSupplierlinkman").text("格式错误");
                     $("#checkSupplierlinkman").css("color","red");
+                    checkSupplierPhone =false;
+
                 }
 
             }
         })
     }
+    //电话号码
+    var checkSupplierPhone =false;
     var Phone=document.querySelector('#phone');
     //用户绑定焦点事件
     Phone.onblur = function checkSupplierphone(){
@@ -209,20 +225,30 @@
             dataType:"text",//服务器返回的数据类型
             success:function(result){
                 if (result==1){
-                    $("#checkSupplierphone").text("已经存在！");
-                    $("#checkSupplierphone").css("color","red");
-                }else if(supplierphone=="") {
-                    $("#checkSupplierphone").text("不能为空");
-                    $("#checkSupplierphone").css("color","red");
-                }else if (result==0){
                     $("#checkSupplierphone").text("√" );
                     $("#checkSupplierphone").css("color","green");
-                }else if (result==2){
+                    checkSupplierPhone =true;
+
+
+                }else if (supplierphone==""){
+                    $("#checkSupplierphone").text("不能为空");
+                    $("#checkSupplierphone").css("color","red");
+                    checkSupplierPhone =false;
+
+                }
+                else if(result==0) {
                     $("#checkSupplierphone").text("格式错误");
                     $("#checkSupplierphone").css("color","red");
-                }
+                    checkSupplierPhone =false;
 
+                }
             }
         })
+    }
+    function  checkSupplierAll (){
+        console.log(checkSupplierName);
+        console.log(checkSupplierLinkman);
+        console.log(checkSupplierPhone);
+        return checkSupplierName&&checkSupplierLinkman&&checkSupplierPhone;
     }
 </script>
