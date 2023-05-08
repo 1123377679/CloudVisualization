@@ -58,7 +58,7 @@
                         <c:forEach items="${requestScope.pageUtils.records}" var="l" varStatus="sta">
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="id" value="1"   lay-skin="primary">
+                                    <input type="checkbox" name="id" value="${l.id}"   lay-skin="primary">
                                 </td>
                                 <td>${sta.index+1}</td>
                                 <td>${l.username}</td>
@@ -193,6 +193,28 @@
             btn: ['确定', '取消'],
             yes: function (index, layero) {
                 self.location = '/LogServlet.do?action=delete&id='+id;//确定按钮跳转地址
+            }
+        });
+    }
+    //批量删除
+    function delAll() {
+        layer.msg(' 确定要删除吗?', {
+            time: 20000, //20s后自动关闭
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                var checkId = [];//先定义一个空的数组
+                if ($("input[type='checkbox']:checked").length > 0) {
+                    $("input[type='checkbox']:checked").each(function (i) {
+                        checkId[i] = $(this).val();
+                    })
+                    // self.location = '/LogServlet.do?action=delAll&checkId='+checkId;//确定按钮跳转地址
+                    window.location.href = '/LogServlet.do?action=delAll&checkId=' + checkId;//确定按钮跳转地址
+                    //$("input[type='checkbox]:checked")拿到已经勾选的东西，然后再each循环
+                    //或者$("input[name=check]")
+                } else {
+                    alert("请选择你要删除的信息");
+                    window.location.href = '/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20';
+                }
             }
         });
     }

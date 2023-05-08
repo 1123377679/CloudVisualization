@@ -237,6 +237,36 @@ public class LogServlet extends HttpServlet {
         if (value.equals("excelImport")){
             extracted(req, resp);
         }
+
+        //批量删除
+        if (value.equals("delAll")){
+            String checkId = req.getParameter("checkId");
+            System.out.println(checkId);
+            String[] split = checkId.split(",");
+//            int[] ints = new int[split.length];
+            String[] ids = new String[split.length];
+            PrintWriter writer = resp.getWriter();
+            if (split.length>0){
+                for (int i = 0; i < split.length; i++) {
+                    ids[i] = split[i];
+                }
+            }
+            try {
+                for (String id : ids){
+                    //循环删除
+                    logService.deleteLogs(id);
+                }
+                writer.print("<script>"+
+                        "alert('日志批量删除成功');"+
+                        "window.location.href = '/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20'"+
+                        "</script>");
+            }catch (Exception e){
+                writer.print("<script>"+
+                        "alert('日志删除失败');"+
+                        "window.location.href = '/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20'"+
+                        "</script>");
+            }
+        }
     }
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //执行excel文件导入操作
