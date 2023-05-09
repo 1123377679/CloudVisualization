@@ -59,13 +59,13 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                        <i class="layui-icon"></i>批量删除</button>
+                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加用户','/bill-add.jsp',800,600)">
                         <i class="layui-icon"></i>添加</button>
+                        <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
                         <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
                         <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
-                        <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
+
                 </div>
 
                 <div class="layui-card-body ">
@@ -92,7 +92,7 @@
                         <c:forEach items="${requestScope.pageUtils.records}" var="p">
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="" lay-skin="primary">
+                                    <input type="checkbox" name="" value="${p.id}" lay-skin="primary">
                                 </td>
                                 <td>${p.id}</td>
                                 <td>${p.title}</td>
@@ -230,19 +230,26 @@
             });
     }
 
-    function delAll(argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？' + data,
-            function(index) {
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {
-                    icon: 1
-                });
-                $(".layui-form-checked").not('.header').parents('tr').remove();
-            });
-    }
+    function delAll(){
+        layer.msg(' 确定要删除吗?', {
+            time: 20000, //20s后自动关闭
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                var checkId=[];//先定义一个空的数组
+                if ($("input[type='checkbox']:checked").length > 0){
+                    $("input[type='checkbox']:checked").each(function (i){
+                        checkId[i]=$(this).val();
+                    })
+                    // self.location = '/LogServlet.do?action=delAll&checkId='+checkId;//确定按钮跳转地址
+                    window.location.href = '/BillServlet.do?action=delAll&checkId='+checkId;//确定按钮跳转地址
+                    //$("input[type='checkbox]:checked")拿到已经勾选的东西，然后再each循环
+                    //或者$("input[name=check]")
+                }else {
+                    alert("请选择你要删除的信息");
+                    window.location.href = '/BillServlet.do?action=limit&pageIndex=1&pageSize=20';
+                }
+            }
+        })};
     function jumpPage(){
         //获取
         var number = $("#number").val();
@@ -274,6 +281,42 @@
         //发送请求到后台导出excel数据
         location.href = "/BillServlet.do?action=exportException&name="+name;
     }
+    //下载模板
+    function downloadExcelModel(){
+        location.href = "/BillServlet.do?action=downloadExcelModel";
+    }
+    //上传文件
+    layui.use(['laydate','form','upload'], function(){
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var upload = layui.upload;
+        // 指定允许上传的文件类型
+        upload.render({
+            elem: '#test3'//id
+            ,url: '/BillServlet.do?action=excelImport' //此处配置你自己的上传接口即可
+            ,accept: 'file' //普通文件
+            ,multiple:true
+            //这里需要返回JSON数据，不然会报接口格式返回有误
+            ,done: function(res){
+                console.log(res);
+                //如果上传成功
+                if(res.code == 200){
+                    layer.msg('上传成功',{
+
+                    },function (){
+                        window.location.reload();
+                    });
+                }else if (res.code == 500){
+                    //上传失败
+                    layer.msg('上传失败',{
+
+                    },function (){
+                        window.location.reload();
+                    });
+                }
+            }
+        });
+    });
 </script>
 
 </html>

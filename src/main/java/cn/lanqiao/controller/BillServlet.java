@@ -4,6 +4,7 @@ package cn.lanqiao.controller;
 import cn.lanqiao.pojo.Bill;
 
 
+import cn.lanqiao.pojo.JsonResult;
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.service.BillService;
 import cn.lanqiao.service.SupplierService;
@@ -11,23 +12,34 @@ import cn.lanqiao.service.impl.BillServiceImpl;
 import cn.lanqiao.service.impl.SupplierServiceImpl;
 import cn.lanqiao.utils.DateUtils;
 import cn.lanqiao.utils.ExprotCellStyle;
+import cn.lanqiao.utils.ImportExcelUtils;
 import cn.lanqiao.utils.PageUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+@MultipartConfig //标注当前servlet支持文件上传
 @WebServlet("/BillServlet.do")
 public class BillServlet extends HttpServlet {
     BillService billService = new BillServiceImpl();
@@ -178,7 +190,7 @@ public class BillServlet extends HttpServlet {
                         "alert('账单列表删除失败');location.href = '/BillServlet.do?action=limit&pageIndex=1&pageSize=5'" +
                         "</script>");
             }
- 
+
 
         }
         //获取下拉框的数据
@@ -195,6 +207,7 @@ public class BillServlet extends HttpServlet {
             //响应浏览器一段JSON数据
             writer.print(jsonString);
         }
+        //导出数据
         if (value.equals("exportException")){
             String name = req.getParameter("name");
             //System.out.println("要进行Excel导出操作...查询"+name);
@@ -203,7 +216,7 @@ public class BillServlet extends HttpServlet {
             //1.创建工作簿
             HSSFWorkbook workbook = new HSSFWorkbook();
             //2.创建工作表
-            HSSFSheet sheet = workbook.createSheet("供应商信息表");
+            HSSFSheet sheet = workbook.createSheet("账单管理信息表");
             sheet.setDefaultColumnWidth(20);//设置所有列的列宽
             //3.首行合并
             CellRangeAddress region1 = new CellRangeAddress(0, 0, 0, 6);
@@ -217,7 +230,7 @@ public class BillServlet extends HttpServlet {
             //在row01上创建单元格
             HSSFCell cell_row01 = row01.createCell(0);
             //向cell_row01写东西
-            cell_row01.setCellValue("供应商数据");
+            cell_row01.setCellValue("账单管理数据");
             //设置标题样式
             HSSFCellStyle titleStyle = ExprotCellStyle.createTitleCellStyle(workbook);
             cell_row01.setCellStyle(titleStyle);
@@ -297,7 +310,7 @@ public class BillServlet extends HttpServlet {
 
             //3.设置content-disposition响应头控制浏览器以下载的形式打开文件
             //下载中文文件时，需要注意的地方就是中文文件名要使用
-            String fileName = "供应商数据信息表.xls";
+            String fileName = "账单管理数据信息表.xls";
             // URLEncoder.encode方法进行编码(URLEncoder.encode(fileName, "字符编码"))，否则会出现文件名乱码。
             resp.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 
@@ -310,5 +323,161 @@ public class BillServlet extends HttpServlet {
             outputStream.close();
 
         }
+        //下载模板
+        if(value.equals("downloadExcelModel")){
+            //1.获取要下载的文件的绝对路径
+            //在resources目录放入QQ.png，注意项目导出后resource中的文件被打包到/WEB-INF/classes下,服务器的真实路径
+            String realPath = this.getServletContext().getRealPath("/WEB-INF/classes/账单管理数据文件模板.xls");
+            //2.获取要下载的文件名
+            String fileName = realPath.substring(realPath.lastIndexOf("\\") + 1);
+            System.out.println("要下载的文件名:" + fileName);
+            //字节输入流
+            FileInputStream inputStream = new FileInputStream(realPath);
+            //浏览器输出流
+            ServletOutputStream outputStream = resp.getOutputStream();
+
+            //3.设置content-disposition响应头控制浏览器以下载的形式打开文件
+            // URLEncoder.encode方法进行编码(URLEncoder.encode(fileName, "字符编码"))，否则会出现文件名乱码。
+            resp.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+
+            //5.准备数据缓冲区
+            int len = 0;
+            byte[] buffer = new byte[1024]; // 1KB
+            while ((len = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, len);
+            }
+            outputStream.close();
+            inputStream.close();
+
+        }
+
+
+        //上传文件
+        if (value.equals("excelImport")){
+            extracted(req, resp);
+        }
+
+        //批量删除
+        if (value.equals("delAll")){
+            String checkId = req.getParameter("checkId");
+            System.out.println(checkId);
+            String[] split = checkId.split(",");
+//            int[] ints = new int[split.length];
+            String[] ids = new String[split.length];
+            PrintWriter writer = resp.getWriter();
+            if (split.length>0){
+                for (int i = 0; i < split.length; i++) {
+                    ids[i] = split[i];
+                }
+            }
+            try {
+                for (String id : ids){
+                    //循环删除
+                    billService.deleteById(id);
+                }
+                writer.print("<script>"+
+                        "alert('账单批量删除成功');"+
+                        "window.location.href = '/BillServlet.do?action=limit&pageIndex=1&pageSize=20'"+
+                        "</script>");
+            }catch (Exception e){
+                writer.print("<script>"+
+                        "alert('账单删除失败');"+
+                        "window.location.href = '/BillServlet.do?action=limit&pageIndex=1&pageSize=20'"+
+                        "</script>");
+            }
+        }
     }
+    private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        //执行excel文件导入操作
+        List<Bill> billList = new ArrayList<>();
+        //取上传的文件数量
+        Collection<Part> parts = req.getParts();
+        PrintWriter writer = resp.getWriter();
+        System.out.println("文件上传的个数:"+parts.size());
+        try {
+            if (parts.size()>0){
+                Part part = req.getPart("file");
+                //取文件名
+                String submittedFileName = part.getSubmittedFileName();
+                System.out.println("上传的文件名:"+submittedFileName);
+                //上传的文件对应输入流
+                InputStream inputStream = part.getInputStream();
+                //读取excel中的数据
+                Workbook workbook = ImportExcelUtils.getWorkbookByInputStream(inputStream, submittedFileName);
+                //得到工作表
+                Sheet sheet = ImportExcelUtils.getSheetByWorkbook(workbook,0);
+                //根据需要是否加条数限制
+                if (sheet.getRow(1000) != null){
+                    throw new RuntimeException("系统已限制单批次导入必须小于或等于1000笔!");
+                }
+                int rowNum = 0;//已取值的行数
+                int colNum = 0;//列号
+                //获取数据行数
+                int realRowCount = sheet.getPhysicalNumberOfRows();
+                //处理表格数据
+                for (Row row : sheet){
+                    if (realRowCount == rowNum){
+                        //excel文件所有的行读取完毕，结束循环
+                        break;
+                    }
+                    if (ImportExcelUtils.isBlankRow(row)){//空行跳过
+                        continue;
+                    }
+                    if (row.getRowNum() == -1){
+                        continue;
+                    }else {
+                        if (row.getRowNum() == 0 || row.getRowNum() == 1){//第一行，第二行表头跳过
+                            continue;
+                        }
+                    }
+                    rowNum++;
+                    colNum = 1;
+                    Bill bill = new Bill();
+
+                    //列号需要自加获取
+                    ImportExcelUtils.validCellValue(sheet,row,colNum,"商品名称");
+                    bill.setTitle(ImportExcelUtils.getCellValue(sheet,row,colNum-1));
+
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"商品单位");
+                    bill.setUnit(ImportExcelUtils.getCellValue(sheet,row,colNum-1));
+
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"商品数量");
+                    String num = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
+                    bill.setNum(Integer.parseInt(num));
+
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"总金额");
+                    String money = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
+                    bill.setMoney(Integer.parseInt(money));
+
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"供应商");
+                    String providerid = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
+                    bill.setProviderid(Integer.parseInt(providerid));
+
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"是否付款");
+                    String ispay = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
+                    bill.setIspay(Integer.parseInt(ispay));
+                    //存储对象到list集合中
+                    billList.add(bill);
+                }
+                System.out.println("===================导入的数据是=================");
+                for (Bill bill: billList) {
+                    System.out.println(bill);
+                    //对象添加到数据库
+                    billService.add(bill);
+                }
+                //到这里添加数据成功
+                JsonResult jsonResult = new JsonResult<>("200","导入数据成功");
+                String jsonString = JSONObject.toJSONString(jsonResult);
+                writer.print(jsonString);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            JsonResult jsonResult = new JsonResult<>("500","导入数据失败");
+            String jsonString = JSONObject.toJSONString(jsonResult);
+            writer.print(jsonString);
+        }
+    }
+
+
+
 }

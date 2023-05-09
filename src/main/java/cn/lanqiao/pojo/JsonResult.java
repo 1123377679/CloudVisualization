@@ -1,5 +1,7 @@
 package cn.lanqiao.pojo;
 
+
+
 import lombok.Data;
 
 /**
@@ -59,3 +61,4 @@ public class JsonResult<T> {
         this.msg = msg;
     }
 }
+

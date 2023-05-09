@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Bill {
     private Integer id;
     private String title;
@@ -18,8 +19,6 @@ public class Bill {
     private Integer isdelete;
     private String providerName;//扩展字段，为了数据显示
 
-    public Bill() {
-    }
 
     public Bill(Integer id, String title, String unit, Integer num, Integer money, Integer providerid, Integer ispay, Integer isdelete) {
         this.id = id;
