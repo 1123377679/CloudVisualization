@@ -40,7 +40,7 @@
                     <%--供应商搜索回显--%>
                     <form class="layui-form layui-col-space5" action="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex}&pageSize=${requestScope.pageUtils.pageSize}" method="post">
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            <input type="text" name="username"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -108,7 +108,7 @@
                     </table>
                 </div>
 
-                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
+                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1" style="margin-left: 15px">
                     <a href="/SupplierServlet.do?action=limit&pageIndex=${requestScope.pageUtils.pageIndex-1}&pageSize=${requestScope.pageUtils.pageSize}"
                        class="layui-laypage-prev ${requestScope.pageUtils.pageIndex==1 ? 'layui-disabled':''}"
                        data-page="0"
@@ -193,7 +193,7 @@
     //动态修改页面大小
     function  goPage(select){
         var pageSize = $(select).val();
-        location.href = '/SupplierServlet.do?action=limit&pageSize='+pageSize ;
+        location.href = '/SupplierServlet.do?action=limit&pageIndex=1&pageSize='+pageSize ;
     }
 
 </script>

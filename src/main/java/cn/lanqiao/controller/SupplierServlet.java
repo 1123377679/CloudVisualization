@@ -51,7 +51,8 @@ public class SupplierServlet extends HttpServlet {
             //前端发送的每页显示条数
             String pageSize = req.getParameter("pageSize");
             //前端发送过来的输入框发送的信息
-            String  name  =req.getParameter("username");
+            String name =req.getParameter("username");
+            System.out.println(name);
             //总条数
             int totalCount =supplierService.getTotalCount();
             System.out.println("总条数："+totalCount);

@@ -19,7 +19,7 @@ public class SupplierDaoImpl implements SupplierDao {
     public List<Supplier> getDepatrs(String name, Integer pageStart, Integer pageSize) {
         //模糊查询和分页查询
         if (name != null && !"".equals(name)) {
-            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0 and suppliername like ? limit ?,?", "%" + name + "%", pageStart, pageSize);
+            return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0 and name like ? limit ?,?", "%" + name + "%", pageStart, pageSize);
         } else {
             return DButils.commonQuery(Supplier.class, "select * from tb_supplier where isdelete=0  limit ?,?", pageStart, pageSize);
         }
