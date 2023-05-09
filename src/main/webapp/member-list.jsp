@@ -43,9 +43,9 @@
           </form>
         </div>
         <div class="layui-card-header">
-          <button class="layui-btn layui-btn-danger"><i class="layui-icon"></i>批量删除</button>
+          <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
           <button class="layui-btn" onclick="xadmin.open('添加用户','/member-add.jsp',600,400)"><i class="layui-icon"></i>添加</button>
-          <button class="layui-btn"><i class="layui-icon"></i>下载模板</button>
+          <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
           <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
           <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
         </div>
@@ -71,7 +71,7 @@
             <tbody>
               <tr>
                 <td>
-                  <input type="checkbox" name="id" value="1"   lay-skin="primary">
+                  <input type="checkbox" name="id" value="${p.id}"   lay-skin="primary">
                 </td>
                 <td>${p.id}</td>
                 <td>${p.username}</td>
@@ -191,11 +191,81 @@
       }
     })
   }
+
+  //批量删除
+  function delAll() {
+    layer.msg(' 确定要删除吗?', {
+      time: 20000, //20s后自动关闭
+      btn: ['确定', '取消'],
+      yes: function (index, layero) {
+        var id = [];//先定义一个空的数组
+        if ($("input[type='checkbox']:checked").length > 0) {
+          $("input[type='checkbox']:checked").each(function (i) {
+            id[i] = $(this).val();
+          })
+          // self.location = '/LogServlet.do?action=delAll&checkId='+checkId;//确定按钮跳转地址
+          window.location.href = '/MemberServlet.do?action=delAll&id=' + id;//确定按钮跳转地址
+          //$("input[type='checkbox]:checked")拿到已经勾选的东西，然后再each循环
+          //或者$("input[name=check]")
+        } else {
+          alert("请选择你要删除的信息");
+          window.location.href = '/MemberServlet.do?action=limit&pageIndex=1&pageSize=5';
+        }
+      }
+    });
+  }
+
+  //下载模板
+  function downloadExcelModel(){
+    location.href = "/MemberServlet.do?action=downloadExcelModel";
+  }
+
+  //上传文件
+  layui.use(['laydate','form','upload'], function(){
+    var laydate = layui.laydate;
+    var form = layui.form;
+    var upload = layui.upload;
+    // 指定允许上传的文件类型
+    upload.render({
+      elem: '#test3'//id
+      ,url: '/MemberServlet.do?action=excelImport' //此处配置你自己的上传接口即可
+      ,accept: 'file' //普通文件
+      ,multiple:true
+      //这里需要返回JSON数据，不然会报接口格式返回有误
+      ,done: function(res){
+        console.log(res);
+        //如果上传成功
+        if(res.code == 200){
+          layer.msg('上传成功',{
+
+          },function (){
+            window.location.reload();
+          });
+        }else if (res.code == 500){
+          //上传失败
+          layer.msg('上传失败',{
+
+          },function (){
+            window.location.reload();
+          });
+        }
+      }
+    });
+  });
+
   //动态效果
   $('#LayerDemo . layui-btn').on('click', function() {
     var othis = $(this), method = othis.data('method');
     active[method] ? active[method].call(this, othis):'';
   });
+
+  <%--导出数据--%>
+  function exportExcel(){
+    // 搜索的关键字
+    var name = $('#name').val();
+    //发送请求到后台导出excel数据
+    location.href = "/MemberServlet.do?action=exportException&name="+name;
+  }
 </script>
 </html>
 <script>

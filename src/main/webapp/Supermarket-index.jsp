@@ -11,6 +11,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery.min.js" charset="utf-8"></script>
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
@@ -104,77 +105,77 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表</cite></a>
                     </li>
-<%--                </ul>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a href="javascript:;">--%>
-<%--                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>--%>
-<%--                    <cite>供应商管理</cite>--%>
-<%--                    <i class="iconfont nav_right">&#xe697;</i></a>--%>
-<%--                <ul class="sub-menu">--%>
-<%--                    <li>--%>
-<%--                        &lt;%&ndash;前端发送请求,需要后台拿到action=list数据&ndash;%&gt;--%>
-<%--                        <a onclick="xadmin.add_tab('供应商列表','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>供应商列表</cite></a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a href="javascript:;">--%>
-<%--                    <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>--%>
-<%--                    <cite>账单管理</cite>--%>
-<%--                    <i class="iconfont nav_right">&#xe697;</i></a>--%>
-<%--                <ul class="sub-menu">--%>
-<%--                    <li>--%>
-<%--                        <a onclick="xadmin.add_tab('账单管理','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>账单列表</cite></a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a onclick="xadmin.add_tab('统计页面','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>账单统计(柱状图)</cite>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                    <li>--%>
-<%--                        <a onclick="xadmin.add_tab('统计页面','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>账单统计(饼状图)</cite>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a href="javascript:;">--%>
-<%--                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>--%>
-<%--                    <cite>登录日志</cite>--%>
-<%--                    <i class="iconfont nav_right">&#xe697;</i></a>--%>
-<%--                <ul class="sub-menu">--%>
-<%--                    <li>--%>
-<%--                        &lt;%&ndash;前端发送请求,需要后台拿到action=list数据&ndash;%&gt;--%>
-<%--                        <a onclick="xadmin.add_tab('登录日志','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>用户登录日志</cite></a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a href="javascript:;">--%>
-<%--                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>--%>
-<%--                    <cite>权限管理</cite>--%>
-<%--                    <i class="iconfont nav_right">&#xe697;</i></a>--%>
-<%--                <ul class="sub-menu">--%>
-<%--                    <li>--%>
-<%--                        &lt;%&ndash;前端发送请求,需要后台拿到action=list数据&ndash;%&gt;--%>
-<%--                        <a onclick="xadmin.add_tab('权限分类','/xxx')">--%>
-<%--                            <i class="iconfont">&#xe6a7;</i>--%>
-<%--                            <cite>权限分类</cite>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </li>--%>
-<%--        </ul>--%>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                    <cite>供应商管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <%--前端发送请求,需要后台拿到action=list数据--%>
+                        <a onclick="xadmin.add_tab('供应商列表','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>供应商列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>
+                    <cite>账单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('账单管理','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>账单列表</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('统计页面','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>账单统计(柱状图)</cite>
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('统计页面','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>账单统计(饼状图)</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                    <cite>登录日志</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <%--前端发送请求,需要后台拿到action=list数据--%>
+                        <a onclick="xadmin.add_tab('登录日志','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>用户登录日志</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                    <cite>权限管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <%--前端发送请求,需要后台拿到action=list数据--%>
+                        <a onclick="xadmin.add_tab('权限分类','/xxx')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>权限分类</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
 <!-- <div class="x-slide_left"></div> -->

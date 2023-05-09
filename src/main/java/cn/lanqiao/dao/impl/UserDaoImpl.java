@@ -5,6 +5,7 @@ import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -17,5 +18,10 @@ public class UserDaoImpl implements UserDao {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<User> selectAllUser() {
+        return DButils.commonQuery(User.class, "select * from tb_user");
     }
 }

@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
+    <script type="text/javascript" src="/js/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -22,7 +23,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" target="_parent" action="/MemberServlet.do?action=update&id=${requestScope.userById.id}" method="post" onsubmit="return checkAll();">
+        <form class="layui-form" target="_parent" action="/MemberServlet.do?action=update&id=${requestScope.userById.id}" method="post" onsubmit="return checkEditAll();">
             <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">
                     <span class="x-red">*</span>用户姓名</label>
@@ -145,6 +146,8 @@
     });
 </script>
 <script>
+    //全局变量
+    var checkUserAllNameVal = false;
     //用户姓名
     var userName = document.querySelector("#userName");
     //文本框焦点事件
@@ -161,24 +164,26 @@
                 if (result == 1) {
                     $("#userNameSpanDiv").text("用户名已存在!");
                     $("#userNameSpanDiv").css("color","red");
-                    return false;
+                    checkUserAllNameVal = false;
                 } else if (userName == "") {
                     $("#userNameSpanDiv").text("用户姓名不能为空！");
                     $("#userNameSpanDiv").css("color", "red");
-                    return false;
+                    checkUserAllNameVal = false;
                 } else if(result == 0){
                     $("#userNameSpanDiv").text("√");
                     $("#userNameSpanDiv").css("color","green");
-                    return true;
+                    checkUserAllNameVal = true;
                 }else if(result == 2){
                     $("#userNameSpanDiv").text("用户名必须是中文!");
                     $("#userNameSpanDiv").css("color","red");
-                    return false;
+                    checkUserAllNameVal = false;
                 }
             }
         });
     }
 
+    //全局变量
+    var checkUserAllPhone = false;
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
@@ -192,28 +197,26 @@
             data: "action=checkUserPhone&userphone="+userphone,
             dataType:"text",
             success:function (result) {
-                if (result == 1) {
-                    $("#userNamePhoneSpan").text("用户电话号码已存在!");
-                    $("#userNamePhoneSpan").css("color","red");
-                    return false;
-                } else if (userphone == "") {
+                if (userphone == "") {
                     $("#userNamePhoneSpan").text("用户电话号码不能为空！");
                     $("#userNamePhoneSpan").css("color", "red");
-                    return false;
+                    checkUserAllPhone = false;
                 } else if(result == 0){
                     $("#userNamePhoneSpan").text("√");
                     $("#userNamePhoneSpan").css("color","green");
-                    return true;
+                    checkUserAllPhone = true;
                 }else if(result == 2){
                     $("#userNamePhoneSpan").text("用户电话号码必须是11位的阿拉伯数字！");
                     $("#userNamePhoneSpan").css("color","red");
-                    return false;
+                    checkUserAllPhone = false;
                 }
             }
         });
     }
-    function checkAll(){
-        return checkUserPhone() && checkUserNameVal();
+    function checkEditAll(){
+        console.log(checkUserAllNameVal);
+        console.log(checkUserAllPhone);
+        return checkUserAllNameVal && checkUserAllPhone;
     }
 </script>
 

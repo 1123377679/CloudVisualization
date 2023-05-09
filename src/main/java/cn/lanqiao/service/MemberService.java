@@ -21,6 +21,6 @@ public interface MemberService {
     int deleteById(String id);
     //判断添加用户
     int checkName(String name);
-    //判断用户的电话
-    int checkPhone(String phone);
+    //查询所有用户信息
+    List<User> selectAllUser();
 }

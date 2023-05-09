@@ -22,7 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" method="post" action="/MemberServlet.do?action=add">
+        <form class="layui-form" method="post" action="/MemberServlet.do?action=add" onsubmit="return checkAddAll();">
             <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">
                     <span class="x-red">*</span>用户姓名</label>
@@ -132,6 +132,8 @@
 </body>
 </html>
 <script>
+    //全局变量
+    var checkAllUserName = false;
     //用户姓名
     var username = document.querySelector("#username");
     //文本框焦点事件
@@ -148,20 +150,26 @@
                 if (result == 1) {
                     $("#userNameSpan").text("用户姓名已存在!");
                     $("#userNameSpan").css("color","red");
+                    checkAllUserName = false;
                 } else if (username == "") {
                     $("#userNameSpan").text("用户姓名不能为空！");
                     $("#userNameSpan").css("color", "red");
+                    checkAllUserName = false;
                 } else if(result == 0){
                     $("#userNameSpan").text("√");
                     $("#userNameSpan").css("color","green");
+                    checkAllUserName = true;
                 }else if(result == 2){
                     $("#userNameSpan").text("用户姓名必须是中文!");
                     $("#userNameSpan").css("color","red");
+                    checkAllUserName = false;
                 }
             }
         });
     }
 
+    //全局变量
+    var checkAllUserWord = false;
     //用户密码
     var oldpassword = document.querySelector("#oldpassword");
     //文本框焦点事件
@@ -178,17 +186,22 @@
                 if (oldpassword == "") {
                     $("#userNameWord").text("用户密码不能为空！");
                     $("#userNameWord").css("color", "red");
+                    checkAllUserWord = false;
                 } else if(result == 0){
                     $("#userNameWord").text("√");
                     $("#userNameWord").css("color","green");
+                    checkAllUserWord = true;
                 }else if(result == 2){
                     $("#userNameWord").text("用户密码必须是6到16个字符!");
                     $("#userNameWord").css("color","red");
+                    checkAllUserWord = false;
                 }
             }
         });
     }
 
+    //全局变量
+    var checkerAllNewPassword = false;
     //确认密码
     var newpassword = document.querySelector('#newpassword');
     newpassword.onblur = function checkerNewPassword() {
@@ -199,15 +212,20 @@
         if (newpassword == ""){
             $("#userNameWordSpan").text("确认密码不能为空!");
             $("#userNameWordSpan").css("color","red");
+            checkerAllNewPassword = false;
         } else if (oldpassword != newpassword) {
             $("#userNameWordSpan").text("两次密码输入不相同!");
             $("#userNameWordSpan").css("color", "red");
+            checkerAllNewPassword = false;
         }  else {
             $("#userNameWordSpan").text("√");
             $("#userNameWordSpan").css("color", "green");
+            checkerAllNewPassword = true;
         }
     }
 
+    //全局变量
+    var checkAllUserPhone = false;
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
@@ -221,21 +239,29 @@
             data: "action=checkUserPhone&userphone="+userphone,
             dataType:"text",
             success:function (result) {
-                if (result == 1) {
-                    $("#userNamePhone").text("用户电话已存在!");
-                    $("#userNamePhone").css("color","red");
-                } else if (userphone == "") {
+                 if (userphone == "") {
                     $("#userNamePhone").text("用户电话不能为空！");
                     $("#userNamePhone").css("color", "red");
+                     checkAllUserPhone = false;
                 } else if(result == 0){
                     $("#userNamePhone").text("√");
                     $("#userNamePhone").css("color","green");
+                     checkAllUserPhone = true;
                 }else if(result == 2){
                     $("#userNamePhone").text("用户电话必须是11位的阿拉伯数字！");
                     $("#userNamePhone").css("color","red");
+                     checkAllUserPhone = false;
                 }
             }
         });
+    }
+
+    function checkAddAll() {
+        console.log(checkAllUserName);
+        console.log(checkAllUserWord);
+        console.log(checkerAllNewPassword);
+        console.log(checkAllUserPhone);
+        return checkAllUserName&&checkAllUserWord&&checkerAllNewPassword&&checkAllUserPhone;
     }
 </script>
 

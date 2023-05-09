@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int checkPhone(String phone) {
-        return memberDao.checkPhone(phone);
+    public List<User> selectAllUser() {
+        return memberDao.selectAllUser();
     }
 }
