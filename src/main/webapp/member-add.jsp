@@ -22,7 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" method="post" action="/MemberServlet.do?action=add">
+        <form class="layui-form" method="post" action="/MemberServlet.do?action=add" onsubmit="return checkAddAll();">
             <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">
                     <span class="x-red">*</span>用户姓名</label>
@@ -38,100 +38,102 @@
                     <input type="password" id="oldpassword" name="oldpassword" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
                 <%------------  --   --- ---------------------- ----------------------     ------        --%>
                 <div class="layui-form-mid" id="userNameWord" style="color: #999999">6到16个字符</div>
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
-                    <span class="x-red">*</span>确认密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" id="newpassword" name="newpassword" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
-                <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                <div class="layui-form-mid" id="userNameWordSpan" style="color: #999999">6到16个字符</div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">用户性别</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="sex" value="1" title="男" checked="">
-                    <input type="radio" name="sex" value="0" title="女">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">生日日期</label>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>确认密码</label>
                     <div class="layui-input-inline">
-                        <input type="date" name="birthday" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        <input type="password" id="newpassword" name="newpassword" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                    <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                    <div class="layui-form-mid" id="userNameWordSpan" style="color: #999999">6到16个字符</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="1" title="男" checked="">
+                        <input type="radio" name="sex" value="0" title="女">
                     </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
-                    <span class="x-red">*</span>用户电话</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
-                <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                <div class="layui-form-mid" id="userNamePhone" style="color: #999999">11位数字</div>
-            </div>
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
-                    <span class="x-red">*</span>用户地址</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">生日日期</label>
+                        <div class="layui-input-inline">
+                            <input type="date" name="birthday" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">用户类别</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="userlei" value="1" title="管理员" checked="">
-                    <input type="radio" name="userlei" value="2" title="经理">
-                    <input type="radio" name="userlei" value="3" title="普通用户">
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>用户电话</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                    <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                    <div class="layui-form-mid" id="userNamePhone" style="color: #999999">11位数字</div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label"></label>
-                <button class="layui-btn" lay-filter="add" type="submit">点击添加</button>
-            </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>用户地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户类别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="userlei" value="1" title="管理员" checked="">
+                        <input type="radio" name="userlei" value="2" title="经理">
+                        <input type="radio" name="userlei" value="3" title="普通用户">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label"></label>
+                    <button class="layui-btn" lay-filter="add" type="submit">点击添加</button>
+                </div>
         </form>
     </div>
 </div>
 <script>
     layui.use(['form', 'layer','jquery'],
-    function() {
-        $ = layui.jquery;
-        var form = layui.form,
-            layer = layui.layer;
-        //自定义验证规则
-        form.verify({
-            nikename: function(value) {
-                if (value.length < 5) {
-                    return '昵称至少得5个字符啊';
+        function() {
+            $ = layui.jquery;
+            var form = layui.form,
+                layer = layui.layer;
+            //自定义验证规则
+            form.verify({
+                nikename: function(value) {
+                    if (value.length < 5) {
+                        return '昵称至少得5个字符啊';
+                    }
+                },
+                pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                repass: function(value) {
+                    if ($('#L_pass').val() != $('#L_repass').val()) {
+                        return '两次密码不一致';
+                    }
                 }
-            },
-            pass: [/(.+){6,12}$/, '密码必须6到12位'],
-            repass: function(value) {
-                if ($('#L_pass').val() != $('#L_repass').val()) {
-                    return '两次密码不一致';
-                }
-            }
-        });
-        //监听提交
-        form.on('submit(add)',
-            function(data) {
-                console.log(data);
-                //发异步，把数据提交给php
-                layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function() {
-                        //关闭当前frame
-                        xadmin.close();
-                        // 可以对父窗口进行刷新
-                        xadmin.father_reload();
-                    });
-                return false;
             });
-    });
+            //监听提交
+            form.on('submit(add)',
+                function(data) {
+                    console.log(data);
+                    //发异步，把数据提交给php
+                    layer.alert("增加成功", {
+                            icon: 6
+                        },
+                        function() {
+                            //关闭当前frame
+                            xadmin.close();
+                            // 可以对父窗口进行刷新
+                            xadmin.father_reload();
+                        });
+                    return false;
+                });
+        });
 </script>
 </body>
 </html>
 <script>
+    //全局变量
+    var checkAllUserName = false;
     //用户姓名
     var username = document.querySelector("#username");
     //文本框焦点事件
@@ -148,20 +150,26 @@
                 if (result == 1) {
                     $("#userNameSpan").text("用户姓名已存在!");
                     $("#userNameSpan").css("color","red");
+                    checkAllUserName = false;
                 } else if (username == "") {
                     $("#userNameSpan").text("用户姓名不能为空！");
                     $("#userNameSpan").css("color", "red");
+                    checkAllUserName = false;
                 } else if(result == 0){
                     $("#userNameSpan").text("√");
                     $("#userNameSpan").css("color","green");
+                    checkAllUserName = true;
                 }else if(result == 2){
                     $("#userNameSpan").text("用户姓名必须是中文!");
                     $("#userNameSpan").css("color","red");
+                    checkAllUserName = false;
                 }
             }
         });
     }
 
+    //全局变量
+    var checkAllUserWord = false;
     //用户密码
     var oldpassword = document.querySelector("#oldpassword");
     //文本框焦点事件
@@ -178,17 +186,22 @@
                 if (oldpassword == "") {
                     $("#userNameWord").text("用户密码不能为空！");
                     $("#userNameWord").css("color", "red");
+                    checkAllUserWord = false;
                 } else if(result == 0){
                     $("#userNameWord").text("√");
                     $("#userNameWord").css("color","green");
+                    checkAllUserWord = true;
                 }else if(result == 2){
                     $("#userNameWord").text("用户密码必须是6到16个字符!");
                     $("#userNameWord").css("color","red");
+                    checkAllUserWord = false;
                 }
             }
         });
     }
 
+    //全局变量
+    var checkerAllNewPassword = false;
     //确认密码
     var newpassword = document.querySelector('#newpassword');
     newpassword.onblur = function checkerNewPassword() {
@@ -199,15 +212,20 @@
         if (newpassword == ""){
             $("#userNameWordSpan").text("确认密码不能为空!");
             $("#userNameWordSpan").css("color","red");
+            checkerAllNewPassword = false;
         } else if (oldpassword != newpassword) {
             $("#userNameWordSpan").text("两次密码输入不相同!");
             $("#userNameWordSpan").css("color", "red");
+            checkerAllNewPassword = false;
         }  else {
             $("#userNameWordSpan").text("√");
             $("#userNameWordSpan").css("color", "green");
+            checkerAllNewPassword = true;
         }
     }
 
+    //全局变量
+    var checkAllUserPhone = false;
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
@@ -221,21 +239,29 @@
             data: "action=checkUserPhone&userphone="+userphone,
             dataType:"text",
             success:function (result) {
-                if (result == 1) {
-                    $("#userNamePhone").text("用户电话已存在!");
-                    $("#userNamePhone").css("color","red");
-                } else if (userphone == "") {
+                if (userphone == "") {
                     $("#userNamePhone").text("用户电话不能为空！");
                     $("#userNamePhone").css("color", "red");
+                    checkAllUserPhone = false;
                 } else if(result == 0){
                     $("#userNamePhone").text("√");
                     $("#userNamePhone").css("color","green");
+                    checkAllUserPhone = true;
                 }else if(result == 2){
                     $("#userNamePhone").text("用户电话必须是11位的阿拉伯数字！");
                     $("#userNamePhone").css("color","red");
+                    checkAllUserPhone = false;
                 }
             }
         });
+    }
+
+    function checkAddAll() {
+        console.log(checkAllUserName);
+        console.log(checkAllUserWord);
+        console.log(checkerAllNewPassword);
+        console.log(checkAllUserPhone);
+        return checkAllUserName&&checkAllUserWord&&checkerAllNewPassword&&checkAllUserPhone;
     }
 </script>
 

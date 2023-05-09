@@ -77,7 +77,7 @@ public class MemberDaoImpl implements MemberDao {
     }
 
     @Override
-    public int checkPhone(String phone) {
-        return DButils.commonQueryCount( "select count(*) from tb_user where phone =?",phone);
+    public List<User> selectAllUser() {
+        return DButils.commonQuery(User.class, "select * from tb_user");
     }
 }
