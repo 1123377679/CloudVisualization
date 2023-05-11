@@ -105,11 +105,11 @@
                     <span class="layui-laypage-count">[当前${requestScope.pageUtils.pageIndex}/${requestScope.pageUtils.pageCount}]</span>
                     <span class="layui-laypage-limits">
 							    <select lay-ignore="" onchange="goPage(this)">
-									<option value="5" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
-									<option value="10" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
-									<option value="20" ${requestScope.pageUtils.pageSize==60?"selected":""}>60 条/页</option>
-									<option value="30" ${requestScope.pageUtils.pageSize==80?"selected":""}>80 条/页</option>
-									<option value="40" ${requestScope.pageUtils.pageSize==100?"selected":""}>100 条/页</option>
+									<option value="5" ${requestScope.pageUtils.pageSize==5?"selected":""}>5 条/页</option>
+									<option value="10" ${requestScope.pageUtils.pageSize==10?"selected":""}>10 条/页</option>
+									<option value="20" ${requestScope.pageUtils.pageSize==20?"selected":""}>20 条/页</option>
+									<option value="30" ${requestScope.pageUtils.pageSize==30?"selected":""}>30 条/页</option>
+									<option value="40" ${requestScope.pageUtils.pageSize==40?"selected":""}>40 条/页</option>
 							</select>
                     </span>
                 </div>

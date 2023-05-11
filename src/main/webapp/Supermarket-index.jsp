@@ -154,7 +154,7 @@
                 <ul class="sub-menu">
                     <li>
                         <%--前端发送请求,需要后台拿到action=list数据--%>
-                        <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                        <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=5')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>用户登录日志</cite></a>
                     </li>
