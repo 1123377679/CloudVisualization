@@ -9,6 +9,8 @@ import cn.lanqiao.utils.ImportExcelUtils;
 import cn.lanqiao.utils.ExprotCellStyle;
 import cn.lanqiao.utils.PageUtils;
 //import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,6 +34,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @MultipartConfig //标注当前servlet支持文件上传
 @WebServlet("/SupplierServlet.do")
@@ -372,6 +375,38 @@ public class SupplierServlet extends HttpServlet {
                         "alert('日志删除失败');"+
                         "window.location.href = '/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5'"+
                         "</script>");
+            }
+        }
+
+        //供应商柱状图
+        if (value.equals("supplierEchars")){
+            // System.out.println("前端发送请求过来了");
+            Map<String, Integer> billCountBySupplier = supplierService.getBillCountBySupplier();
+            //规定用JSON两个流
+            JSONObject jsonObject;
+            JSONArray jsonArray = new JSONArray();
+            for(Map.Entry<String, Integer> entry : billCountBySupplier.entrySet()){
+                jsonObject = new JSONObject();
+                //获取供应商的名字
+                String name = entry.getKey();
+                //获取账单数量
+                Integer billCount = entry.getValue();
+                //通过JSONObject存数据
+                jsonObject.put("name",name);
+                jsonObject.put("billCount",billCount);
+                //通过JSONArray发送数据到前端页面
+                jsonArray.add(jsonObject);
+            }
+            //将JSONArray这个流存储到页面上去，转成JSON格式
+            String s = JSON.toJSONString(jsonArray);
+            //发送一个编码格式
+            resp.setContentType("text/html;charset=UTF-8");
+            //try...catch
+            try(PrintWriter writer = resp.getWriter()){
+                writer.print(s);
+                writer.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

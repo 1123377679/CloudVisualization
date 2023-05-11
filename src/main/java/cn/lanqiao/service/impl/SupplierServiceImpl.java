@@ -7,6 +7,7 @@ import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.SupplierService;
 
 import java.util.List;
+import java.util.Map;
 
 public class SupplierServiceImpl implements SupplierService {
     SupplierDao supplierDao=new SupplierDaoImpl();
@@ -65,6 +66,11 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public List<Supplier> selectAllSupplier() {
         return supplierDao.selectAllSupplier();
+    }
+
+    @Override
+    public Map<String, Integer> getBillCountBySupplier() {
+        return supplierDao.getBillCountBySupplier();
     }
 
 

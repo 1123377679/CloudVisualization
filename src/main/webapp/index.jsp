@@ -57,14 +57,13 @@
     <div class="column">
         <div class="panel bar">
             <h2>
-                柱状图-就业行业 <a href="javascript:;">2019</a>
-                <a href="javacript:;"> 2020</a>
+                柱状图-账单信息
             </h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>
         <div class="panel line">
-            <h2>折线图-人员变化</h2>
+            <h2>折线图-会员变化</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>

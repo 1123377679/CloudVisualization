@@ -4,6 +4,7 @@ import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SupplierService {
     int getTotalCount();
@@ -27,4 +28,6 @@ public interface SupplierService {
     Supplier findById  (String id);
     //寻找数据库中所有信息的方法
     List<Supplier> selectAllSupplier();
+    //查询供应商地下所有的账单信息(供应商姓名:账单数量)
+    Map<String,Integer> getBillCountBySupplier();
 }

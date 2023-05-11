@@ -2,11 +2,11 @@ package cn.lanqiao.dao.impl;
 
 import cn.lanqiao.dao.SupplierDao;
 import cn.lanqiao.pojo.Supplier;
-import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SupplierDaoImpl implements SupplierDao {
 
@@ -95,6 +95,12 @@ public class SupplierDaoImpl implements SupplierDao {
     @Override
     public List<Supplier> selectAllSupplier() {
         return DButils.commonQuery(Supplier.class ,"select * from tb_supplier");
+    }
+
+    @Override
+    public Map<String, Integer> getBillCountBySupplier() {
+        String sql = "select tb_supplier.name , COUNT(tb_bills.providerid) as bill_count from tb_supplier LEFT JOIN tb_bills ON tb_supplier.id = tb_bills.providerid GROUP BY tb_supplier.name";
+        return DButils.commonQueryCountMap(sql);
     }
 
 

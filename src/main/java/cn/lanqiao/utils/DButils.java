@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class DButils {
@@ -249,6 +251,36 @@ public class DButils {
         }
         return null;
     }
+    //查询供应商底下的账单信息(供应商的名字和供应商对应的账单数量)
+    public static Map<String,Integer> commonQueryCountMap(String sql){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        //创建一个map集合
+        Map<String,Integer> map = new HashMap<>();
+        try {
+            connection = getConnection();//获取驱动连接
+            statement = connection.prepareStatement(sql);//编译sql
+            resultSet = statement.executeQuery();//执行sql
+            //处理sql里面的值
+            while (resultSet.next()){
+                //供应商名字
+                String name = resultSet.getString("name");
+                //账单数量
+                int billCount = resultSet.getInt("bill_count");
+                //存入map集合中
+                map.put(name,billCount);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            //关闭所有的流
+            DButils.close(connection,statement,resultSet);
+        }
+        return map;
+    }
+
+
 
     //获取类上的属性对象
     public static Field getField(Class<?> clazz, String name) {

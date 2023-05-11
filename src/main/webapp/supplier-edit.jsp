@@ -202,7 +202,6 @@
         $.ajax({
             type:"POST",
             url:"/SupplierServlet.do",
-            //?????????????data打成date了
             data:"action=checkSupplierLinkman&supplierlinkman="+supplierlinkman,
             dataType:"text",//服务器返回的数据类型
             success:function(result){
@@ -233,7 +232,6 @@
         $.ajax({
             type:"POST",
             url:"/SupplierServlet.do",
-            //?????????????data打成date了
             data:"action=checkSupplierPhone&supplierphone="+supplierphone,
             dataType:"text",//服务器返回的数据类型
             success:function(result){

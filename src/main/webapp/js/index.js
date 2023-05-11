@@ -22,15 +22,7 @@
     xAxis: [
       {
         type: "category",
-        data: [
-          "旅游行业",
-          "教育培训",
-          "游戏行业",
-          "医疗行业",
-          "电商行业",
-          "社交行业",
-          "金融行业"
-        ],
+        data: [],
         axisTick: {
           alignWithLabel: true
         },
@@ -73,7 +65,7 @@
         name: "直接访问",
         type: "bar",
         barWidth: "35%",
-        data: [200, 300, 300, 900, 1500, 1200, 600],
+        data: [],
         itemStyle: {
           barBorderRadius: 5
         }
@@ -89,14 +81,68 @@
 
   // 数据变化
   var dataAll = [
-    { year: "2019", data: [200, 300, 300, 900, 1500, 1200, 600] },
-    { year: "2020", data: [300, 400, 350, 800, 1800, 1400, 700] }
+    // { year: "2019", data: [200, 300, 300, 900, 1500, 1200, 600] },
+    // { year: "2020", data: [300, 400, 350, 800, 1800, 1400, 700] }
   ];
 
   $(".bar h2 ").on("click", "a", function() {
     option.series[0].data = dataAll[$(this).index()].data;
     myChart.setOption(option);
   });
+  //ajax请求
+  // function(){}
+  //当页面加载的时候发送ajax请求到后台
+  $(function (){
+    //定义新数组来存储后端发送过来的值
+    var arrName = [];
+    var arrBillCount = [];
+    //url,data
+    $.get("/SupplierServlet.do?action=supplierEchars",function (result){
+      console.log(result);
+      //遍历后端发送过来的值
+        for (var i = 0 ;i<result.length; i++){
+            //将遍历出来的值存到新数组中
+          arrName.push(result[i].name);
+          arrBillCount.push(result[i].billCount);
+          //隐藏加载动画
+          myChart.hideLoading();
+          //覆盖上面data数据
+          myChart.setOption({
+            xAxis: [
+              {
+                type: "category",
+                data: arrName,
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLabel: {
+                  interval:0,//将横轴信息全部显示出来
+                  textStyle: {
+                    color: "rgba(255,255,255,.6)",
+                    fontSize: "12"
+                  }
+                },
+                axisLine: {
+                  show: false
+                }
+              }
+            ],
+            series: [
+              {
+                name: "直接访问",
+                type: "bar",
+                barWidth: "35%",
+                data: arrBillCount,
+                itemStyle: {
+                  barBorderRadius: 5
+                }
+              }
+            ]
+          })
+        }
+    },"json");
+  });
+
 })();
 
 // 折线图定制
@@ -215,7 +261,6 @@
 })();
 
 // 饼形图定制
-// 折线图定制
 (function() {
   // 基于准备好的dom，初始化echarts实例
   var myChart = echarts.init(document.querySelector(".pie .chart"));
