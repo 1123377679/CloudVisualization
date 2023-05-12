@@ -11,7 +11,9 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
+    <link rel="stylesheet" href="/css/layuimini.css">
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+    <script type="text/javascript" src="/js/jquery.min.js" ></script>
     <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -25,6 +27,10 @@
     </script>
 </head>
 <body class="index">
+<!--初始化加载层-->
+<div class="layuimini-loader">
+    <div class="layuimini-loader-inner"></div>
+</div>
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
@@ -132,18 +138,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>账单列表</cite></a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('统计页面','/xxx')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>账单统计(柱状图)</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('统计页面','/xxx')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>账单统计(饼状图)</cite>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li>
@@ -221,4 +215,7 @@ var _hmt = _hmt || []; (function() {
             location.href = "/userServlet.do?action=logout";
         }
     }
+    $(window).on('load', function () {
+        $('.layuimini-loader').fadeOut(); // 隐藏加载层
+    });
 </script>

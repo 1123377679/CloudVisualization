@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
 </head>
@@ -316,6 +316,9 @@
                 }
             }
         });
+    });
+    $(window).on('load', function () {
+        $('.layuimini-loader').fadeOut(); // 隐藏加载层
     });
 </script>
 
