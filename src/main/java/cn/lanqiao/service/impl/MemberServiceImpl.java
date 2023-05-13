@@ -6,6 +6,7 @@ import cn.lanqiao.dao.impl.MemberDaoImpl;
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.MemberService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
@@ -58,6 +59,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Integer> selectAge() {
         return memberDao.selectAge();
+    }
+
+    @Override
+    public ArrayList<Integer> getTotalCount(User user) {
+        return memberDao.getTotalCount(user);
     }
 
 

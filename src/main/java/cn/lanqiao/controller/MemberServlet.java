@@ -410,6 +410,16 @@ public class MemberServlet extends HttpServlet {
             outputStream.close();
             inputStream.close();
         }
+        //折线图请求
+        if (value.equals("peopleNum")){
+            //System.out.println("折线图请求发送过来");
+            User user = new User();
+            ArrayList<Integer> totalCount = memberService.getTotalCount(user);
+            //System.out.println(totalCount);
+            String jsonString = JSONObject.toJSONString(totalCount);
+            PrintWriter writer = resp.getWriter();
+            writer.print(jsonString);
+        }
         //上传文件
         //实现文件上传到数据库
         if (value.equals("excelImport")){

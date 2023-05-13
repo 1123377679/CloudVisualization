@@ -2,6 +2,7 @@ package cn.lanqiao.dao;
 
 import cn.lanqiao.pojo.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface MemberDao {
@@ -25,4 +26,6 @@ public interface MemberDao {
     List<User> selectAllUser();
     //查询年龄
     List<Integer>  selectAge();
+    //查询总数
+    ArrayList<Integer> getTotalCount(User user);
 }

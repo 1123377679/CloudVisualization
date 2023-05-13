@@ -147,42 +147,34 @@
 
 // 折线图定制
 (function() {
-  // 基于准备好的dom，初始化echarts实例
+
+  // 1. 实例化对象
   var myChart = echarts.init(document.querySelector(".line .chart"));
-
-  // (1)准备数据
-  var data = {
-    year: [
-      [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
-      [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
-    ]
-  };
-
-  // 2. 指定配置和数据
+  // 2.指定配置
   var option = {
+    // 通过这个color修改两条线的颜色
     color: ["#00f2f1", "#ed3f35"],
     tooltip: {
-      // 通过坐标轴来触发
       trigger: "axis"
     },
     legend: {
-      // 距离容器10%
-      right: "10%",
-      // 修饰图例文字的颜色
+      data: ['新增会员'],
+      // 如果series 对象有name 值，则 legend可以不用写data
+      // 修改图例组件 文字颜色
       textStyle: {
         color: "#4c9bfd"
-      }
-      // 如果series 里面设置了name，此时图例组件的data可以省略
-      // data: ["邮件营销", "联盟广告"]
+      },
+      // 这个10% 必须加引号
+      right: "10%"
     },
     grid: {
       top: "20%",
       left: "3%",
       right: "4%",
       bottom: "3%",
-      show: true,
-      borderColor: "#012f4a",
-      containLabel: true
+      show: true, // 显示边框
+      borderColor: "#012f4a", // 边框颜色
+      containLabel: true // 包含刻度文字在内
     },
 
     xAxis: {
@@ -202,61 +194,111 @@
         "11月",
         "12月"
       ],
-      // 去除刻度
       axisTick: {
-        show: false
+        show: false // 去除刻度线
       },
-      // 修饰刻度标签的颜色
       axisLabel: {
-        color: "rgba(255,255,255,.7)"
+        color: "#4c9bfd" // 文本颜色
       },
-      // 去除x坐标轴的颜色
       axisLine: {
-        show: false
+        show: false // 去除轴线
       }
     },
     yAxis: {
       type: "value",
-      // 去除刻度
       axisTick: {
-        show: false
+        show: false // 去除刻度线
       },
-      // 修饰刻度标签的颜色
       axisLabel: {
-        color: "rgba(255,255,255,.7)"
+        color: "#4c9bfd" // 文本颜色
       },
-      // 修改y轴分割线的颜色
+      axisLine: {
+        show: false // 去除轴线
+      },
       splitLine: {
         lineStyle: {
-          color: "#012f4a"
+          color: "#012f4a" // 分割线颜色
         }
       }
     },
     series: [
       {
-        name: "新增粉丝",
-        type: "line",
-        stack: "总量",
-        // 是否让线条圆滑显示
-        smooth: true,
-        data: data.year[0]
-      },
-      {
-        name: "新增游客",
-        type: "line",
-        stack: "总量",
-        smooth: true,
-        data: data.year[1]
+        name: '新增会员',
+        type: 'line',
+        stack: 'Total',
+        data: []
       }
     ]
   };
-  // 3. 把配置和数据给实例对象
-  myChart.setOption(option);
 
-  // 重新把配置好的新数据给实例对象
+  //页面加载的时候发送请求
+  $(function (){
+    var arrCount = [];
+    // 发送AJAX异步请求去Servlet后台获取用户数量的数据
+    $.get("/MemberServlet.do?action=peopleNum",function (result){
+      for (var i = 0; i<result.length;i++){
+        arrCount.push(result[i]);
+        myChart.hideLoading(); //隐藏加载动画
+        myChart.setOption({
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            axisTick: {
+              show: false // 去除刻度线
+            },
+            axisLabel: {
+              interval:0,//将横轴信息全部显示出来
+              color: "#4c9bfd" // 文本颜色
+            },
+            axisLine: {
+              show: false // 去除轴线
+            }
+          },
+          series: [
+            {
+              name: '新增会员',
+              type: 'line',
+              stack: 'Total',
+              data: arrCount
+            }
+          ]
+        });
+      }
+    },"json")
+  });
+
+  // 3. 把配置给实例对象
   myChart.setOption(option);
+  // 4. 让图表跟随屏幕自动的去适应
   window.addEventListener("resize", function() {
     myChart.resize();
+  });
+
+  // 5.点击切换效果
+  $(".line h2").on("click", "a", function() {
+    // alert(1);
+    // console.log($(this).index());
+    // 点击 a 之后 根据当前a的索引号 找到对应的 yearData的相关对象
+    // console.log(yearData[$(this).index()]);
+    var obj = yearData[$(this).index()];
+    option.series[0].data = obj.data[0];
+    option.series[1].data = obj.data[1];
+    // 需要重新渲染
+    myChart.setOption(option);
   });
 })();
 

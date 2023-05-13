@@ -73,7 +73,7 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public int checkName(String name) {
-        return DButils.commonQueryCount( "select count(*) from tb_user where username =?",name);
+        return DButils.commonQueryCount("select count(*) from tb_user where username =?", name);
     }
 
     @Override
@@ -84,9 +84,13 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public List<Integer> selectAge() {
-        String  sql="SELECT  CASE    WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 20 AND 29 THEN 'group1'   WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 30 AND 39 THEN 'group2'   WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 40 AND 49 THEN 'group3'  ELSE 'group4'   END AS age_group,   COUNT(*) AS user_count  FROM  tb_user   GROUP BY  age_group";
+        String sql = "SELECT  CASE    WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 20 AND 29 THEN 'group1'   WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 30 AND 39 THEN 'group2'   WHEN TIMESTAMPDIFF(YEAR, birthday, CURDATE()) BETWEEN 40 AND 49 THEN 'group3'  ELSE 'group4'   END AS age_group,   COUNT(*) AS user_count  FROM  tb_user   GROUP BY  age_group";
         return DButils.countUsersByAgeGroup(sql);
     }
 
-
+    @Override
+    public ArrayList<Integer> getTotalCount(User user) {
+        return DButils.commonQueryCountAll("SELECT DATE_FORMAT(birthday, '%Y-%m') AS month, COUNT(*) AS count FROM tb_user GROUP BY month");
+    }
 }
+

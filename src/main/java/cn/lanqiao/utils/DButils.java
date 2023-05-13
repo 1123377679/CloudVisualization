@@ -276,6 +276,33 @@ public class DButils {
         }
         return map;
     }
+    //查询会员列表的生日信息
+    public static ArrayList<Integer> commonQueryCountAll(String sql, Object... param) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int count = 0;
+        //int month = 0;
+        ArrayList<Integer> list = new ArrayList<>();
+        try {
+            connection = getConnection();
+            Statement stmt = connection.createStatement();
+            resultSet = stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                //count = resultSet.getInt(1);
+                count = resultSet.getInt("count");
+                list.add(count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DButils.close(connection, statement, resultSet);
+        }
+        return list;
+    }
+
+
+
     //查询会员底下的年龄
     public static ArrayList<Integer> countUsersByAgeGroup(String sql) {
         Connection connection = null;
