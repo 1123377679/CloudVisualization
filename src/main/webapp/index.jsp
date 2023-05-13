@@ -71,6 +71,7 @@
             <h2>饼形图-年龄分布</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
+
         </div>
     </div>
     <div class="column">

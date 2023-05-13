@@ -1,7 +1,6 @@
 package cn.lanqiao.dao;
 
 import cn.lanqiao.pojo.Supplier;
-import cn.lanqiao.pojo.User;
 
 import java.util.List;
 import java.util.Map;

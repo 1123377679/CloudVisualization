@@ -2,7 +2,9 @@ package cn.lanqiao.controller;
 
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.JsonResult;
+import cn.lanqiao.service.MemberService;
 import cn.lanqiao.service.SupplierService;
+import cn.lanqiao.service.impl.MemberServiceImpl;
 import cn.lanqiao.service.impl.SupplierServiceImpl;
 import cn.lanqiao.utils.DateUtils;
 import cn.lanqiao.utils.ImportExcelUtils;
@@ -39,6 +41,16 @@ import java.util.Map;
 @WebServlet("/SupplierServlet.do")
 public class SupplierServlet extends HttpServlet {
     SupplierService supplierService=  new SupplierServiceImpl();
+    MemberService memberService=new MemberServiceImpl();
+
+    public SupplierServlet() {
+    }
+
+    public SupplierServlet(SupplierService supplierService, MemberService memberService) {
+        this.supplierService = supplierService;
+        this.memberService = memberService;
+    }
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //处理请求和响应乱码
@@ -379,7 +391,7 @@ public class SupplierServlet extends HttpServlet {
 
         //供应商柱状图
         if (value.equals("supplierEchars")){
-            // System.out.println("前端发送请求过来了");
+//             System.out.println("前端发送请求过来了");
             Map<String, Integer> billCountBySupplier = supplierService.getBillCountBySupplier();
             //规定用JSON两个流
             JSONObject jsonObject;
@@ -408,6 +420,28 @@ public class SupplierServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        //饼图
+        if (value.equals("userEchars")){
+//            System.out.println("前端发送请求过来了");
+            List<Integer> list = memberService.selectAge();
+            JSONObject jsonObject;
+            JSONArray jsonArray=new JSONArray();
+         //转成JSON格式，把他发送到前端
+            for (Integer age : list) {
+                jsonObject = new JSONObject();
+                jsonObject.put("age", age);
+                jsonArray.add(jsonObject);
+            }
+            String s = JSON.toJSONString(jsonArray);
+            //编码格式
+            resp.setContentType("text/html;charset=UTF-8");
+            try(PrintWriter writer = resp.getWriter()){
+                writer.print(s);
+                writer.flush();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+    }
     }
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //执行excel文件导入操作
@@ -511,4 +545,39 @@ public class SupplierServlet extends HttpServlet {
     }
 
 
+    /**
+     * 获取
+     * @return supplierService
+     */
+    public SupplierService getSupplierService() {
+        return supplierService;
+    }
+
+    /**
+     * 设置
+     * @param supplierService
+     */
+    public void setSupplierService(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
+
+    /**
+     * 获取
+     * @return memberService
+     */
+    public MemberService getMemberService() {
+        return memberService;
+    }
+
+    /**
+     * 设置
+     * @param memberService
+     */
+    public void setMemberService(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    public String toString() {
+        return "SupplierServlet{supplierService = " + supplierService + ", memberService = " + memberService + "}";
+    }
 }

@@ -30,4 +30,5 @@ public interface SupplierService {
     List<Supplier> selectAllSupplier();
     //查询供应商地下所有的账单信息(供应商姓名:账单数量)
     Map<String,Integer> getBillCountBySupplier();
+
 }

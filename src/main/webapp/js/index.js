@@ -265,6 +265,9 @@
   // 基于准备好的dom，初始化echarts实例
   var myChart = echarts.init(document.querySelector(".pie .chart"));
 
+  // 初始化数据为空数组
+  var dataArr = [];
+
   option = {
     tooltip: {
       trigger: "item",
@@ -278,7 +281,7 @@
       top: "90%",
       itemWidth: 10,
       itemHeight: 10,
-      data: ["0岁以下", "20-29岁", "30-39岁", "40-49岁", "50岁以上"],
+      data: ["20-29岁", "30-39岁", "40-49岁", "50岁以上"],
       textStyle: {
         color: "rgba(255,255,255,.5)",
         fontSize: "12"
@@ -303,13 +306,7 @@
         ],
         label: { show: false },
         labelLine: { show: false },
-        data: [
-          { value: 1, name: "0岁以下" },
-          { value: 4, name: "20-29岁" },
-          { value: 2, name: "30-39岁" },
-          { value: 2, name: "40-49岁" },
-          { value: 1, name: "50岁以上" }
-        ]
+        data: dataArr // 将数据数组作为参数传递给 series.data
       }
     ]
   };
@@ -319,7 +316,56 @@
   window.addEventListener("resize", function() {
     myChart.resize();
   });
+
+  // ajax请求数据
+  $(function () {
+    $.get("/SupplierServlet.do?action=userEchars", function(result) {
+      console.log(result);
+      var ageArr = [];
+      // $.each(result, function(index, obj) {
+      //   ageArr.push(obj.age);
+      // });
+      // 将 JSON 数据解析为 JavaScript 对象
+      var jsonObj = JSON.parse(result);
+
+      // 遍历 JavaScript 对象中的每个元素
+      for (var i = 0; i < jsonObj.length; i++) {
+        var age = jsonObj[i].age;
+        ageArr.push(age);
+      }
+      myChart.hideLoading();
+      myChart.setOption({
+        series: [{
+          name: "年龄分布",
+          type: "pie",
+          center: ["50%", "42%"],
+          radius: ["40%", "60%"],
+          color: [
+            "#065aab",
+            "#066eab",
+            "#0682ab",
+            "#0696ab",
+            "#06a0ab",
+            "#06b4ab",
+            "#06c8ab",
+            "#06dcab",
+            "#06f0ab"
+          ],
+          label: { show: false },
+          labelLine: { show: false },
+          data:  [
+            { value: ageArr[0], name: "20-  29岁" },
+            { value: ageArr[1], name: "30-39岁" },
+            { value: ageArr[2], name: "40-49岁" },
+            { value: ageArr[3], name: "50岁以上" }
+          ] // 将数据数组作为参数传递给 series.data
+        }]
+      });
+    });
+  });
 })();
+
+
 // 学习进度柱状图模块
 (function() {
   // 基于准备好的dom，初始化echarts实例

@@ -98,4 +98,8 @@ public class SupplierDaoImpl implements SupplierDao {
         String sql = "select tb_supplier.name , COUNT(tb_bills.providerid) as bill_count from tb_supplier LEFT JOIN tb_bills ON tb_supplier.id = tb_bills.providerid GROUP BY tb_supplier.name";
         return DButils.commonQueryCountMap(sql);
     }
+
+
+
+
 }

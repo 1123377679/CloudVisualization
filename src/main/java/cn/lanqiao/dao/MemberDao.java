@@ -23,4 +23,6 @@ public interface MemberDao {
     int checkName(String name);
     //查询所有用户信息
     List<User> selectAllUser();
+    //查询年龄
+    List<Integer>  selectAge();
 }

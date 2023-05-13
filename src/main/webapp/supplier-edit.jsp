@@ -171,7 +171,7 @@
             success:function(result){
                 if (result==1){
                     $("#checkSuppliername").text("√");
-                    $("#checkSuppliername").css("color","red");
+                    $("#checkSuppliername").css("color","green");
                     checkSupplierName = true;
                 }else if(result=="") {
                     $("#checkSuppliername").text("供应商名不能为空");

@@ -3,10 +3,7 @@ package cn.lanqiao.utils;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class DButils {
     private static final String url;
@@ -279,9 +276,29 @@ public class DButils {
         }
         return map;
     }
-
-
-
+    //查询会员底下的年龄
+    public static ArrayList<Integer> countUsersByAgeGroup(String sql) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int userCount = resultSet.getInt("user_count");
+                arrayList.add(userCount);
+            }
+            return arrayList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //关闭
+            DButils.close(connection, statement, resultSet);
+        }
+        return null;
+    }
     //获取类上的属性对象
     public static Field getField(Class<?> clazz, String name) {
         Field field = null;

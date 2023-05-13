@@ -1,6 +1,7 @@
 package cn.lanqiao.service.impl;
 
 import cn.lanqiao.dao.SupplierDao;
+import cn.lanqiao.dao.UserDao;
 import cn.lanqiao.dao.impl.SupplierDaoImpl;
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.User;
@@ -72,6 +73,8 @@ public class SupplierServiceImpl implements SupplierService {
     public Map<String, Integer> getBillCountBySupplier() {
         return supplierDao.getBillCountBySupplier();
     }
+
+
 
 
 }

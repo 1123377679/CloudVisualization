@@ -1,6 +1,7 @@
 package cn.lanqiao.service.impl;
 
 import cn.lanqiao.dao.MemberDao;
+import cn.lanqiao.dao.UserDao;
 import cn.lanqiao.dao.impl.MemberDaoImpl;
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.MemberService;
@@ -53,4 +54,11 @@ public class MemberServiceImpl implements MemberService {
     public List<User> selectAllUser() {
         return memberDao.selectAllUser();
     }
+
+    @Override
+    public List<Integer> selectAge() {
+        return memberDao.selectAge();
+    }
+
+
 }
