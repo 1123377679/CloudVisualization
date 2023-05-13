@@ -1,6 +1,7 @@
 package cn.lanqiao.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.lanqiao.pojo.BehaviorLog;
 import cn.lanqiao.pojo.JsonResult;
 import cn.lanqiao.pojo.LoginLog;
 import cn.lanqiao.service.LogService;
@@ -43,7 +44,26 @@ public class LogServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         //获取前端的请求
         String value = req.getParameter("action");
-        //分页
+        //行为日志分页
+        if (value.equals("Behaviors")){
+            //前端发送的当前页
+            String pageIndex = req.getParameter("pageIndex");
+            //前端发送的每页显示条数
+            String pageSize = req.getParameter("pageSize");
+            //获取输入框信息
+            String name = req.getParameter("username");
+            //总条数
+            int totalCount = logService.getBehaviorTotalCount();
+            //每页的数据
+            List<BehaviorLog> depatrs = logService.getBehaviorDepatrs(name,(Integer.parseInt(pageIndex) - 1) * (Integer.parseInt(pageSize)), Integer.parseInt(pageSize));
+            //存到工具类中
+            PageUtils pageUtils = new PageUtils<>(Integer.parseInt(pageIndex),Integer.parseInt(pageSize),totalCount,depatrs);
+            //存储
+            req.setAttribute("pageUtils",pageUtils);
+            req.setAttribute("depatrs",depatrs);
+            req.getRequestDispatcher("/behavior-log.jsp").forward(req,resp);
+        }
+        //登录分页
         if (value.equals("mylogs")){
             //前端发送的当前页
             String pageIndex = req.getParameter("pageIndex");

@@ -1,5 +1,6 @@
 package cn.lanqiao.service;
 
+import cn.lanqiao.pojo.BehaviorLog;
 import cn.lanqiao.pojo.LoginLog;
 
 import java.util.List;
@@ -18,4 +19,15 @@ public interface LogService {
     int getTotalCount();
     //查询每页数量
     List<LoginLog> getDepatrs(Integer pageStart , Integer pageSize);
+
+    //查询行为日志信息
+    List<BehaviorLog> BehaviorLogs();
+    //查询行为日志
+    List<BehaviorLog> queryBehaviorLogs(String username);
+    //查询行为日志总数
+    int getBehaviorTotalCount();
+//    //查询行为日志每页数量
+//    List<BehaviorLog> getBehaviorDepatrs(Integer pageStart , Integer pageSize);
+    //查询行为日志每页数量
+    List<BehaviorLog> getBehaviorDepatrs(String name,Integer pageStart , Integer pageSize);
 }
