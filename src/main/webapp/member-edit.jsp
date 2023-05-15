@@ -69,6 +69,7 @@
                         <span class="x-red">*</span>用户地址</label>
                     <div class="layui-input-inline">
                         <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input" value="${requestScope.userById.address}"></div>
+                    <div class="layui-form-mid" id="userAddressSPAN" style="color: #999999"></div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户类别</label>
@@ -147,6 +148,22 @@
 </script>
 <script>
     //全局变量
+    var userAllAddressSPAN = false;
+    //用户地址
+    var userAddress = document.querySelector('#userAddress');
+    userAddress.onblur = function checkerNewPassword() {
+        var userAddress = $("#userAddress").val();
+        if (userAddress == "") {
+            $("#userAddressSPAN").text("用户地址不能为空!");
+            $("#userAddressSPAN").css("color", "red");
+            userAllAddressSPAN = false;
+        } else {
+            $("#userAddressSPAN").text("√");
+            $("#userAddressSPAN").css("color", "green");
+            userAllAddressSPAN = true;
+        }
+    }
+    //全局变量
     var checkUserAllNameVal = false;
     //用户姓名
     var userName = document.querySelector("#userName");
@@ -216,7 +233,8 @@
     function checkEditAll(){
         console.log(checkUserAllNameVal);
         console.log(checkUserAllPhone);
-        return checkUserAllNameVal && checkUserAllPhone;
+        console.log(userAllAddressSPAN);
+        return userAllAddressSPAN&&checkUserAllNameVal&&checkUserAllPhone;
     }
 </script>
 

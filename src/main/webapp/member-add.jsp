@@ -73,8 +73,9 @@
                     <label for="L_repass" class="layui-form-label">
                         <span class="x-red">*</span>用户地址</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input">
-                    </div>
+                        <input type="text" id="userAddress" name="userAddress" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                    <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                    <div class="layui-form-mid" id="userAddressSPAN" style="color: #999999"></div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户类别</label>
@@ -225,31 +226,48 @@
     }
 
     //全局变量
+    var userAllAddressSPAN = false;
+    //用户地址
+    var userAddress = document.querySelector('#userAddress');
+    userAddress.onblur = function checkerNewPassword() {
+        var userAddress = $("#userAddress").val();
+        if (userAddress == "") {
+            $("#userAddressSPAN").text("用户地址不能为空!");
+            $("#userAddressSPAN").css("color", "red");
+            userAllAddressSPAN = false;
+        } else {
+            $("#userAddressSPAN").text("√");
+            $("#userAddressSPAN").css("color", "green");
+            userAllAddressSPAN = true;
+        }
+    }
+
+    //全局变量
     var checkAllUserPhone = false;
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
-    userphone.onblur = function checkUserPhone(){
+    userphone.onblur = function checkUserPhone() {
         //获取原用户
         var userphone = $("#userphone").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
         $.ajax({
             type: "POST",
             url: "/MemberServlet.do",
-            data: "action=checkUserPhone&userphone="+userphone,
-            dataType:"text",
-            success:function (result) {
+            data: "action=checkUserPhone&userphone=" + userphone,
+            dataType: "text",
+            success: function (result) {
                 if (userphone == "") {
                     $("#userNamePhone").text("用户电话不能为空！");
                     $("#userNamePhone").css("color", "red");
                     checkAllUserPhone = false;
-                } else if(result == 0){
+                } else if (result == 0) {
                     $("#userNamePhone").text("√");
-                    $("#userNamePhone").css("color","green");
+                    $("#userNamePhone").css("color", "green");
                     checkAllUserPhone = true;
-                }else if(result == 2){
+                } else if (result == 2) {
                     $("#userNamePhone").text("用户电话必须是11位的阿拉伯数字！");
-                    $("#userNamePhone").css("color","red");
+                    $("#userNamePhone").css("color", "red");
                     checkAllUserPhone = false;
                 }
             }
@@ -261,7 +279,8 @@
         console.log(checkAllUserWord);
         console.log(checkerAllNewPassword);
         console.log(checkAllUserPhone);
-        return checkAllUserName&&checkAllUserWord&&checkerAllNewPassword&&checkAllUserPhone;
+        console.log(userAllAddressSPAN);
+        return checkAllUserName&&checkAllUserWord&&checkerAllNewPassword&&checkAllUserPhone&&userAllAddressSPAN;
     }
 </script>
 

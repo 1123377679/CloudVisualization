@@ -117,7 +117,6 @@ public class MemberServlet extends HttpServlet {
             String phone = req.getParameter("userphone");           //用户手机号码
             String address = req.getParameter("userAddress");       //用户地址
             String type = req.getParameter("userlei");             //用户类别
-            User loginUser = (User) session.getAttribute("loginUser");
             //将值赋值给实体类
             User user = new User(Integer.parseInt(id), username, oldpassword, Integer.parseInt(sex), birthday, phone, address, Integer.parseInt(type), 0);
             int i = memberService.updateById(user);
@@ -149,11 +148,11 @@ public class MemberServlet extends HttpServlet {
             String oldpass = req.getParameter("oldpass");   //旧密码
             String newpass = req.getParameter("newpass");   //新密码
             String repass = req.getParameter("repass");     //确认新密码
-            System.out.println(oldpass);
-            System.out.println(loginUser.getPassword());
+            //System.out.println(oldpass);
+            //System.out.println(loginUser.getPassword());
             //--------------------判断---------------------
             PrintWriter writer = resp.getWriter();
-            int i = memberService.updatePwd(loginUser.getId(), newpass);
+            int i = memberService.updatePwd(loginUser.getId(), oldpass);
             if (i > 0) {
                 //密码修改成功
                 writer.println("<script>" +

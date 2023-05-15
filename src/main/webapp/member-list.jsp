@@ -121,7 +121,7 @@
           </a>
           <c:forEach begin="${requestScope.pageUtils.numberStart}" end="${requestScope.pageUtils.numberEnd}" var="num" step="1">
             <c:if test="${requestScope.pageUtils.pageIndex == num}">
-              <span style="color:#00e1ff;font-weight: bold;">${num}</span>
+              <span style="color:#fd0303;font-weight: bold;">${num}</span>
             </c:if>
             <c:if test="${requestScope.pageUtils.pageIndex!=num}">
               <a href="/MemberServlet.do?action=limit&pageIndex=${num}&pageSize=${requestScope.pageUtils.pageSize}">${num}</a>

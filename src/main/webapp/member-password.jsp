@@ -24,7 +24,7 @@
         <form class="layui-form" action="/MemberServlet.do?action=updatepwd" method="post" onsubmit="return checkPassAll();">
             <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label">
-                    <span class="x-red">*</span>旧密码</label>
+                    <span class="x-red">*</span>旧的密码</label>
                 <div class="layui-input-inline">
                     <input type="text" id="oldPassword" name="oldpass" required="" lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">
-                    <span class="x-red">*</span>新密码</label>
+                    <span class="x-red">*</span>新的密码</label>
                 <div class="layui-input-inline">
                     <input type="text" id="newPassword" name="newpass" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                 <%--                ------------------------------------------------%>
@@ -91,11 +91,11 @@
                     $("#oldPasswordSpan").css("color","green");
                     checkOldAllPassword = true;
                 } else  if (oldPassword == ""){
-                    $("#oldPasswordSpan").text("原密码不能为空!");
+                    $("#oldPasswordSpan").text("旧的密码不能为空!");
                     $("#oldPasswordSpan").css("color","red");
                     checkOldAllPassword = false;
                 } else {
-                    $("#oldPasswordSpan").text("原密码填写错误!");
+                    $("#oldPasswordSpan").text("旧的密码填写错误!");
                     $("#oldPasswordSpan").css("color","red");
                     checkOldAllPassword = false;
                 }
@@ -114,11 +114,11 @@
         //新密码
         var newPassword = $("#newPassword").val();
         if (newPassword == ""){
-            $("#newPasswordSpan").text("新密码不能为空!");
+            $("#newPasswordSpan").text("新的密码不能为空!");
             $("#newPasswordSpan").css("color","red");
             checkNewAllPassword = false;
         } else if (newPassword == oldPassword){
-            $("#newPasswordSpan").text("新密码不能和原密码相同!");
+            $("#newPasswordSpan").text("新密码不能和旧密码相同!");
             $("#newPasswordSpan").css("color","red");
             checkNewAllPassword = false;
         } else {$("#newPasswordSpan").text("√");
