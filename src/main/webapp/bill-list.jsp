@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <script src="/js/jquery.min.js"></script>
-    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
 </head>
 
@@ -60,7 +60,7 @@
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','/bill-add.jsp',800,600)">
+                    <button class="layui-btn" onclick="xadmin.open('添加账单','/bill-add.jsp',800,600)">
                         <i class="layui-icon"></i>添加</button>
                         <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
                         <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
@@ -102,7 +102,7 @@
                                 <td>${p.providerName}</td>
                                 <td>${p.ispay==1?"已付款":"未付款"}</td>
                                 <td class="td-manage">
-                                    <a title="个人信息"  onclick="xadmin.open('个人信息','/BillServlet.do?action=details&id=${p.id}',600,400)" href="javascript:;">
+                                    <a title="账单信息"  onclick="xadmin.open('账单信息','/BillServlet.do?action=details&id=${p.id}',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe66e;</i>
                                     </a>
                                     <a title="编辑"  onclick="xadmin.open('编辑','/BillServlet.do?action=goUpdate&id=${p.id}',600,400)" href="javascript:;">
@@ -316,9 +316,6 @@
                 }
             }
         });
-    });
-    $(window).on('load', function () {
-        $('.layuimini-loader').fadeOut(); // 隐藏加载层
     });
 </script>
 

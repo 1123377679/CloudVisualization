@@ -15,7 +15,6 @@ import cn.lanqiao.utils.ExprotCellStyle;
 import cn.lanqiao.utils.ImportExcelUtils;
 import cn.lanqiao.utils.PageUtils;
 import com.alibaba.fastjson.JSONObject;
-//import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -99,12 +98,12 @@ public class BillServlet extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             if (i>0){
                 writer.print("<script>" +
-                        "alert('用户新增成功');" +
+                        "alert('账单新增成功');" +
                         "window.parent.location='/BillServlet.do?action=limit&pageIndex=1&pageSize=5'" +
                         "</script>");
             }else {
                 writer.print("<script>" +
-                        "alert('用户新增失败');location.href = '/bill-add.jsp'" +
+                        "alert('账单新增失败');location.href = '/bill-add.jsp'" +
                         "</script>");
             }
         }
@@ -386,6 +385,7 @@ public class BillServlet extends HttpServlet {
                         "</script>");
             }
         }
+
     }
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //执行excel文件导入操作

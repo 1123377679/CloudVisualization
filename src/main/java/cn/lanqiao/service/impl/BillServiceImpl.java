@@ -8,7 +8,9 @@ import cn.lanqiao.pojo.Bill;
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.service.BillService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BillServiceImpl implements BillService {
     BillDao billDao = new BillDaoImpl();
@@ -53,6 +55,11 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<Bill> selectAll() {
         return billDao.selectAll();
+    }
+
+    @Override
+    public Map<String, Integer> getsupplierarea() {
+        return billDao.getsupplierarea();
     }
 
 

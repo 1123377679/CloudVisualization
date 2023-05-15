@@ -1,9 +1,12 @@
 package cn.lanqiao.service;
 
 import cn.lanqiao.pojo.Bill;
+import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.User;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface BillService {
     int getTotalCount();
@@ -20,4 +23,7 @@ public interface BillService {
 
     //查询所有的数据
     List<Bill> selectAll();
+
+    //查询供应商地区
+    Map<String ,Integer > getsupplierarea();
 }

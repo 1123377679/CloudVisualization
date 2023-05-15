@@ -2,11 +2,14 @@ package cn.lanqiao.dao.impl;
 
 import cn.lanqiao.dao.BillDao;
 import cn.lanqiao.pojo.Bill;
+import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 //记得把BillDaoImpl写对，你写成Imol了
 public class BillDaoImpl implements BillDao {
     @Override
@@ -86,4 +89,11 @@ public class BillDaoImpl implements BillDao {
     public List<Bill> selectAll() {
         return DButils.commonQuery(Bill.class,"select * from tb_bills");
     }
+
+    @Override
+    public Map<String, Integer> getsupplierarea() {
+        String sql = "SELECT address as supplierArea, SUM(1) AS supplierCount FROM tb_supplier GROUP BY address";
+        return DButils.commonQueryArea(sql);
+    }
+
 }

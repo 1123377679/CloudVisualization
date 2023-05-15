@@ -326,6 +326,38 @@ public class DButils {
         }
         return null;
     }
+
+    //查询供应商地区
+    public static Map<String,Integer> commonQueryArea(String sql) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        //创建一个map集合
+        Map<String,Integer> map = new HashMap<>();
+        try {
+            connection = getConnection();//获取驱动连接
+            statement = connection.prepareStatement(sql);//编译sql
+            resultSet = statement.executeQuery();//执行sql
+            //处理sql里面的值
+            while (resultSet.next()){
+                //供应商地区
+                String supplierArea = resultSet.getString("supplierArea");
+                //供应商地区数量
+                int supplierCount = resultSet.getInt("supplierCount");
+                //存入map集合中
+                map.put(supplierArea,supplierCount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //关闭
+            DButils.close(connection, statement, resultSet);
+        }
+        return map;
+    }
+
+
+
     //获取类上的属性对象
     public static Field getField(Class<?> clazz, String name) {
         Field field = null;

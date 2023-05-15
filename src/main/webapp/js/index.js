@@ -789,7 +789,10 @@
   });
 })();
 
-// 点位分布统计模块
+
+
+
+// 饼状图点位分布统计模块
 (function() {
   // 1. 实例化对象
   var myChart = echarts.init(document.querySelector(".pie1  .chart"));
@@ -828,14 +831,14 @@
         center: ["50%", "42%"],
         roseType: "radius",
         data: [
-          { value: 20, name: "云南" },
-          { value: 26, name: "北京" },
-          { value: 24, name: "山东" },
-          { value: 25, name: "河北" },
-          { value: 20, name: "江苏" },
-          { value: 25, name: "浙江" },
-          { value: 30, name: "深圳" },
-          { value: 42, name: "广东" }
+          // { value: 20, name: "云南" },
+          // { value: 26, name: "北京" },
+          // { value: 24, name: "山东" },
+          // { value: 25, name: "河北" },
+          // { value: 20, name: "江苏" },
+          // { value: 25, name: "浙江" },
+          // { value: 30, name: "深圳" },
+          // { value: 42, name: "广东" }
         ],
         // 修饰饼形图文字相关的样式 label对象
         label: {
@@ -851,6 +854,43 @@
       }
     ]
   };
+// ajax请求数据
+  $(function () {
+    var Count = [];
+    var area = [];
+    $.get("/SupplierServlet.do?action=supplierAera", function(result) {
+      console.log(result);
+      //遍历前端发送过来的值
+      var Count = result.map(function(item) {
+        return { value: item.supplierCount, name: item.supplierArea };
+      });
+      myChart.hideLoading(); //隐藏加载动画
+      myChart.setOption({
+        series: [
+          {
+            name: "点位统计",
+            type: "pie",
+            // 如果radius是百分比则必须加引号
+            radius: ["10%", "70%"],
+            center: ["50%", "42%"],
+            roseType: "radius",
+            data:Count,
+            // 修饰饼形图文字相关的样式 label对象
+            label: {
+              fontSize: 10
+            },
+            // 修饰引导线样式
+            labelLine: {
+              // 连接到图形的线长度
+              length: 10,
+              // 连接到文字的线长度
+              length2: 10
+            }
+          }
+        ]
+      });
+    },"json");
+  });
 
   // 3. 配置项和数据给我们的实例化对象
   myChart.setOption(option);

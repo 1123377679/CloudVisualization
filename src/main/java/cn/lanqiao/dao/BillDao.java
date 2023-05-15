@@ -1,10 +1,9 @@
 package cn.lanqiao.dao;
 
 import cn.lanqiao.pojo.Bill;
-import cn.lanqiao.pojo.Supplier;
-import cn.lanqiao.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BillDao {
     //查询总数
@@ -21,4 +20,7 @@ public interface BillDao {
     int deleteById(String id);
     //查询所有的数据
     List<Bill> selectAll();
+
+    //查询供应商地区
+    Map<String ,Integer > getsupplierarea();
 }

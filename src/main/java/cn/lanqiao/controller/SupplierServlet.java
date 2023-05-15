@@ -2,8 +2,10 @@ package cn.lanqiao.controller;
 
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.JsonResult;
+import cn.lanqiao.service.BillService;
 import cn.lanqiao.service.MemberService;
 import cn.lanqiao.service.SupplierService;
+import cn.lanqiao.service.impl.BillServiceImpl;
 import cn.lanqiao.service.impl.MemberServiceImpl;
 import cn.lanqiao.service.impl.SupplierServiceImpl;
 import cn.lanqiao.utils.DateUtils;
@@ -42,6 +44,7 @@ import java.util.Map;
 public class SupplierServlet extends HttpServlet {
     SupplierService supplierService=  new SupplierServiceImpl();
     MemberService memberService=new MemberServiceImpl();
+    BillService billService = new BillServiceImpl();
 
     public SupplierServlet() {
     }
@@ -442,6 +445,39 @@ public class SupplierServlet extends HttpServlet {
                 e.printStackTrace();
             }
     }
+
+        //饼图-地区分布
+        if (value.equals("supplierAera")){
+            System.out.println("前端发送请求过来了");
+            Map<String, Integer> getsupplierarea = billService.getsupplierarea();
+            //规定用JSON
+            JSONObject jsonObject;
+            JSONArray jsonArray = new JSONArray();
+
+            //转成JSON格式，把他发送到前端
+            for(Map.Entry<String, Integer> entry : getsupplierarea.entrySet()){
+                jsonObject = new JSONObject();
+                //获取供应商的名字
+                String supplierArea = entry.getKey();
+                //获取账单数量
+                Integer supplierCount = entry.getValue();
+                //存数据
+                jsonObject.put("supplierArea", supplierArea);
+                jsonObject.put("supplierCount",supplierCount);
+                //通过jsonArray发送数据到前端页面
+                jsonArray.add(jsonObject);
+            }
+            //将jsonArray这个流存储到页面上
+            String s = JSON.toJSONString(jsonArray);
+            //发送一个编码格式
+            resp.setContentType("text/html;charset=UTF-8");
+            try(PrintWriter writer = resp.getWriter()){
+                writer.print(s);
+                writer.flush();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //执行excel文件导入操作
