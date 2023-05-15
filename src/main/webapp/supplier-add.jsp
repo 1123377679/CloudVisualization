@@ -168,7 +168,7 @@
                     checkSupplierPhone =true;
 
                 }else if (result==2){
-                    $("#checkSuppliername").text("格式错误");
+                    $("#checkSuppliername").text("供应商名称必须为中文");
                     $("#checkSuppliername").css("color","red");
                     checkSupplierPhone =false;
 
@@ -201,7 +201,7 @@
                     checkSupplierPhone =false;
 
                 } else if (result==2){
-                    $("#checkSupplierlinkman").text("格式错误");
+                    $("#checkSupplierlinkman").text("联系人姓名必须为中文");
                     $("#checkSupplierlinkman").css("color","red");
                     checkSupplierPhone =false;
 
@@ -237,7 +237,7 @@
 
                 }
                 else if(result==0) {
-                    $("#checkSupplierphone").text("格式错误");
+                    $("#checkSupplierphone").text("电话号码必须为11位的阿拉伯数字");
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
 
