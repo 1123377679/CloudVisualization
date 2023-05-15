@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/layuimini.css">
     <style>
         .echars-login {
             position: absolute;
@@ -19,6 +20,10 @@
 </head>
 
 <body>
+<!--初始化加载层-->
+<div class="layuimini-loader">
+    <div class="layuimini-loader-inner"></div>
+</div>
 <header>
     <h1>大数据可视化界面</h1>
     <a class="echars-login" href="/login.jsp">后台管理登录</a>
@@ -54,6 +59,7 @@
     </script>
 </header>
 <section class="mainbox">
+
     <div class="column">
         <div class="panel bar">
             <h2>
@@ -120,5 +126,10 @@
 <script src="/js/index.js"></script>
 <script src="/js/china.js"></script>
 <script src="/js/myMap.js"></script>
+<script>
+    $(window).on('load', function () {
+        $('.layuimini-loader').fadeOut(); // 隐藏加载层
+    });
+</script>
 </body>
 </html>

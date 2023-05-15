@@ -396,7 +396,7 @@
           label: { show: false },
           labelLine: { show: false },
           data:  [
-            { value: ageArr[0], name: "20-  29岁" },
+            { value: ageArr[0], name: "20-29岁" },
             { value: ageArr[1], name: "30-39岁" },
             { value: ageArr[2], name: "40-49岁" },
             { value: ageArr[3], name: "50岁以上" }
