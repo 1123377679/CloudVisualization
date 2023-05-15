@@ -184,7 +184,7 @@
                     checkSupplierName = true;
 
                 }else if (result==2){
-                    $("#checkSuppliername").text("输入格式不正确");
+                    $("#checkSuppliername").text("用户名必须为中文");
                     $("#checkSuppliername").css("color","red");
                     checkSupplierName = false;
                 }
@@ -210,11 +210,11 @@
                     $("#checkSupplierlinkman").css("color","green");
                     checkSupplierLinkman =true;
                 }else if(supplierlinkman=="") {
-                    $("#checkSupplierlinkman").text("不能为空");
+                    $("#checkSupplierlinkman").text("联系人不能为空");
                     $("#checkSupplierlinkman").css("color","red");
                     checkSupplierLinkman =false;
                 } else if (result==1){
-                    $("#checkSupplierlinkman").text("格式错误");
+                    $("#checkSupplierlinkman").text("联系人必须为中文");
                     $("#checkSupplierlinkman").css("color","red");
                     checkSupplierLinkman =false;
                 }
@@ -246,9 +246,8 @@
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
 
-                }
-                else if(result==0) {
-                    $("#checkSupplierphone").text("格式错误");
+                } else if(result==0) {
+                    $("#checkSupplierphone").text("电话为11位的阿拉伯数字");
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
 
