@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class BehaviorLogDAO {
-//    int count = 0;
     private static final String DB_URL = "jdbc:mysql://47.120.39.138/supermarket_db?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true&zeroDateTimeBehavior=CONVERT_TO_NULL";  // 替换为你的数据库连接地址
     private static final String DB_USERNAME = "lhl";  // 替换为你的数据库用户名
     private static final String DB_PASSWORD = "Ab123456";  // 替换为你的数据库密码

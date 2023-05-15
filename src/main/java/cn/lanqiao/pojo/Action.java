@@ -10,4 +10,10 @@ import lombok.NoArgsConstructor;
 public class Action {
     private String type;
     private String description;
+    private String result;
+
+    public Action(String type, String description) {
+        this.type = type;
+        this.description = description;
+    }
 }

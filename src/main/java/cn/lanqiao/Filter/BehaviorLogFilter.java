@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebFilter("/xxx.do")  // 配置过滤器拦截所有请求
 public class BehaviorLogFilter implements Filter {
@@ -27,12 +28,23 @@ public class BehaviorLogFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        //处理请求和响应乱码
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=utf-8");
+
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         //获取请求的URL
         String requestURI = httpRequest.getRequestURI();
         // 获取请求的操作类型，这里假设根据请求路径中的关键词判断
         Action action = getActionFromRequest(requestURI,request);
+
+        //过滤不需要记录的行为，没有行为描述返回值的行为都会被过滤
+        if (action.getDescription().equals("")){
+            chain.doFilter(request,response);
+            return;
+        }
+
         HttpSession session = httpRequest.getSession(false);
         if (session!=null){
             //获取Session中的用户信息
@@ -69,10 +81,8 @@ public class BehaviorLogFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String param = httpRequest.getParameter("action");
         String actionType = "";
-        String actionDescription = "";
-        if (requestURI.matches(".*/login.jsp")) {
-            actionType = "跳转登录页面";
-        } else if (requestURI.contains("/userServlet.do")){
+            String actionDescription = "";
+        if (requestURI.contains("/userServlet.do")){
             if (param.equals("logout")){
                 actionType = "会员登录与退出";
                 actionDescription = "退出登录";

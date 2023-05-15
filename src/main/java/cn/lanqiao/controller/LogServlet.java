@@ -79,16 +79,6 @@ public class LogServlet extends HttpServlet {
             req.setAttribute("pageUtils",pageUtils);
             req.setAttribute("depatrs",depatrs);
             req.getRequestDispatcher("/login-log.jsp").forward(req,resp);
-
-
-//            //将信息存在session中
-//            HttpSession session = req.getSession();
-//            User loginUser = (User) session.getAttribute("loginUser");
-//            //查询登录日志
-//            List<LoginLog> Logs = logService.queryMyLogs(loginUser.getUsername());
-//            //转发数据到页面上
-//            req.setAttribute("Logs",Logs);
-//            req.getRequestDispatcher("/login-log.jsp").forward(req,resp);
         }
 
         //删除操作
