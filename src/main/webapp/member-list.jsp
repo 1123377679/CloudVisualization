@@ -99,7 +99,7 @@
                   <a title="编辑"  onclick="xadmin.open('编辑','/MemberServlet.do?action=goUpdate&id=${p.id}',600,400)" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                   </a>
-                  <a onclick="xadmin.open('修改密码','member-password.jsp',600,400)" title="修改密码" href="javascript:;">
+                  <a title="修改密码" onclick="xadmin.open('修改密码','/MemberServlet.do?action=goupdatepwd&id=${p.id}',600,400)" title="修改密码" href="javascript:;">
                     <i class="layui-icon">&#xe631;</i>
                   </a>
                   <a title="删除" href="javascript:deleteMember(${p.id});">

@@ -66,5 +66,10 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.getTotalCount(user);
     }
 
+    @Override
+    public int checkPassword(Integer userId, String password) {
+        return memberDao.checkPassword(userId,password);
+    }
+
 
 }

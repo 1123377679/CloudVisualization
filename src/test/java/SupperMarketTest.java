@@ -22,5 +22,9 @@ public class SupperMarketTest {
         List<Integer> list = memberService.selectAge();
         System.out.println(list);
     }
-
+    @Test
+    public void test2(){
+        int i = memberService.checkPassword(3,"12345");
+        System.out.println(i);
+    }
 }

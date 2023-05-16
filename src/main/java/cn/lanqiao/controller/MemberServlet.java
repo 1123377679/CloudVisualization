@@ -54,10 +54,10 @@ public class MemberServlet extends HttpServlet {
             String name = req.getParameter("username");
             //总条数
             int totalCount = memberService.getTotalCount();
-            System.out.println("总条数：" + totalCount);
+//            System.out.println("总条数：" + totalCount);
             //每页的数
             List<User> depatrs = memberService.getDepatrs(name, (Integer.parseInt(pageIndex) - 1) * (Integer.parseInt(pageSize)), Integer.parseInt(pageSize));
-            System.out.println("每页查询的数据" + depatrs);
+//            System.out.println("每页查询的数据" + depatrs);
             //存到工具类
             PageUtils pageUtils = new PageUtils<>(Integer.parseInt(pageIndex), Integer.parseInt(pageSize), totalCount, depatrs);
             //将pageUtils存储
@@ -142,9 +142,20 @@ public class MemberServlet extends HttpServlet {
             req.setAttribute("users", userById);
             req.getRequestDispatcher("/member-view.jsp").forward(req, resp);
         }
+        //-------------------修改密码跳转页面-------------------
+        if (value.equals("goupdatepwd")) {
+            String id = req.getParameter("id");
+            //根据id找到实体类对象
+            User userById = memberService.getUserById(id);
+            //存值，好让前端获取内容
+            req.setAttribute("userById", userById);
+            //将查询的id信息发送到页面
+            req.getRequestDispatcher("/member-password.jsp").forward(req, resp);
+        }
         //---------------修改密码功能-----------------------
         if (value.equals("updatepwd")) {
-            User loginUser = (User) session.getAttribute("loginUser");
+//            User loginUser = (User) session.getAttribute("loginUser");
+            String id = req.getParameter("id");
             String oldpass = req.getParameter("oldpass");   //旧密码
             String newpass = req.getParameter("newpass");   //新密码
             String repass = req.getParameter("repass");     //确认新密码
@@ -152,7 +163,7 @@ public class MemberServlet extends HttpServlet {
             //System.out.println(loginUser.getPassword());
             //--------------------判断---------------------
             PrintWriter writer = resp.getWriter();
-            int i = memberService.updatePwd(loginUser.getId(), oldpass);
+            int i = memberService.updatePwd(Integer.parseInt(id), newpass);
             if (i > 0) {
                 //密码修改成功
                 writer.println("<script>" +
@@ -169,18 +180,25 @@ public class MemberServlet extends HttpServlet {
         }
         //检查用户输入的密码是否正确
         if (value.equals("checkOldPass")) {
+            //用户输入的用户名
+            String id = req.getParameter("id");
+            System.out.println("id"+id);
             String oldPassword = req.getParameter("oldPassword");
-            User loginUser = (User) session.getAttribute("loginUser");
+            System.out.println("旧密码:"+oldPassword);
+            int i = memberService.checkPassword(Integer.parseInt(id),oldPassword);
+            System.out.println(i);
+            System.out.println(id);
+            System.out.println(oldPassword);
             //判断
             PrintWriter writer = resp.getWriter();
-            if (loginUser.getPassword().equals(oldPassword)) {
-                //原始正确
-                writer.print(1);
-            } else {
-                //原始密码错误
-                writer.println(0);
+                if (i > 0) {
+                    //存在
+                    writer.print(1);
+                } else {
+                    //不存在
+                    writer.print(0);
+                }
             }
-        }
         //----------------删除功能-----------------------------
         if (value.equals("delete")) {
             String id = req.getParameter("id");

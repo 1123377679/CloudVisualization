@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="x-admin-sm">
 <head>
@@ -21,7 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" action="/MemberServlet.do?action=updatepwd" method="post" onsubmit="return checkPassAll();">
+        <form class="layui-form" action="/MemberServlet.do?action=updatepwd&id=${requestScope.userById.id}" method="post" onsubmit="return checkPassAll();">
             <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label">
                     <span class="x-red">*</span>旧的密码</label>
@@ -80,7 +81,8 @@
         $.ajax({
             type:"POST",
             url:"/MemberServlet.do",
-            data:"action=checkOldPass&oldPassword="+oldPassword,
+            data:"action=checkOldPass&oldPassword="+oldPassword+"&id=${requestScope.userById.id}",
+            <%--data:"action=checkOldPass&id="+${requestScope.userById.id}+"&oldPassword="+oldPassword,--%>
             dataType:"text",//服务器响应数据的格式
             //result:后端响应的数据
             success:function (result){
