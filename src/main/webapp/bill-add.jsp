@@ -29,10 +29,10 @@
                         <span class="x-red">*</span>商品名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="linkman" name="title" required="" lay-verify="pass" autocomplete="off" class="layui-input">
+                        <input type="text" id="linkman" name="title" required="" lay-verify="pass" autocomplete="off" class="layui-input" onblur="checkName()">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入商品名称
+                        <span class="x-red">*</span>请输入商品名称（长度不超过8个字符）
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -56,7 +56,10 @@
                         <span class="x-red">*</span>总金额
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="fax" name="money" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                        <input type="text" id="fax" name="money" required="" lay-verify="repass" autocomplete="off" class="layui-input" onblur="checkMoney()">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>请输入数字
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -86,13 +89,7 @@
 </body>
 
 </html>
-<%--<script type="text/javascript">--%>
-<%--    layui.use('form',function(){--%>
-<%--        const form = layui.form;--%>
-<%--        form.render();--%>
-<%--    });--%>
-<%--</script>--%>
-<%--异步获取下拉框--%>
+
 <script type="text/javascript">
     function renderForm(){
         layui.use('form',function () {
@@ -100,7 +97,8 @@
             form.render();
         });
     }
-    //页面加载的时候执行
+
+    // 页面加载的时候执行
     window.onload = function (){
         //发送AJAX异步请求去Servlet后台获取供应商下拉框  的数据
         $.get("/BillServlet.do?action=loadSupplier",function (result){
@@ -116,7 +114,25 @@
                 renderForm();
             }
         },"json");//返回JSON数据
+
+        // 商品名称输入框外判断输入内容必须为中文，长度不能大于八个字符，超出给提示
+        $("#linkman").blur(function() {
+            var name = $(this).val();
+            if (!/^[\u4e00-\u9fa5]{1,8}$/.test(name)) {
+                layer.msg('请输入中文字符不能超过8个');
+                $(this).val("");
+            }
+        });
+        // 总金额输入框外判断必须输入数字，字母和汉字不行
+        $("#fax").blur(function() {
+            var money = $(this).val();
+            if (!/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(money)) {
+                layer.msg('请输入数字');
+                $(this).val("");
+            }
+        });
+
+
+
     }
 </script>
-
-

@@ -70,7 +70,6 @@
                             <span class="x-red">*</span>供应商</label>
                         <div class="layui-input-inline" >
                             <select name="providerid" id="username">
-                                <option value="-1">----选择供应商----</option>
                                 <c:forEach var="a" items="${requestScope.suppliersList}">
                                     <%--做回显--%>
                                     <option value="${a.id}"${requestScope.providerid==a.id?"selected":""}>${a.name}</option>
