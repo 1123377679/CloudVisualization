@@ -363,6 +363,14 @@ public class DButils {
         try {
             connection = getConnection();//获取驱动连接
             statement = connection.prepareStatement(sql);//编译sql
+
+            //设置参数值
+            if (param != null) {
+                for (int i = 0; i < param.length; i++) {
+                    statement.setObject(i + 1, param[i]);
+                }
+            }
+
             resultSet = statement.executeQuery();//执行sql
             //处理sql里面的值
             while (resultSet.next()){
