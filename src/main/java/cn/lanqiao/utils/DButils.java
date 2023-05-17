@@ -355,7 +355,28 @@ public class DButils {
         }
         return map;
     }
-
+    //根据供应商姓名查询账单外键id
+    public static int getOrderIdBySupplierName(String sql,Object... param) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();//获取驱动连接
+            statement = connection.prepareStatement(sql);//编译sql
+            resultSet = statement.executeQuery();//执行sql
+            //处理sql里面的值
+            while (resultSet.next()){
+                int providerid = resultSet.getInt("providerid");
+                return providerid;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //关闭
+            DButils.close(connection, statement, resultSet);
+        }
+        return -1;
+    }
 
 
     //获取类上的属性对象

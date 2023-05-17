@@ -20,7 +20,8 @@ public interface BillDao {
     int deleteById(String id);
     //查询所有的数据
     List<Bill> selectAll();
-
     //查询供应商地区
     Map<String ,Integer > getsupplierarea();
+    //根据供应商名字查询账单编号
+    int  getbillsum(String name);
 }

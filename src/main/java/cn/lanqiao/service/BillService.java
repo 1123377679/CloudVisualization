@@ -26,4 +26,6 @@ public interface BillService {
 
     //查询供应商地区
     Map<String ,Integer > getsupplierarea();
+    //根据供应商名字查询账单编号
+    int  getbillsum(String name);
 }

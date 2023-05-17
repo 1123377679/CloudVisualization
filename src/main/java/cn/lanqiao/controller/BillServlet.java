@@ -431,11 +431,11 @@ public class BillServlet extends HttpServlet {
                         }
                     }
                     rowNum++;
-                    colNum = 1;
+                    colNum = 0;
                     Bill bill = new Bill();
 
                     //列号需要自加获取
-                    ImportExcelUtils.validCellValue(sheet,row,colNum,"商品名称");
+                    ImportExcelUtils.validCellValue(sheet,row,++colNum,"商品名称");
                     bill.setTitle(ImportExcelUtils.getCellValue(sheet,row,colNum-1));
 
                     ImportExcelUtils.validCellValue(sheet,row,++colNum,"商品单位");
@@ -450,12 +450,20 @@ public class BillServlet extends HttpServlet {
                     bill.setMoney(Integer.parseInt(money));
 
                     ImportExcelUtils.validCellValue(sheet,row,++colNum,"供应商");
-                    String providerid = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
-                    bill.setProviderid(Integer.parseInt(providerid));
+                    //发送进来的supplierName值一定是供应商的名字
+                    String supplierName = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
+                    //拿着供应商的名字去获取账单id，然后把他存入到setProviderid中
+                    // bill.setProviderid(Integer.parseInt(providerid));
+                    int getbillsum = billService.getbillsum(supplierName);
+                    bill.setProviderid(getbillsum);
 
                     ImportExcelUtils.validCellValue(sheet,row,++colNum,"是否付款");
                     String ispay = ImportExcelUtils.getCellValue(sheet, row, colNum-1);
-                    bill.setIspay(Integer.parseInt(ispay));
+                    if ("未付款".equals(ispay)){
+                        bill.setIspay(0);
+                    } else if ("已付款".equals(ispay)){
+                        bill.setIspay(1);
+                    }
                     //存储对象到list集合中
                     billList.add(bill);
                 }

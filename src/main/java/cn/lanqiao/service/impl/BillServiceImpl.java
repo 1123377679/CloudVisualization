@@ -62,5 +62,10 @@ public class BillServiceImpl implements BillService {
         return billDao.getsupplierarea();
     }
 
+    @Override
+    public int getbillsum(String name) {
+        return billDao.getbillsum(name);
+    }
+
 
 }

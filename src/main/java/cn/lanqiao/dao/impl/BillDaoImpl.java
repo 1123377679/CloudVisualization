@@ -96,4 +96,9 @@ public class BillDaoImpl implements BillDao {
         return DButils.commonQueryArea(sql);
     }
 
+    @Override
+    public int getbillsum(String name) {
+        return DButils.getOrderIdBySupplierName("SELECT DISTINCT b.providerid FROM tb_bills b JOIN tb_supplier s ON b.providerid = s.id WHERE s.name = ?",name);
+    }
+
 }
