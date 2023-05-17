@@ -67,6 +67,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public ArrayList<Integer> getCount(User user) {
+        return memberDao.getCount(user);
+    }
+
+    @Override
     public int checkPassword(Integer userId, String password) {
         return memberDao.checkPassword(userId,password);
     }

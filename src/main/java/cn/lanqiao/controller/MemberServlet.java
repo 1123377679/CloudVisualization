@@ -154,7 +154,7 @@ public class MemberServlet extends HttpServlet {
         }
         //---------------修改密码功能-----------------------
         if (value.equals("updatepwd")) {
-//            User loginUser = (User) session.getAttribute("loginUser");
+            User loginUser = (User) session.getAttribute("loginUser");
             String id = req.getParameter("id");
             String oldpass = req.getParameter("oldpass");   //旧密码
             String newpass = req.getParameter("newpass");   //新密码
@@ -163,20 +163,27 @@ public class MemberServlet extends HttpServlet {
             //System.out.println(loginUser.getPassword());
             //--------------------判断---------------------
             PrintWriter writer = resp.getWriter();
-            int i = memberService.updatePwd(Integer.parseInt(id), newpass);
-            if (i > 0) {
+            if (Integer.parseInt(id) == (loginUser.getId())) {
+            if (memberService.updatePwd(loginUser.getId(), newpass) > 0) {
                 //密码修改成功
                 writer.println("<script>" +
                         "alert('密码修改成功');" +
                         "window.parent.parent.location.href='/login.jsp'"
                         + "</script>");
-            } else {
-                //密码修改失败
-                writer.println("<script>" +
-                        "alert('密码修改异常');" +
-                        "window.location.href='/member-password.jsp'"
-                        + "</script>");
-            }
+                }
+            } else if (memberService.updatePwd(Integer.parseInt(id), newpass) > 0)  {
+                    //密码修改成功
+                    writer.print("<script>" +
+                            "alert('密码修改成功');" +
+                            "window.parent.location='/MemberServlet.do?action=limit&pageIndex=1&pageSize=5'"
+                            + "</script>");
+                } else {
+                    //密码修改失败
+                    writer.println("<script>" +
+                            "alert('密码修改异常');" +
+                            "window.location.href='/member-password.jsp'"
+                            + "</script>");
+                }
         }
         //检查用户输入的密码是否正确
         if (value.equals("checkOldPass")) {
@@ -367,8 +374,14 @@ public class MemberServlet extends HttpServlet {
 
                 //创建性别
                 HSSFCell phoneCell = row.createCell(3);
-                phoneCell.setCellValue(p.getSex());
-                phoneCell.setCellStyle(tableBodyStyle);
+                if (p.getSex() == 1) {
+                    phoneCell.setCellValue("男");
+                    phoneCell.setCellStyle(tableBodyStyle);
+                } else if (p.getSex() == 0) {
+                    phoneCell.setCellValue("女");
+                    phoneCell.setCellStyle(tableBodyStyle);
+                }
+
 
                 //创建生日
                 HSSFCell addressCell = row.createCell(4);
@@ -432,6 +445,16 @@ public class MemberServlet extends HttpServlet {
             //System.out.println("折线图请求发送过来");
             User user = new User();
             ArrayList<Integer> totalCount = memberService.getTotalCount(user);
+            //System.out.println(totalCount);
+            String jsonString = JSONObject.toJSONString(totalCount);
+            PrintWriter writer = resp.getWriter();
+            writer.print(jsonString);
+        }
+        //折线图第二请求
+        if (value.equals("goOldUser")){
+            //System.out.println("折线图请求发送过来");
+            User user = new User();
+            ArrayList<Integer> totalCount = memberService.getCount(user);
             //System.out.println(totalCount);
             String jsonString = JSONObject.toJSONString(totalCount);
             PrintWriter writer = resp.getWriter();

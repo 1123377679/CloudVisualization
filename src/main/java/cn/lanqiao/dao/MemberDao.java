@@ -28,6 +28,8 @@ public interface MemberDao {
     List<Integer>  selectAge();
     //查询总数
     ArrayList<Integer> getTotalCount(User user);
+    //折线图查询tb_oldUser
+    ArrayList<Integer> getCount(User user);
     //查询密码
     int checkPassword(Integer userId,String password);
 }

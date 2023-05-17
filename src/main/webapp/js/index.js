@@ -147,34 +147,33 @@
 
 // 折线图定制
 (function() {
-
-  // 1. 实例化对象
+  // 1. 基于准备好的dom，初始化echarts实例
   var myChart = echarts.init(document.querySelector(".line .chart"));
-  // 2.指定配置
+  // 2. 指定配置和数据
   var option = {
-    // 通过这个color修改两条线的颜色
     color: ["#00f2f1", "#ed3f35"],
     tooltip: {
+      // 通过坐标轴来触发
       trigger: "axis"
     },
     legend: {
-      data: ['新增会员'],
-      // 如果series 对象有name 值，则 legend可以不用写data
-      // 修改图例组件 文字颜色
+      // 距离容器10%
+      right: "10%",
+      // 修饰图例文字的颜色
       textStyle: {
         color: "#4c9bfd"
-      },
-      // 这个10% 必须加引号
-      right: "10%"
+      }
+      // 如果series 里面设置了name，此时图例组件的data可以省略
+      // data: ["邮件营销", "联盟广告"]
     },
     grid: {
       top: "20%",
       left: "3%",
       right: "4%",
       bottom: "3%",
-      show: true, // 显示边框
-      borderColor: "#012f4a", // 边框颜色
-      containLabel: true // 包含刻度文字在内
+      show: true,
+      borderColor: "#012f4a",
+      containLabel: true
     },
 
     xAxis: {
@@ -194,34 +193,43 @@
         "11月",
         "12月"
       ],
+      // 去除刻度
       axisTick: {
-        show: false // 去除刻度线
+        show: false
       },
+      // 修饰刻度标签的颜色
       axisLabel: {
-        color: "#4c9bfd" // 文本颜色
+        color: "rgba(255,255,255,.7)"
       },
+      // 去除x坐标轴的颜色
       axisLine: {
-        show: false // 去除轴线
+        show: false
       }
     },
     yAxis: {
       type: "value",
+      // 去除刻度
       axisTick: {
-        show: false // 去除刻度线
+        show: false
       },
+      // 修饰刻度标签的颜色
       axisLabel: {
-        color: "#4c9bfd" // 文本颜色
+        color: "rgba(255,255,255,.7)"
       },
-      axisLine: {
-        show: false // 去除轴线
-      },
+      // 修改y轴分割线的颜色
       splitLine: {
         lineStyle: {
-          color: "#012f4a" // 分割线颜色
+          color: "#012f4a"
         }
       }
     },
     series: [
+      {
+        name: '新增粉丝',
+        type: 'line',
+        stack: 'Total',
+        data: []
+      },
       {
         name: '新增会员',
         type: 'line',
@@ -231,7 +239,9 @@
     ]
   };
 
-  //页面加载的时候发送请求
+
+
+  //页面加载的时候发送请求1
   $(function (){
     var arrCount = [];
     // 发送AJAX异步请求去Servlet后台获取用户数量的数据
@@ -274,6 +284,56 @@
               type: 'line',
               stack: 'Total',
               data: arrCount
+            }
+          ]
+        });
+      }
+    },"json")
+  });
+
+  //页面加载的时候发送请求2
+  $(function (){
+    var arCount = [];
+    // 发送AJAX异步请求去Servlet后台获取用户数量的数据
+    $.get("/MemberServlet.do?action=goOldUser",function (result){
+      for (var i = 0; i<result.length;i++){
+        arCount.push(result[i]);
+        myChart.hideLoading(); //隐藏加载动画
+        myChart.setOption({
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: [
+              "1月",
+              "2月",
+              "3月",
+              "4月",
+              "5月",
+              "6月",
+              "7月",
+              "8月",
+              "9月",
+              "10月",
+              "11月",
+              "12月"
+            ],
+            axisTick: {
+              show: false // 去除刻度线
+            },
+            axisLabel: {
+              interval:0,//将横轴信息全部显示出来
+              color: "#4c9bfd" // 文本颜色
+            },
+            axisLine: {
+              show: false // 去除轴线
+            }
+          },
+          series: [
+            {
+              name: '新增粉丝',
+              type: 'line',
+              stack: 'Total',
+              data: arCount
             }
           ]
         });

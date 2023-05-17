@@ -94,8 +94,13 @@ public class MemberDaoImpl implements MemberDao {
     }
 
     @Override
+    public ArrayList<Integer> getCount(User user) {
+        return DButils.commonQueryCountAll("SELECT DATE_FORMAT(birthday, '%Y-%m') AS month, COUNT(*) AS count FROM tb_olduser GROUP BY month");
+    }
+
+    @Override
     public int checkPassword(Integer userId,String password) {
-        return DButils.commonQueryCount("SELECT COUNT(*) as count FROM tb_user WHERE id = ? AND password = ?;",userId, password);
+        return DButils.commonQueryCount("SELECT COUNT(*) as count FROM tb_user WHERE id = ? AND password = ?",userId, password);
     }
 }
 
