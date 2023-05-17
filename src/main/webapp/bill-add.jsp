@@ -42,6 +42,9 @@
                     <div class="layui-input-inline">
                         <input type="text" id="phone" name="unit" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                     </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>请输入商品单位（长度不超过2个字符）
+                    </div>
                 </div>
                 <div class="layui-form-item">
                     <label for="address" class="layui-form-label">
@@ -49,6 +52,9 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="address" name="num" required="" lay-verify="repass" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>请输入数字
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -123,8 +129,24 @@
                 $(this).val("");
             }
         });
+        // 商品名称输入框外判断输入内容必须为中文，长度不能大于2个字符，超出给提示
+        $("#phone").blur(function() {
+            var name = $(this).val();
+            if (!/^[\u4e00-\u9fa5]{1,8}$/.test(name)) {
+                layer.msg('请输入中文字符不能超过8个');
+                $(this).val("");
+            }
+        });
         // 总金额输入框外判断必须输入数字，字母和汉字不行
         $("#fax").blur(function() {
+            var money = $(this).val();
+            if (!/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(money)) {
+                layer.msg('请输入数字');
+                $(this).val("");
+            }
+        });
+        // 总金额输入框外判断必须输入数字，字母和汉字不行
+        $("#address").blur(function() {
             var money = $(this).val();
             if (!/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(money)) {
                 layer.msg('请输入数字');
