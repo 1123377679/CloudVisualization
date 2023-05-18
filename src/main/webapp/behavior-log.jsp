@@ -68,7 +68,7 @@
                             <th>行为所属模块</th>
                             <th>行为记录时间</th>
                             <th>用户Ip</th>
-                            <th>返回结果</th>
+<%--                            <th>返回结果</th>--%>
 
                         </thead>
                         <tbody>
@@ -81,7 +81,7 @@
                                 <td>${l.model}</td>
                                 <td>${l.operationtime}</td>
                                 <td>${l.ip}</td>
-                                <td>${l.result}</td>
+<%--                                <td>${l.result}</td>--%>
 
                             </tr>
                         </c:forEach>
@@ -189,9 +189,5 @@
         var pageSize = $(select).val();
         location.href = "/LogServlet.do?action=Behaviors&pageIndex=1&pageSize=" + pageSize;
     }
-
-
-
-
 </script>
 </html>

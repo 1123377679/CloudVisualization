@@ -25,8 +25,6 @@ public class BehaviorLogDAO {
             stmt.setString(5, behaviorLog.getIp());
             stmt.setString(6, behaviorLog.getOperationtime());
             stmt.setString(7, behaviorLog.getResult());
-//            count++;
-//            System.out.println(count);
             stmt.executeUpdate();
             System.out.println("行为日志记录成功");
         } catch (SQLException e) {

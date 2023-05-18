@@ -61,7 +61,7 @@ public class BillServlet extends HttpServlet {
             String ispay = req.getParameter("ispay");
             //总条数
             int totalCount = billService.getTotalCount();
-            System.out.println("总条数：" + totalCount);
+//            System.out.println("总条数：" + totalCount);
             //供应商数据回显
             List<Supplier> suppliersList = supplierService.selectAllSupplier();
             //供应商的集合存储转发
@@ -69,7 +69,7 @@ public class BillServlet extends HttpServlet {
             //每页的数据
             //起始索引从0开始，起始索引=（查询页码-1）*每页显示记录数
             List<Bill> depatrs = billService.getDepatrs(name,providerid,ispay, (Integer.parseInt(pageIndex) - 1 )* (Integer.parseInt(pageSize)), Integer.parseInt(pageSize));
-            System.out.println("每页查询的数据："+depatrs);//值能查询到了
+//            System.out.println("每页查询的数据："+depatrs);//值能查询到了
             //存到工具类去
             PageUtils pageUtils = new PageUtils<>(Integer.parseInt(pageIndex),Integer.parseInt(pageSize),totalCount,depatrs);
             //将pageUtils存储起来
@@ -91,7 +91,7 @@ public class BillServlet extends HttpServlet {
             String ispay = req.getParameter("ispay");
             //前端赋值给实体类
             Bill bill = new Bill(null,title,unit,Integer.parseInt(num),Integer.parseInt(money),Integer.parseInt(providerid),Integer.parseInt(ispay),0);
-            System.out.println(bill);
+//            System.out.println(bill);
             //保存到数据库中
             int i =  billService.add(bill);
             //后端往前端写js代码
@@ -120,7 +120,7 @@ public class BillServlet extends HttpServlet {
             //供应商的集合存储转发
             req.setAttribute("suppliersList",suppliersList);//
 
-            System.out.println(bliiById);
+//            System.out.println(bliiById);
             //存值
             req.setAttribute("bliiById",bliiById);
             //把值发送到前端页面
@@ -164,7 +164,7 @@ public class BillServlet extends HttpServlet {
         if(value.equals("details")){
 
             String id = req.getParameter("id");
-            System.out.println(id);
+//            System.out.println(id);
             //根据id查询用户信息
             Bill billById = billService.getBillById(id);
             //存储起来
@@ -209,7 +209,7 @@ public class BillServlet extends HttpServlet {
         //导出数据
         if (value.equals("exportException")){
             String name = req.getParameter("name");
-            //System.out.println("要进行Excel导出操作...查询"+name);
+            System.out.println("要进行Excel导出操作...查询"+name);
             //获取数据库中的数据
             List<Bill> bills = billService.selectAll();
             //1.创建工作簿
@@ -359,7 +359,7 @@ public class BillServlet extends HttpServlet {
         //批量删除
         if (value.equals("delAll")){
             String checkId = req.getParameter("checkId");
-            System.out.println(checkId);
+//            System.out.println(checkId);
             String[] split = checkId.split(",");
 //            int[] ints = new int[split.length];
             String[] ids = new String[split.length];

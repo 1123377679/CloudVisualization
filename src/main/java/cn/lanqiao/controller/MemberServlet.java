@@ -275,7 +275,7 @@ public class MemberServlet extends HttpServlet {
         //批量删除
         if (value.equals("delAll")){
             String checkId = req.getParameter("id");
-            System.out.println(checkId);
+//            System.out.println(checkId);
             String[] split = checkId.split(",");
             String[] ids = new String[split.length];
             PrintWriter writer = resp.getWriter();

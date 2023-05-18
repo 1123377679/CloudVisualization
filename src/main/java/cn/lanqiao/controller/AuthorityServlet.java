@@ -62,14 +62,14 @@ public class AuthorityServlet extends HttpServlet {
         //修改操作
         if (value.equals("update")){
             String id = req.getParameter("id");
-            System.out.println("当前用户id:"+id);
+//            System.out.println("当前用户id:"+id);
             String userlei = req.getParameter("userlei");
             int i = authorityService.updateById(Integer.parseInt(id),userlei);
-            System.out.println(i);
+//            System.out.println(i);
             PrintWriter writer = resp.getWriter();
             if (i > 0){
                 //添加成功
-                //System.out.println("添加成功");
+//                System.out.println("添加成功");
                 writer.print("<script>" +
                         "alert('修改成功');" +
                         "window.location='/AuthorityServlet.do?action=limit&pageIndex=1&pageSize=5'" +
