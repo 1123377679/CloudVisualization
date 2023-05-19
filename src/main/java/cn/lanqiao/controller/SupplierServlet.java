@@ -69,13 +69,13 @@ public class SupplierServlet extends HttpServlet {
             String pageSize = req.getParameter("pageSize");
             //前端发送过来的输入框发送的信息
             String name =req.getParameter("username");
-            System.out.println(name);
+//            System.out.println(name);
             //总条数
             int totalCount =supplierService.getTotalCount();
-            System.out.println("总条数："+totalCount);
+//            System.out.println("总条数："+totalCount);
             //每页的数
             List<Supplier> depatrs = supplierService.getDepatrs(name,(Integer.parseInt(pageIndex) - 1)*(Integer.parseInt(pageSize)),Integer.parseInt(pageSize));
-            System.out.println("每页查询的数据"+depatrs);
+//            System.out.println("每页查询的数据"+depatrs);
             //存到工具类
             PageUtils pageUtils = new PageUtils<>(Integer.parseInt(pageIndex),Integer.parseInt(pageSize),totalCount,depatrs);
             //将pageUtils存储
@@ -96,7 +96,7 @@ public class SupplierServlet extends HttpServlet {
             String description= req.getParameter("description");
             //前端的值给实体类
             Supplier supplier=new Supplier(null,name,linkman,phone,address,fax,description,0);
-            System.out.println(supplier);
+//            System.out.println(supplier);
             //存入数据库
             int i=supplierService.addSuppliers(supplier);
             PrintWriter writer = resp.getWriter();
@@ -365,7 +365,7 @@ public class SupplierServlet extends HttpServlet {
         //批量删除
         if (value.equals("delAll")){
             String checkId = req.getParameter("id");
-            System.out.println(checkId);
+//            System.out.println(checkId);
             String[] split = checkId.split(",");
 //            int[] ints = new int[split.length];
             String[] ids = new String[split.length];
@@ -448,7 +448,7 @@ public class SupplierServlet extends HttpServlet {
 
         //饼图-地区分布
         if (value.equals("supplierAera")){
-            System.out.println("前端发送请求过来了");
+//            System.out.println("前端发送请求过来了");
             Map<String, Integer> getsupplierarea = billService.getsupplierarea();
             //规定用JSON
             JSONObject jsonObject;

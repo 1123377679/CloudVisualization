@@ -17,14 +17,14 @@ public class SupperMarketTest {
         SupplierService supplierService = new SupplierServiceImpl();
         Map<String, Integer> billCountBySupplier = supplierService.getBillCountBySupplier();
         for (Map.Entry<String, Integer> entry : billCountBySupplier.entrySet()) {
-            System.out.println("供应商: " + entry.getKey() + "，订单数量: " + entry.getValue());
+//            System.out.println("供应商: " + entry.getKey() + "，订单数量: " + entry.getValue());
         }
 
     }
     @Test
     public void test(){
         List<Integer> list = memberService.selectAge();
-        System.out.println(list);
+//        System.out.println(list);
     }
     @Test
     public void test2(){

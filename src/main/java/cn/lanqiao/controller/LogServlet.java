@@ -1,6 +1,7 @@
 package cn.lanqiao.controller;
 
 import cn.hutool.core.date.DateUtil;
+import cn.lanqiao.pojo.Action;
 import cn.lanqiao.pojo.BehaviorLog;
 import cn.lanqiao.pojo.JsonResult;
 import cn.lanqiao.pojo.LoginLog;
@@ -251,7 +252,7 @@ public class LogServlet extends HttpServlet {
         //批量删除
         if (value.equals("delAll")){
             String checkId = req.getParameter("checkId");
-            System.out.println(checkId);
+//            System.out.println(checkId);
             String[] split = checkId.split(",");
 //            int[] ints = new int[split.length];
             String[] ids = new String[split.length];
@@ -295,7 +296,7 @@ public class LogServlet extends HttpServlet {
                 InputStream inputStream = part.getInputStream();
                 //读取excel中的数据
                 Workbook workbook = ImportExcelUtils.getWorkbookByInputStream(inputStream, submittedFileName);
-                System.out.println(workbook);
+//                System.out.println(workbook);
                 //得到工作表
                 Sheet sheet = ImportExcelUtils.getSheetByWorkbook(workbook,0);
                 //根据需要是否加条数限制

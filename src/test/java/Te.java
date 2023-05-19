@@ -9,6 +9,6 @@ public class Te {
         MemberService memberService = new MemberServiceImpl();
         User user = new User();
         ArrayList<Integer> totalCount = memberService.getTotalCount(user);
-        System.out.println(totalCount);
+//        System.out.println(totalCount);
     }
 }
