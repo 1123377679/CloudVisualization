@@ -1,5 +1,6 @@
 <%@ page import="cn.lanqiao.pojo.User" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -98,84 +99,141 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
-                    <cite>会员管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
+            <c:choose>
+                <c:when test="${sessionScope.loginUser.type == 1}">
                     <li>
-                        <%--前端发送请求,需要后台拿到action=list数据--%>
-                        <a onclick="xadmin.add_tab('会员列表','/MemberServlet.do?action=limit&pageIndex=1&pageSize=5')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite></a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                            <cite>会员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('会员列表','/MemberServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员列表</cite></a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
-        <%--供应商---------------------------------------------------------------------%>
+                    <%--供应商---------------------------------------------------------------------%>
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
-                    <cite>供应商管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('供应商列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>供应商列表</cite></a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
+                            <cite>供应商管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('供应商列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>供应商列表</cite></a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>
-                    <cite>账单管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('账单管理','/BillServlet.do?action=limit&pageIndex=1&pageSize=5')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>账单列表</cite></a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>
+                            <cite>账单管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('账单管理','/BillServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>账单列表</cite></a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
-                    <cite>用户日志</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
                     <li>
-                        <%--前端发送请求,需要后台拿到action=list数据--%>
-                        <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>用户登录日志</cite></a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                            <cite>登录日志</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>用户登录日志</cite></a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-                <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('用户行为日志','/LogServlet.do?action=Behaviors&pageIndex=1&pageSize=20')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>用户行为日志</cite></a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                            <cite>权限管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('权限分类','/AuthorityServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限分类</cite>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
-                    <cite>权限管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
+                </c:when>
+                <c:when test="${sessionScope.loginUser.type == 2}">
+                    <%--供应商---------------------------------------------------------------------%>
                     <li>
-                        <%--前端发送请求,需要后台拿到action=list数据--%>
-                        <a onclick="xadmin.add_tab('权限分类','/AuthorityServlet.do?action=limit&pageIndex=1&pageSize=5')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
-                        </a>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
+                            <cite>供应商管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('供应商列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>供应商列表</cite></a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>
+                            <cite>账单管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('账单管理','/BillServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>账单列表</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                </c:when>
+                <c:when test="${sessionScope.loginUser.type == 3}">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                            <cite>登录日志</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>用户登录日志</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
+                            <cite>权限管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('权限分类','/AuthorityServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限分类</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </c:when>
+            </c:choose>
         </ul>
     </div>
 </div>
