@@ -40,6 +40,7 @@
                         <div class="layui-input-inline">
                             <input type="text" value="${bliiById.title}" id="title" name="title" required="" lay-verify="pass" autocomplete="off" class="layui-input">
                         </div>
+                        <div class="layui-form-mid" id="checkBillName" style="color:#999999"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="unit" class="layui-form-label">
@@ -48,6 +49,7 @@
                         <div class="layui-input-inline">
                             <input type="text" value="${bliiById.unit}" id="unit" name="unit" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                         </div>
+                        <div class="layui-form-mid" id="checkBillPhone" style="color:#999999"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="num" class="layui-form-label">
@@ -56,6 +58,7 @@
                         <div class="layui-input-inline">
                             <input type="text" value="${bliiById.num}" id="num" name="num" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                         </div>
+                        <div class="layui-form-mid" id="checkBillNum" style="color:#999999"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="money" class="layui-form-label">
@@ -64,6 +67,7 @@
                         <div class="layui-input-inline">
                             <input type="text" value="${bliiById.money}" id="money" name="money" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                         </div>
+                        <div class="layui-form-mid" id="checkBillFax" style="color:#999999"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label">
@@ -168,5 +172,134 @@
                 renderForm();
             }
         },"json");//返回JSON数据
+    }
+</script>
+
+<script>
+    var checkBillName = true;
+    //获取输入框
+    var Name = document.querySelector('#title');
+    //用户绑定焦点事件
+    Name.onkeyup = function checkName(){
+        //获取输入框中的内容
+        var billName =$("#title").val();
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillName&billName="+billName,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if (result==1){
+                    $("#checkBillName").text("不能英文且不能超过8个字符！");
+                    $("#checkBillName").css("color","red");
+                    checkBillName =false;
+                }else if(billName=="") {
+                    $("#checkBillName").text("不能为空");
+                    $("#checkBillName").css("color","red");
+                    checkBillName =false;
+
+                }else if (result==0){
+                    $("#checkBillName").text("√" );
+                    $("#checkBillName").css("color","green");
+                    checkBillName =true;
+                }
+            }
+        })
+    }
+
+    var checkBillPhone = true;
+    //获取输入框
+    var Phone = document.querySelector('#unit');
+    //用户绑定焦点事件
+    Phone.onkeyup = function checkPhone(){
+        //获取输入框中的内容
+        var billPhone =$("#unit").val();
+        console.log(billPhone)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillPhone&billPhone="+billPhone,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billPhone =="") {
+                    $("#checkBillPhone").text("不能为空");
+                    $("#checkBillPhone").css("color", "red");
+                    checkBillPhone = false;
+                }else if (result==1){
+                    $("#checkBillPhone").text("不能英文且不能超过1个字符！");
+                    $("#checkBillPhone").css("color","red");
+                    checkBillPhone =false;
+                }else if (result==0){
+                    $("#checkBillPhone").text("√" );
+                    $("#checkBillPhone").css("color","green");
+                    checkBillPhone =true;
+                }
+            }
+        })
+    }
+
+
+    var checkBillNum = true;
+    //获取输入框
+    var address = document.querySelector('#num');
+    //用户绑定焦点事件
+    address.onkeyup = function checkAddress(){
+        //获取输入框中的内容
+        var billAddress =$("#num").val();
+        console.log(billAddress)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillNum&billAddress="+billAddress,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billAddress =="") {
+                    $("#checkBillNum").text("不能为空");
+                    $("#checkBillNum").css("color", "red");
+                    checkBillNum = false;
+                }else if (result==1){
+                    $("#checkBillNum").text("商品必须为数字并且为整数！");
+                    $("#checkBillNum").css("color","red");
+                    checkBillNum =false;
+                }else if (result==0){
+                    $("#checkBillNum").text("√" );
+                    $("#checkBillNum").css("color","green");
+                    checkBillNum =true;
+                }
+            }
+        })
+    }
+
+
+
+    var checkBillFax = true;
+    //获取输入框
+    var fax = document.querySelector('#money');
+    //用户绑定焦点事件
+    fax.onkeyup = function checkFax(){
+        //获取输入框中的内容
+        var billFax =$("#money").val();
+        console.log(billFax)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillFax&billFax="+billFax,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billFax =="") {
+                    $("#checkBillFax").text("不能为空");
+                    $("#checkBillFax").css("color", "red");
+                    checkBillFax = false;
+                }else if (result==1){
+                    $("#checkBillFax").text("商品必须为数字并且为正数！");
+                    $("#checkBillFax").css("color","red");
+                    checkBillFax =false;
+                }else if (result==0){
+                    $("#checkBillFax").text("√" );
+                    $("#checkBillFax").css("color","green");
+                    checkBillFax =true;
+                }
+            }
+        })
     }
 </script>

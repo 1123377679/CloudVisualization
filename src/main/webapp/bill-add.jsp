@@ -31,9 +31,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="linkman" name="title" required="" lay-verify="pass" autocomplete="off" class="layui-input" onblur="checkName()">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入商品名称（长度不超过8个字符）
-                    </div>
+                    <div class="layui-form-mid" id="checkBillName" style="color:#999999">输入商品名称</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="phone" class="layui-form-label">
@@ -42,9 +40,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="phone" name="unit" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入商品单位（长度不超过2个字符）
-                    </div>
+                    <div class="layui-form-mid" id="checkBillPhone" style="color:#999999">输入商品单位</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="address" class="layui-form-label">
@@ -53,9 +49,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="address" name="num" required="" lay-verify="repass" autocomplete="off" class="layui-input">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入数字
-                    </div>
+                    <div class="layui-form-mid" id="checkBillNum" style="color:#999999">输入商品数量</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="fax" class="layui-form-label">
@@ -64,9 +58,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="fax" name="money" required="" lay-verify="repass" autocomplete="off" class="layui-input" onblur="checkMoney()">
                     </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>请输入数字
-                    </div>
+                    <div class="layui-form-mid" id="checkBillFax" style="color:#999999">输入商品总金额</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="username" class="layui-form-label">
@@ -121,40 +113,133 @@
             }
         },"json");//返回JSON数据
 
-        // 商品名称输入框外判断输入内容必须为中文，长度不能大于八个字符，超出给提示
-        $("#linkman").blur(function() {
-            var name = $(this).val();
-            if (!/^[\u4e00-\u9fa5]{1,8}$/.test(name)) {
-                layer.msg('请输入中文字符不能超过8个');
-                $(this).val("");
+    }
+</script>
+<script>
+    var checkBillName = true;
+    //获取输入框
+    var Name = document.querySelector('#linkman');
+    //用户绑定焦点事件
+    Name.onkeyup = function checkName(){
+        //获取输入框中的内容
+        var billName =$("#linkman").val();
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillName&billName="+billName,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if (result==1){
+                    $("#checkBillName").text("不能英文且不能超过8个字符！");
+                    $("#checkBillName").css("color","red");
+                    checkBillName =false;
+                }else if(billName=="") {
+                    $("#checkBillName").text("不能为空");
+                    $("#checkBillName").css("color","red");
+                    checkBillName =false;
+
+                }else if (result==0){
+                    $("#checkBillName").text("√" );
+                    $("#checkBillName").css("color","green");
+                    checkBillName =true;
+                }
             }
-        });
-        // 商品名称输入框外判断输入内容必须为中文，长度不能大于2个字符，超出给提示
-        $("#phone").blur(function() {
-            var name = $(this).val();
-            if (!/^[\u4e00-\u9fa5]{1,8}$/.test(name)) {
-                layer.msg('请输入中文字符不能超过8个');
-                $(this).val("");
+        })
+    }
+
+    var checkBillPhone = true;
+    //获取输入框
+    var Phone = document.querySelector('#phone');
+    //用户绑定焦点事件
+    Phone.onkeyup = function checkPhone(){
+        //获取输入框中的内容
+        var billPhone =$("#phone").val();
+        console.log(billPhone)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillPhone&billPhone="+billPhone,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billPhone =="") {
+                    $("#checkBillPhone").text("不能为空");
+                    $("#checkBillPhone").css("color", "red");
+                    checkBillPhone = false;
+                }else if (result==1){
+                    $("#checkBillPhone").text("不能英文且不能超过1个字符！");
+                    $("#checkBillPhone").css("color","red");
+                    checkBillPhone =false;
+                }else if (result==0){
+                    $("#checkBillPhone").text("√" );
+                    $("#checkBillPhone").css("color","green");
+                    checkBillPhone =true;
+                }
             }
-        });
-        // 总金额输入框外判断必须输入数字，字母和汉字不行
-        $("#fax").blur(function() {
-            var money = $(this).val();
-            if (!/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(money)) {
-                layer.msg('请输入数字');
-                $(this).val("");
+        })
+    }
+
+
+    var checkBillNum = true;
+    //获取输入框
+    var address = document.querySelector('#address');
+    //用户绑定焦点事件
+    address.onkeyup = function checkAddress(){
+        //获取输入框中的内容
+        var billAddress =$("#address").val();
+        console.log(billAddress)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillNum&billAddress="+billAddress,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billAddress =="") {
+                    $("#checkBillNum").text("不能为空");
+                    $("#checkBillNum").css("color", "red");
+                    checkBillNum = false;
+                }else if (result==1){
+                    $("#checkBillNum").text("商品必须为数字并且为正整数！");
+                    $("#checkBillNum").css("color","red");
+                    checkBillNum =false;
+                }else if (result==0){
+                    $("#checkBillNum").text("√" );
+                    $("#checkBillNum").css("color","green");
+                    checkBillNum =true;
+                }
             }
-        });
-        // 总金额输入框外判断必须输入数字，字母和汉字不行
-        $("#address").blur(function() {
-            var money = $(this).val();
-            if (!/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(money)) {
-                layer.msg('请输入数字');
-                $(this).val("");
-            }
-        });
+        })
+    }
 
 
 
+    var checkBillFax = true;
+    //获取输入框
+    var fax = document.querySelector('#fax');
+    //用户绑定焦点事件
+    fax.onkeyup = function checkFax(){
+        //获取输入框中的内容
+        var billFax =$("#fax").val();
+        console.log(billFax)
+        $.ajax({
+            type:"POST",
+            url:"/BillServlet.do",
+            data:"action=checkBillFax&billFax="+billFax,
+            dataType:"text",//服务器返回的数据类型
+            success:function(result){
+                if(billFax =="") {
+                    $("#checkBillFax").text("不能为空");
+                    $("#checkBillFax").css("color", "red");
+                    checkBillFax = false;
+                }else if (result==1){
+                    $("#checkBillFax").text("商品必须为数字并且为正数！");
+                    $("#checkBillFax").css("color","red");
+                    checkBillFax =false;
+                }else if (result==0){
+                    $("#checkBillFax").text("√" );
+                    $("#checkBillFax").css("color","green");
+                    checkBillFax =true;
+                }
+            }
+        })
     }
 </script>

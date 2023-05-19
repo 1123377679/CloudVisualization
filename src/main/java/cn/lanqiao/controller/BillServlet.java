@@ -37,6 +37,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @MultipartConfig //标注当前servlet支持文件上传
 @WebServlet("/BillServlet.do")
@@ -383,6 +385,84 @@ public class BillServlet extends HttpServlet {
                         "alert('账单删除失败');"+
                         "window.location.href = '/BillServlet.do?action=limit&pageIndex=1&pageSize=20'"+
                         "</script>");
+            }
+        }
+
+
+
+        //判断不能英文且不能超过8个字符！
+        if (value.equals("checkBillName")){
+            //前端通过Ajax携带过来的值
+            String billName = req.getParameter("billName");
+            //定义中文正则表达式
+            String regex = "^[\u4e00-\u9fa5]{0,8}$";
+            //编译正则表达式
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(billName);
+            //判断输入是否为空或者超过8个中文字符
+            if (billName == null || !matcher.matches()) {
+                //如果不符合规定则返回错误信息，这里返回1
+                resp.getWriter().write("1");
+            } else {
+                //如果符合规定则通过判断输入的供应商名称是否已存在来返回相应的结果
+                resp.getWriter().write("0");
+            }
+        }
+
+        //判断不能英文且不能超过1个字符！
+        if (value.equals("checkBillPhone")){
+            //前端通过Ajax携带过来的值
+            String billPhone = req.getParameter("billPhone");
+            //定义中文正则表达式
+            String regexPhone = "^[\u4e00-\u9fa5]{1}$";
+            //编译正则表达式
+            Pattern pattern = Pattern.compile(regexPhone);
+            Matcher matcher = pattern.matcher(billPhone);
+            //判断输入是否为空或者超过2个中文字符
+            if (billPhone == null || !matcher.matches()) {
+                //如果不符合规定则返回错误信息，这里返回1
+                resp.getWriter().write("1");
+            } else {
+                //如果符合规定则通过判断输入的供应商名称是否已存在来返回相应的结果
+                resp.getWriter().write("0");
+            }
+        }
+
+        //判断必须是数字并且为整数！
+        if (value.equals("checkBillNum")){
+            //前端通过Ajax携带过来的值
+            String billAddress = req.getParameter("billAddress");
+            //定义中文正则表达式
+            String regexAddress = "^[1-9]\\d*$";
+            //编译正则表达式
+            Pattern pattern = Pattern.compile(regexAddress);
+            Matcher matcher = pattern.matcher(billAddress);
+            //判断输入是否为空或者不是一个整数或者是负数
+            if (billAddress == null || !matcher.matches() || Integer.parseInt(billAddress) < 0) {
+                //如果不符合规定则返回错误信息，这里返回1
+                resp.getWriter().write("1");
+            } else {
+                //如果符合规定则通过判断输入的供应商名称是否已存在来返回相应的结果
+                resp.getWriter().write("0");
+            }
+        }
+
+        //判断必须是数字并且为整数！
+        if (value.equals("checkBillFax")){
+            //前端通过Ajax携带过来的值
+            String billFax = req.getParameter("billFax");
+            //定义中文正则表达式
+            String regexFax  = "^([1-9]\\d*\\.?\\d*)|(0\\.\\d*[1-9])$";
+            //编译正则表达式
+            Pattern pattern = Pattern.compile(regexFax);
+            Matcher matcher = pattern.matcher(billFax);
+            //判断输入是否为空或者不是一个正数
+            if (billFax == null || !matcher.matches() || Integer.parseInt(billFax) < 0) {
+                //如果不符合规定则返回错误信息，这里返回1
+                resp.getWriter().write("1");
+            } else {
+                //如果符合规定则通过判断输入的供应商名称是否已存在来返回相应的结果
+                resp.getWriter().write("0");
             }
         }
 
