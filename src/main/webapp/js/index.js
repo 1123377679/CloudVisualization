@@ -474,7 +474,7 @@
   var myChart = echarts.init(document.querySelector(".bar1 .chart"));
 
   var data = [70, 34, 60, 78, 69];
-  var titlename = ["HTML5", "CSS3", "javascript", "VUE", "NODE"];
+  var titlename = ["永辉", "沃尔玛", "步步高", "世纪华联", "万象城"];
   var valdata = [702, 350, 610, 793, 664];
   var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
   option = {

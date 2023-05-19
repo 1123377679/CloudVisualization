@@ -25,8 +25,8 @@
     <div class="layuimini-loader-inner"></div>
 </div>
 <header>
-    <h1>大数据可视化界面</h1>
-    <a class="echars-login" href="/login.jsp">后台管理登录</a>
+    <h1>大数据超市可视化界面</h1>
+    <a class="echars-login" href="/login.jsp">超市管理登录</a>
     <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
     <script>
         var t = null;
@@ -90,8 +90,8 @@
             </div>
             <div class="no-bd">
                 <ul>
-                    <li>前端需求人数</li>
-                    <li>市场供应人数</li>
+                    <li>超市需求人数</li>
+                    <li>超市供应人数</li>
                 </ul>
             </div>
         </div>
@@ -104,12 +104,12 @@
     </div>
     <div class="column">
         <div class="panel bar1">
-            <h2>柱状图-技能掌握</h2>
+            <h2>柱状图-商品排行</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>
         <div class="panel line1">
-            <h2>折线图-播放量</h2>
+            <h2>折线图-访问转发量</h2>
             <div class="chart"></div>
             <div class="panel-footer"></div>
         </div>

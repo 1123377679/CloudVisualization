@@ -139,10 +139,11 @@
     });
 </script>
 <script>
+    var checkSupplierName=true;
     //获取输入框
     var Name=document.querySelector('#name');
     //用户绑定焦点事件
-    Name.onblur = function checkSuppliername(){
+    Name.onkeyup = function checkSuppliername(){
         //获取输入框中的内容
         var suppliername =$("#name").val();
         $.ajax({
@@ -152,9 +153,9 @@
             data:"action=checkSupplierName&suppliername="+suppliername,
             dataType:"text",//服务器返回的数据类型
             success:function(result){
-                if (result==1){
-                    $("#checkSuppliername").text("已经存在该供应商名称！");
-                    $("#checkSuppliername").css("color","red");
+                if (result==0){
+                    $("#checkSuppliername").text("√");
+                    $("#checkSuppliername").css("color","green");
                     checkSupplierPhone =false;
 
                 }else if(suppliername=="") {
@@ -162,9 +163,9 @@
                     $("#checkSuppliername").css("color","red");
                     checkSupplierPhone =false;
 
-                }else if (result==0){
-                    $("#checkSuppliername").text("√" );
-                    $("#checkSuppliername").css("color","green");
+                }else if (result==1){
+                    $("#checkSuppliername").text("已经存在该供应商名称" );
+                    $("#checkSuppliername").css("color","red");
                     checkSupplierPhone =true;
 
                 }else if (result==2){
@@ -177,10 +178,11 @@
             }
         })
     }
+    var checkSupplierLinkman=true;
     //获取输入框
     var Linkman=document.querySelector('#linkman');
     //用户绑定焦点事件
-    Linkman.onblur = function checkSupplierlinkman(){
+    Linkman.onkeyup = function checkSupplierlinkman(){
         //获取输入框中的内容
         var supplierlinkman =$("#linkman").val();
         $.ajax({
@@ -190,16 +192,14 @@
             data:"action=checkSupplierLinkman&supplierlinkman="+supplierlinkman,
             dataType:"text",//服务器返回的数据类型
             success:function(result){
-                if (result==0){
-                    $("#checkSupplierlinkman").text("√");
-                    $("#checkSupplierlinkman").css("color","green");
-                    checkSupplierPhone =true;
-
-                }else if(supplierlinkman=="") {
+                if (  supplierlinkman==""){
                     $("#checkSupplierlinkman").text("不能为空");
                     $("#checkSupplierlinkman").css("color","red");
                     checkSupplierPhone =false;
-
+                }else if(result==0) {
+                    $("#checkSupplierlinkman").text("√");
+                    $("#checkSupplierlinkman").css("color","green");
+                    checkSupplierPhone =true;
                 } else if (result==2){
                     $("#checkSupplierlinkman").text("联系人姓名必须为中文");
                     $("#checkSupplierlinkman").css("color","red");
@@ -211,10 +211,10 @@
         })
     }
     //电话号码
-    var checkSupplierPhone =false;
+    var checkSupplierPhone =true;
     var Phone=document.querySelector('#phone');
     //用户绑定焦点事件
-    Phone.onblur = function checkSupplierphone(){
+    Phone.onkeyup = function checkSupplierphone(){
         //获取输入框中的内容
         var supplierphone =$("#phone").val();
         $.ajax({
@@ -229,15 +229,13 @@
                     $("#checkSupplierphone").css("color","green");
                     checkSupplierPhone =true;
 
-
                 }else if (supplierphone==""){
                     $("#checkSupplierphone").text("不能为空");
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
-
                 }
                 else if(result==0) {
-                    $("#checkSupplierphone").text("电话号码必须为11位的阿拉伯数字");
+                    $("#checkSupplierphone").text("电话为短号/座机号/11位号码的数字");
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
 

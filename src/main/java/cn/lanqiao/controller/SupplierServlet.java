@@ -180,12 +180,16 @@ public class SupplierServlet extends HttpServlet {
         if (value.equals("checkSupplierName")){
             //前端通过Ajax携带过来的值
             String suppliername = req.getParameter("suppliername");
+            System.out.println(suppliername);
             String suppliername1= "^[\\u4E00-\\u9FA5]{1,8}$";
             //存储用户输入的名称
             int i =supplierService.checkName(suppliername);
+            System.out.println(i);
             //判断
             PrintWriter writer = resp.getWriter();
-            if (suppliername.matches(suppliername1)){
+            if (suppliername.equals("")){
+                writer.print(3);
+            }else if (suppliername.matches(suppliername1)){
                 if (i>0){
                     writer.print(1);
                 }else {
@@ -199,7 +203,7 @@ public class SupplierServlet extends HttpServlet {
         if (value.equals("checkSupplierPhone")){
             //前端通过Ajax携带过来的值
             String supplierphone = req.getParameter("supplierphone");
-            String supplierphone1= "1[0-9]{10}";
+            String supplierphone1= "^(1[3-9]\\d{9})|(6\\d{4})|(0\\d{2,3}-?\\d{7,8})$";
             //存储用户输入的名称
             //判断
             PrintWriter writer = resp.getWriter();

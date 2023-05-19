@@ -154,12 +154,12 @@
 
 </script>
 <script>
-    var checkSupplierName =false;
+    var checkSupplierName =true;
     //获取输入框
     var Name=document.querySelector('#name');
 
     //用户绑定焦点事件
-    Name.onblur = function checkSuppliername(){
+    Name.onkeyup = function checkSuppliername(){
         //获取输入框中的内容
         var suppliername =$("#name").val();
         $.ajax({
@@ -169,19 +169,19 @@
             data:"action=checkSupplierName&suppliername="+suppliername,
             dataType:"text",//服务器返回的数据类型
             success:function(result){
-                if (result==1){
+                if (result==0){
                     $("#checkSuppliername").text("√");
                     $("#checkSuppliername").css("color","green");
                     checkSupplierName = true;
-                }else if(result=="") {
+                }else if(result==3) {
                     $("#checkSuppliername").text("供应商名不能为空");
                     $("#checkSuppliername").css("color","red");
                     checkSupplierName = false;
 
-                }else if (result==0){
-                    $("#checkSuppliername").text("√" );
-                    $("#checkSuppliername").css("color","green");
-                    checkSupplierName = true;
+                }else if (result==1){
+                    $("#checkSuppliername").text("供应商名已经存在");
+                    $("#checkSuppliername").css("color","red");
+                    checkSupplierName = false;
 
                 }else if (result==2){
                     $("#checkSuppliername").text("用户名必须为中文");
@@ -193,10 +193,10 @@
         })
     }
     //联系人
-    var checkSupplierLinkman =false;
+    var checkSupplierLinkman =true;
     var Linkman=document.querySelector('#linkman');
     //用户绑定焦点事件
-    Linkman.onblur = function checkSupplierlinkman(){
+    Linkman.onkeyup = function checkSupplierlinkman(){
         //获取输入框中的内容
         var supplierlinkman =$("#linkman").val();
         $.ajax({
@@ -223,10 +223,10 @@
         })
     }
     //电话号码
-    var checkSupplierPhone =false;
+    var checkSupplierPhone =true;
     var Phone=document.querySelector('#phone');
     //用户绑定焦点事件
-    Phone.onblur = function checkSupplierphone(){
+    Phone.onkeyup = function checkSupplierphone(){
         //获取输入框中的内容
         var supplierphone =$("#phone").val();
         $.ajax({
@@ -247,7 +247,7 @@
                     checkSupplierPhone =false;
 
                 } else if(result==0) {
-                    $("#checkSupplierphone").text("电话为11位的阿拉伯数字");
+                    $("#checkSupplierphone").text("电话为短号/座机号/11位号码的数字");
                     $("#checkSupplierphone").css("color","red");
                     checkSupplierPhone =false;
 
