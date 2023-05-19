@@ -62,7 +62,7 @@
                         <span class="x-red">*</span>用户电话</label>
                     <div class="layui-input-inline">
                         <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input" value="${requestScope.userById.phone}"></div>
-                    <div class="layui-form-mid" id="userNamePhoneSpan" style="color: #999999">11位数字</div>
+                    <div class="layui-form-mid" id="userNamePhoneSpan" style="color: #999999">国内手机号码/座机号码/短号号码</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
@@ -148,10 +148,10 @@
 </script>
 <script>
     //全局变量
-    var userAllAddressSPAN = false;
+    var userAllAddressSPAN = true;
     //用户地址
     var userAddress = document.querySelector('#userAddress');
-    userAddress.onblur = function checkerNewPassword() {
+    userAddress.onkeyup = function checkerNewPassword() {
         var userAddress = $("#userAddress").val();
         if (userAddress == "") {
             $("#userAddressSPAN").text("用户地址不能为空!");
@@ -163,12 +163,13 @@
             userAllAddressSPAN = true;
         }
     }
+
     //全局变量
-    var checkUserAllNameVal = false;
+    var checkUserAllNameVal = true;
     //用户姓名
     var userName = document.querySelector("#userName");
     //文本框焦点事件
-    userName.onblur = function checkUserNameVal(){
+    userName.onkeyup = function checkUserNameVal(){
         //获取原用户
         var userName = $("#userName").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -191,7 +192,7 @@
                     $("#userNameSpanDiv").css("color","green");
                     checkUserAllNameVal = true;
                 }else if(result == 2){
-                    $("#userNameSpanDiv").text("用户名必须是中文!");
+                    $("#userNameSpanDiv").text("用户姓名输入错误!");
                     $("#userNameSpanDiv").css("color","red");
                     checkUserAllNameVal = false;
                 }
@@ -200,11 +201,11 @@
     }
 
     //全局变量
-    var checkUserAllPhone = false;
+    var checkUserAllPhone = true;
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
-    userphone.onblur = function checkUserPhone(){
+    userphone.onkeyup = function checkUserPhone(){
         //获取原用户
         var userphone = $("#userphone").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -223,7 +224,7 @@
                     $("#userNamePhoneSpan").css("color","green");
                     checkUserAllPhone = true;
                 }else if(result == 2){
-                    $("#userNamePhoneSpan").text("用户电话号码必须是11位的阿拉伯数字！");
+                    $("#userNamePhoneSpan").text("电话号码位6到11位的数字！");
                     $("#userNamePhoneSpan").css("color","red");
                     checkUserAllPhone = false;
                 }

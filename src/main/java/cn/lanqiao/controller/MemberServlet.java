@@ -193,9 +193,9 @@ public class MemberServlet extends HttpServlet {
             String oldPassword = req.getParameter("oldPassword");
             System.out.println("旧密码:"+oldPassword);
             int i = memberService.checkPassword(Integer.parseInt(id),oldPassword);
-            System.out.println(i);
-            System.out.println(id);
-            System.out.println(oldPassword);
+//            System.out.println(i);
+//            System.out.println(id);
+//            System.out.println(oldPassword);
             //判断
             PrintWriter writer = resp.getWriter();
                 if (i > 0) {
@@ -257,11 +257,25 @@ public class MemberServlet extends HttpServlet {
                 writer.print(2);
             }
         }
+        //检查用户修改密码的格式是否正确
+        if (value.equals("checkAllWord")) {
+            String newPassword = req.getParameter("newPassword");
+            String newPasswords = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+            //判断
+            PrintWriter writer = resp.getWriter();
+            if (newPassword.matches(newPasswords)) {
+                //格式正确
+                writer.print(1);
+            } else {
+                //格式不正确
+                writer.print(2);
+            }
+        }
         //检查用户添加输入的电话号码是否正确
         if (value.equals("checkUserPhone")) {
             //用户输入的电话号码
             String userphone = req.getParameter("userphone");
-            String  userphone2 = "1[0-9]{10}";
+            String  userphone2 = "^(1\\d{10})|((\\d{3,4}-)?\\d{7,8}(-\\d{1,6})?)$|^400\\d{7}$|^800\\d{7}|^\\d{3,6}|(0\\d{10})$";
             //判断
             PrintWriter writer = resp.getWriter();
             if (userphone.matches(userphone2)) {

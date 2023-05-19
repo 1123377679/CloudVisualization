@@ -36,4 +36,14 @@ public class SupperMarketTest {
         int i = billService.getbillsum("旺旺");
         System.out.println(i);
     }
+    @Test
+    public void test4(){
+        String i = "^(1\\d{10})|((\\d{3,4}-)?\\d{7,8}(-\\d{1,6})?)$|^400\\d{7}$|^800\\d{7}|^\\d{3,6}$$";
+        String a = "286456";
+        if (a.matches(i)) {
+            System.out.println("正确");
+        } else {
+            System.out.println("错误");
+        }
+    }
 }

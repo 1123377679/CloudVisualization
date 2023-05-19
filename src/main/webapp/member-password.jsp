@@ -36,9 +36,9 @@
                 <label for="L_pass" class="layui-form-label">
                     <span class="x-red">*</span>新的密码</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="newPassword" name="newpass" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="newPassword" name="newPassword" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                 <%--                ------------------------------------------------%>
-                <div class="layui-form-mid" id="newPasswordSpan"></div>
+                <div class="layui-form-mid" id="newPasswordSpan" style="color: #999999">6到16个字符</div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                         <span class="x-red">*</span>确认密码</label>
@@ -74,7 +74,7 @@
     //检查原密码合法性
     var oldPassword = document.querySelector('#oldPassword');
     //文本框焦点事件
-    oldPassword.onblur = function checkOldPassword(){
+    oldPassword.onkeyup = function checkOldPassword(){
         //获取原密码
         var oldPassword = $("#oldPassword").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -110,30 +110,44 @@
     //新密码框
     var newPassword = document.querySelector('#newPassword');
     //鼠标离开焦点事件
-    newPassword.onblur = function checkNewPassword(){
+    newPassword.onkeyup = function checkNewPassword(){
         //原始密码
         var oldPassword = $("#oldPassword").val();
         //新密码
         var newPassword = $("#newPassword").val();
-        if (newPassword == ""){
-            $("#newPasswordSpan").text("新的密码不能为空!");
-            $("#newPasswordSpan").css("color","red");
-            checkNewAllPassword = false;
-        } else if (newPassword == oldPassword){
-            $("#newPasswordSpan").text("新密码不能和旧密码相同!");
-            $("#newPasswordSpan").css("color","red");
-            checkNewAllPassword = false;
-        } else {$("#newPasswordSpan").text("√");
-            $("#newPasswordSpan").css("color","green");
-            checkNewAllPassword = true;
-        }
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkAllWord&newPassword="+newPassword,
+            dataType: "text",
+            success: function (result) {
+                if (newPassword == "") {
+                    $("#newPasswordSpan").text("新的密码不能为空!");
+                    $("#newPasswordSpan").css("color", "red");
+                    checkNewAllPassword = false;
+                } else if (newPassword == oldPassword) {
+                    $("#newPasswordSpan").text("新密码不能和旧密码相同!");
+                    $("#newPasswordSpan").css("color", "red");
+                    checkNewAllPassword = false;
+                } else if (result == 1) {
+                    $("#newPasswordSpan").text("√");
+                    $("#newPasswordSpan").css("color", "green");
+                    checkNewAllPassword = true;
+                } else if (result == 2) {
+                    $("#newPasswordSpan").text("密码为6到11位字符串加数字!");
+                    $("#newPasswordSpan").css("color", "red");
+                    checkNewAllPassword = false;
+                }
+            }
+        });
     }
 
     //全局变量
     var checkerNewAllPassword = false;
     //确认新密码框
     var confirmPassword = document.querySelector('#confirmPassword');
-    confirmPassword.onblur = function checkerNewPassword() {
+    confirmPassword.onkeyup = function checkerNewPassword() {
         //新密码
         var newPassword = $("#newPassword").val();
         //确认新密码

@@ -67,7 +67,7 @@
                     <div class="layui-input-inline">
                         <input type="text" id="userphone" name="userphone" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
                     <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                    <div class="layui-form-mid" id="userNamePhone" style="color: #999999">11位数字</div>
+                    <div class="layui-form-mid" id="userNamePhone" style="color: #999999">国内手机号码/座机号码/短号号码</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
@@ -138,7 +138,7 @@
     //用户姓名
     var username = document.querySelector("#username");
     //文本框焦点事件
-    username.onblur = function checkUserName(){
+    username.onkeyup = function checkUserName(){
         //获取原用户
         var username = $("#username").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -161,7 +161,7 @@
                     $("#userNameSpan").css("color","green");
                     checkAllUserName = true;
                 }else if(result == 2){
-                    $("#userNameSpan").text("用户姓名必须是中文!");
+                    $("#userNameSpan").text("用户姓名输入错误!");
                     $("#userNameSpan").css("color","red");
                     checkAllUserName = false;
                 }
@@ -169,12 +169,15 @@
         });
     }
 
+
+
+
     //全局变量
     var checkAllUserWord = false;
     //用户密码
     var oldpassword = document.querySelector("#oldpassword");
     //文本框焦点事件
-    oldpassword.onblur = function checkUserWord(){
+    oldpassword.onkeyup = function checkUserWord(){
         //获取原用户
         var oldpassword = $("#oldpassword").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -193,7 +196,7 @@
                     $("#userNameWord").css("color","green");
                     checkAllUserWord = true;
                 }else if(result == 2){
-                    $("#userNameWord").text("用户密码必须是6到16个字符!");
+                    $("#userNameWord").text("密码为6到11位字符串加数字!");
                     $("#userNameWord").css("color","red");
                     checkAllUserWord = false;
                 }
@@ -201,11 +204,14 @@
         });
     }
 
+
+
+
     //全局变量
     var checkerAllNewPassword = false;
     //确认密码
     var newpassword = document.querySelector('#newpassword');
-    newpassword.onblur = function checkerNewPassword() {
+    newpassword.onkeyup = function checkerNewPassword() {
         //用户密码
         var oldpassword = $("#oldpassword").val();
         //确认密码
@@ -229,7 +235,7 @@
     var userAllAddressSPAN = false;
     //用户地址
     var userAddress = document.querySelector('#userAddress');
-    userAddress.onblur = function checkerNewPassword() {
+    userAddress.onkeyup = function checkerNewPassword() {
         var userAddress = $("#userAddress").val();
         if (userAddress == "") {
             $("#userAddressSPAN").text("用户地址不能为空!");
@@ -247,7 +253,7 @@
     //电话号码
     var userphone = document.querySelector("#userphone");
     //文本框焦点事件
-    userphone.onblur = function checkUserPhone() {
+    userphone.onkeyup = function checkUserPhone() {
         //获取原用户
         var userphone = $("#userphone").val();
         //验证用户输入的密码是否正确，Jquery版本的Ajax请求
@@ -266,7 +272,7 @@
                     $("#userNamePhone").css("color", "green");
                     checkAllUserPhone = true;
                 } else if (result == 2) {
-                    $("#userNamePhone").text("用户电话必须是11位的阿拉伯数字！");
+                    $("#userNamePhone").text("请输入正确的电话号码！");
                     $("#userNamePhone").css("color", "red");
                     checkAllUserPhone = false;
                 }
