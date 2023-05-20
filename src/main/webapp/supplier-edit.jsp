@@ -240,7 +240,6 @@
                     $("#checkSupplierphone").css("color","green");
                     checkSupplierPhone =true;
 
-
                 }else if (supplierphone==""){
                     $("#checkSupplierphone").text("不能为空");
                     $("#checkSupplierphone").css("color","red");
