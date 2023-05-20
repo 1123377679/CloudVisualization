@@ -21,7 +21,7 @@
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 40%;transform: translateX(-40%);">
-    <div class="message">x-admin2.0-用户注册</div>
+    <div class="message">超市管理系统用户注册</div>
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form" action="/userServlet.do?action=register">

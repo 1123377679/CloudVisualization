@@ -21,7 +21,7 @@
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up">
-    <div class="message"大数据超市可视化管理登录</div>
+    <div class="message">大数据超市可视化管理登录</div>
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form" action="/userServlet.do?action=login">
