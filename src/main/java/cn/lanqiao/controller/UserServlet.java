@@ -115,9 +115,9 @@ public class UserServlet extends HttpServlet {
                         //判断两次输入的密码是否一致
                         if (oncePassword.equals(twicePassword)){
                             //判断性别输入是否规范
-                            if (sex.equals("男") || Integer.parseInt(sex) == 1){
+                            if (sex.equals("男") || sex.equals("1")){
                                 trueSex = 1;
-                            }else if (sex.equals("女") || Integer.parseInt(sex) == 0){
+                            }else if (sex.equals("女") || sex.equals("0")){
                                 trueSex = 0;
                             }else {
                                 //存值并且赋值
