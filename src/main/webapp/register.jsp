@@ -20,21 +20,31 @@
 </head>
 <body class="login-bg">
 
-<div class="login layui-anim layui-anim-up">
-    <div class="message">x-admin2.0-管理登录</div>
+<div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 40%;transform: translateX(-40%);">
+    <div class="message">x-admin2.0-用户注册</div>
     <div id="darkbannerwrap"></div>
 
-    <form method="post" class="layui-form" action="/userServlet.do?action=login">
+    <form method="post" class="layui-form" action="/userServlet.do?action=register">
         <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <input name="oncePassword" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <hr class="hr15">
+        <input name="twicePassword" lay-verify="required" placeholder="再次输入密码"  type="password" class="layui-input">
+        <hr class="hr15">
+        <input name="sex" lay-verify="required" placeholder="性别（男或女 1或0）"  type="text" class="layui-input">
+        <hr class="hr15">
+        <input name="birthday" lay-verify="required" placeholder="生日"  type="text" class="layui-input">
+        <hr class="hr15">
+        <input name="phone" lay-verify="required" placeholder="联系电话"  type="text" class="layui-input">
+        <hr class="hr15">
+        <input name="address" lay-verify="required" placeholder="家庭住址"  type="text" class="layui-input">
         <hr class="hr15">
         <%--  验证码  --%>
         <input id="yanzhengm" style="width: 131px;" type="text" name="usercode" placeholder="请输入验证码" required/>
         <!--验证码图片-->
         <img src="/CodeServlet" onclick="changeImage(this);" style="position: relative;cursor: pointer;"/>
-        <input value="登录" lay-submit lay-filter="login" style="width:62%;margin-top: 15px" type="submit">
-        <input value="注册" style="width:32%;margin-top: 15px;margin-left: 5%;" type="button" onclick="location.href='/register.jsp';">
+        <input value="注册" lay-submit lay-filter="login" style="width:100%;margin-top: 15px" type="submit">
+        <input value="返回登录" style="width:100%;margin-top: 15px;" type="button" onclick="location.href='/login.jsp';">
 <%--        <input value="忘记密码？" lay-submit lay-filter="login" style="width:32%;margin-top: 15px;margin-left: 68%;" type="submit">--%>
 <%--        <hr class="hr20" >--%>
     </form>

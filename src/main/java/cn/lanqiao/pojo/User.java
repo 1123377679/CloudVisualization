@@ -26,6 +26,10 @@ public class User {
         this.password = password;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public User(Integer id, Integer type) {
         this.id = id;
         this.type = type;

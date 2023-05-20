@@ -146,19 +146,19 @@
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
-                            <cite>登录日志</cite>
+                            <cite>用户日志</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('用户登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>用户登录日志</cite></a>
+                            </li>
                             <li>
                                 <a onclick="xadmin.add_tab('用户行为日志','/LogServlet.do?action=Behaviors&pageIndex=1&pageSize=20')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>用户行为日志</cite></a>
-                            </li>
-                            <li>
-                                    <%--前端发送请求,需要后台拿到action=list数据--%>
-                                <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>用户登录日志</cite></a>
                             </li>
                         </ul>
                     </li>
@@ -211,19 +211,19 @@
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
-                            <cite>登录日志</cite>
+                            <cite>用户日志</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
+                            <li>
+                                    <%--前端发送请求,需要后台拿到action=list数据--%>
+                                <a onclick="xadmin.add_tab('用户登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>用户登录日志</cite></a>
+                            </li>
                             <li>
                                 <a onclick="xadmin.add_tab('用户行为日志','/LogServlet.do?action=Behaviors&pageIndex=1&pageSize=20')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>用户行为日志</cite></a>
-                            </li>
-                            <li>
-                                    <%--前端发送请求,需要后台拿到action=list数据--%>
-                                <a onclick="xadmin.add_tab('登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>用户登录日志</cite></a>
                             </li>
                         </ul>
                     </li>

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebFilter("/xxx.do")  // 配置过滤器拦截所有请求
 public class BehaviorLogFilter implements Filter {
