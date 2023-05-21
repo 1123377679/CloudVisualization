@@ -105,7 +105,7 @@
                             <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
                             <cite>会员管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" onclick="refreshPage_a()">
                             <li>
                                     <%--前端发送请求,需要后台拿到action=list数据--%>
                                 <a onclick="xadmin.add_tab('会员列表','/MemberServlet.do?action=limit&pageIndex=1&pageSize=5')">
@@ -121,9 +121,9 @@
                             <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
                             <cite>供应商管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" onclick="refreshPage_b()">
                             <li>
-                                <a onclick="xadmin.add_tab('供应商列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5')">
+                                <a onclick="xadmin.add_tab('供应商列表','/SupplierServlet.do?action=limit&pageIndex=1&pageSize=5');">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>供应商列表</cite></a>
                             </li>
@@ -134,7 +134,7 @@
                             <i class="iconfont left-nav-li" lay-tips="账单管理">&#xe723;</i>
                             <cite>账单管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" onclick="refreshPage_c()">
                             <li>
                                 <a onclick="xadmin.add_tab('账单管理','/BillServlet.do?action=limit&pageIndex=1&pageSize=5')">
                                     <i class="iconfont">&#xe6a7;</i>
@@ -148,13 +148,13 @@
                             <cite>用户日志</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
-                            <li>
+                            <li onclick="refreshPage_d()">
                                     <%--前端发送请求,需要后台拿到action=list数据--%>
                                 <a onclick="xadmin.add_tab('用户登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>用户登录日志</cite></a>
                             </li>
-                            <li>
+                            <li onclick="refreshPage_e()">
                                 <a onclick="xadmin.add_tab('用户行为日志','/LogServlet.do?action=Behaviors&pageIndex=1&pageSize=20')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>用户行为日志</cite></a>
@@ -166,7 +166,7 @@
                             <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe6b8;</i>
                             <cite>权限管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" onclick="refreshPage_f()">
                             <li>
                                     <%--前端发送请求,需要后台拿到action=list数据--%>
                                 <a onclick="xadmin.add_tab('权限分类','/AuthorityServlet.do?action=limit&pageIndex=1&pageSize=5')">
@@ -282,7 +282,7 @@ var _hmt = _hmt || []; (function() {
     s.parentNode.insertBefore(hm, s);
 })();</script>
 
-<div class="translateSelectLanguage" id="translate"></div>
+<div class="translateSelectLanguage" id="translate" onclick="refreshPage()"></div>
 </body>
 <!-- 引入多语言切换的js -->
 <script src="https://res.zvo.cn/translate/translate.js"></script>
@@ -309,6 +309,35 @@ var _hmt = _hmt || []; (function() {
         border: none;
     }
 </style>
+<script>
+    var clickCount = 0;
+    function refreshPage() {
+        clickCount++;
+        if (clickCount % 2 === 0) { // 每点击两次才刷新
+            location.reload();
+        }
+    }
+</script>
+<script>
+    function refreshPage_a() {
+        location.reload();
+    }
+    function refreshPage_b() {
+        location.reload();
+    }
+    function refreshPage_c() {
+        location.reload();
+    }
+    function refreshPage_d() {
+        location.reload();
+    }
+    function refreshPage_e() {
+        location.reload();
+    }
+    function refreshPage_f() {
+        location.reload();
+    }
+</script>
 </html>
 <script>
     function logout() {
