@@ -78,7 +78,6 @@
             <a href="javascript:;">
                 <%=username%>
             </a>
-
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
@@ -270,7 +269,10 @@
     </div>
 </div>
 <div class="page-content-bg"></div>
+    <button id="translate_btn"></button>
+</div>
 <style id="theme_style"></style>
+<div class="translateSelectLanguage" id="translate"></div>
 <!-- 右侧主体结束 -->
 <!-- 中部结束 -->
 <script>//百度统计可去掉
@@ -280,8 +282,33 @@ var _hmt = _hmt || []; (function() {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
 })();</script>
-</body>
 
+<!-- 引入多语言切换的js -->
+<script src="https://res.zvo.cn/translate/translate.js"></script>
+<script>
+    /*
+ * 是否显示 select选择语言的选择框，true显示； false不显示。默认为true
+ * 注意,这行要放到 translate.execute(); 上面
+ */
+    translate.selectLanguageTag.show = true;
+    translate.setUseVersion2(); // 这里使用自己的版本
+    // translate.setAutoDiscriminateLocalLanguage('chinese_simplified'); // 自动切换国际化语言
+    // translate.ignore.class.push('text-one');
+    // translate.ignore.class.push('echars-login');
+    // translate.ignore.class.push('showTime');
+    translate.execute();
+</script>
+<style>
+    .translateSelectLanguage{
+        position: absolute;
+        top: 8px;
+        left: 708px;
+        text-decoration: none;
+        font-size: 14px;
+        border: none;
+    }
+</style>
+</body>
 </html>
 <script>
     function logout() {

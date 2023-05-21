@@ -52,7 +52,35 @@
                     <button class="layui-btn" lay-filter="save" lay-submit="" type="submit">确认修改</button></div>
         </form>
     </div>
+    <div class="translateSelectLanguage" id="translate"></div>
 </div>
+<!-- 引入多语言切换的js -->
+<script src="https://res.zvo.cn/translate/translate.js"></script>
+<script>
+    /*
+  * 是否显示 select选择语言的选择框，true显示； false不显示。默认为true
+  * 注意,这行要放到 translate.execute(); 上面
+  */
+
+    translate.selectLanguageTag.show = true;
+    translate.setUseVersion2(); // 这里使用自己的版本
+    // translate.setAutoDiscriminateLocalLanguage('chinese_simplified'); // 自动切换国际化语言
+    // translate.ignore.class.push('text-one');
+    // translate.ignore.class.push('echars-login');
+    // translate.ignore.class.push('showTime');
+    translate.execute();
+</script>
+<style>
+    .translateSelectLanguage{
+        position: absolute;
+        top: 2%;
+        left: 30%;
+        text-decoration: none;
+        font-size: 14px;
+        border: none;
+        display: none;
+    }
+</style>
 <script>layui.use(['form', 'layer'],
     function() {
         $ = layui.jquery;
