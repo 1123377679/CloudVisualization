@@ -293,10 +293,6 @@ var _hmt = _hmt || []; (function() {
  */
     translate.selectLanguageTag.show = true;
     translate.setUseVersion2(); // 这里使用自己的版本
-    // translate.setAutoDiscriminateLocalLanguage('chinese_simplified'); // 自动切换国际化语言
-    // translate.ignore.class.push('text-one');
-    // translate.ignore.class.push('echars-login');
-    // translate.ignore.class.push('showTime');
     translate.execute();
 </script>
 <style>
@@ -319,24 +315,24 @@ var _hmt = _hmt || []; (function() {
     }
 </script>
 <script>
-    function refreshPage_a() {
-        location.reload();
-    }
-    function refreshPage_b() {
-        location.reload();
-    }
-    function refreshPage_c() {
-        location.reload();
-    }
-    function refreshPage_d() {
-        location.reload();
-    }
-    function refreshPage_e() {
-        location.reload();
-    }
-    function refreshPage_f() {
-        location.reload();
-    }
+    // function refreshPage_a() {
+    //     location.reload();
+    // }
+    // function refreshPage_b() {
+    //     location.reload();
+    // }
+    // function refreshPage_c() {
+    //     location.reload();
+    // }
+    // function refreshPage_d() {
+    //     location.reload();
+    // }
+    // function refreshPage_e() {
+    //     location.reload();
+    // }
+    // function refreshPage_f() {
+    //     location.reload();
+    // }
 </script>
 </html>
 <script>
