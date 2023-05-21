@@ -272,7 +272,6 @@
     <button id="translate_btn"></button>
 </div>
 <style id="theme_style"></style>
-<div class="translateSelectLanguage" id="translate"></div>
 <!-- 右侧主体结束 -->
 <!-- 中部结束 -->
 <script>//百度统计可去掉
@@ -283,6 +282,8 @@ var _hmt = _hmt || []; (function() {
     s.parentNode.insertBefore(hm, s);
 })();</script>
 
+<div class="translateSelectLanguage" id="translate"></div>
+</body>
 <!-- 引入多语言切换的js -->
 <script src="https://res.zvo.cn/translate/translate.js"></script>
 <script>
@@ -308,7 +309,6 @@ var _hmt = _hmt || []; (function() {
         border: none;
     }
 </style>
-</body>
 </html>
 <script>
     function logout() {

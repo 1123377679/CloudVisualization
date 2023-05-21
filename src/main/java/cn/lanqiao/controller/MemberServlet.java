@@ -156,21 +156,22 @@ public class MemberServlet extends HttpServlet {
             User loginUser = (User) session.getAttribute("loginUser");
             String id = req.getParameter("id");
             String oldpass = req.getParameter("oldpass");   //旧密码
-            String newpass = req.getParameter("newpass");   //新密码
+            String newPassword = req.getParameter("newPassword");   //新密码
             String repass = req.getParameter("repass");     //确认新密码
-            //System.out.println(oldpass);
-            //System.out.println(loginUser.getPassword());
+//            System.out.println(oldpass);
+//            System.out.println(loginUser.getPassword());
+//            System.out.println(newPassword);
             //--------------------判断---------------------
             PrintWriter writer = resp.getWriter();
             if (Integer.parseInt(id) == (loginUser.getId())) {
-            if (memberService.updatePwd(loginUser.getId(), newpass) > 0) {
+            if (memberService.updatePwd(loginUser.getId(), newPassword) > 0) {
                 //密码修改成功
                 writer.println("<script>" +
                         "alert('密码修改成功');" +
                         "window.parent.parent.location.href='/login.jsp'"
                         + "</script>");
                 }
-            } else if (memberService.updatePwd(Integer.parseInt(id), newpass) > 0)  {
+            } else if (memberService.updatePwd(Integer.parseInt(id), newPassword) > 0)  {
                     //密码修改成功
                     writer.print("<script>" +
                             "alert('密码修改成功');" +

@@ -38,7 +38,36 @@
                     <blockquote class="layui-elem-quote">欢迎管理员：
                         <span class="x-red">
                             <%=manname%>
-                        </span>！当前时间:2018-04-25 20:50:53
+                        </span><div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
+                        <script>
+                            var t = null;
+                            t = setTimeout(time, 1000); //開始运行
+                            function time() {
+                                clearTimeout(t); //清除定时器
+                                dt = new Date();
+                                var y = dt.getFullYear();
+                                var mt = dt.getMonth() + 1;
+                                var day = dt.getDate();
+                                var h = dt.getHours(); //获取时
+                                var m = dt.getMinutes(); //获取分
+                                var s = dt.getSeconds(); //获取秒
+                                document.querySelector(".showTime").innerHTML =
+                                    "当前时间：" +
+                                    y +
+                                    "年" +
+                                    mt +
+                                    "月" +
+                                    day +
+                                    "-" +
+                                    h +
+                                    "时" +
+                                    m +
+                                    "分" +
+                                    s +
+                                    "秒";
+                                t = setTimeout(time, 1000); //设定定时器，循环运行
+                            }
+                        </script>
                     </blockquote>
                 </div>
             </div>
@@ -50,44 +79,44 @@
                     <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
-                                <p>
-                                    <cite>66</cite></p>
-                            </a>
-                        </li>
-                        <li class="layui-col-md2 layui-col-xs6">
-                            <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>会员数</h3>
                                 <p>
-                                    <cite>12</cite></p>
+                                    <cite class="iconfont_a">67</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>回复数</h3>
+                                <h3>供应数</h3>
                                 <p>
-                                    <cite>99</cite></p>
+                                    <cite class="iconfont_b">11</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>商品数</h3>
+                                <h3>帐单数</h3>
                                 <p>
-                                    <cite>67</cite></p>
+                                    <cite>20</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
+                                <h3>登录数</h3>
                                 <p>
-                                    <cite>67</cite></p>
+                                    <cite>936</cite></p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>查阅数</h3>
+                                <p>
+                                    <cite>3567</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6 ">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
+                                <h3>总计数</h3>
                                 <p>
-                                    <cite>6766</cite></p>
+                                    <cite>4601</cite></p>
                             </a>
                         </li>
                     </ul>
@@ -96,12 +125,12 @@
         </div>
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
-                <div class="layui-card-header">下载
+                <div class="layui-card-header">会员列表下载
                     <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
                 <div class="layui-card-body  ">
                     <p class="layuiadmin-big-font">33,555</p>
                     <p>新下载
-                        <span class="layuiadmin-span-color">10%
+                        <span class="layuiadmin-span-color">11%
                                     <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
                     </p>
                 </div>
@@ -109,12 +138,12 @@
         </div>
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
-                <div class="layui-card-header">下载
+                <div class="layui-card-header">供应商列表下载
                     <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
                 <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
+                    <p class="layuiadmin-big-font">12,426</p>
                     <p>新下载
-                        <span class="layuiadmin-span-color">10%
+                        <span class="layuiadmin-span-color">6%
                                     <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
                     </p>
                 </div>
@@ -122,12 +151,12 @@
         </div>
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
-                <div class="layui-card-header">下载
+                <div class="layui-card-header">账单列表下载
                     <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
                 <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
+                    <p class="layuiadmin-big-font">42,678</p>
                     <p>新下载
-                        <span class="layuiadmin-span-color">10%
+                        <span class="layuiadmin-span-color">15%
                                     <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
                     </p>
                 </div>
@@ -135,12 +164,12 @@
         </div>
         <div class="layui-col-sm6 layui-col-md3">
             <div class="layui-card">
-                <div class="layui-card-header">下载
+                <div class="layui-card-header">登录日志下载
                     <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span></div>
                 <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
+                    <p class="layuiadmin-big-font">19,758</p>
                     <p>新下载
-                        <span class="layuiadmin-span-color">10%
+                        <span class="layuiadmin-span-color">9%
                                     <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
                     </p>
                 </div>
@@ -153,14 +182,14 @@
                     <table class="layui-table">
                         <tbody>
                         <tr>
-                            <th>xxx版本</th>
+                            <th>2.0版本</th>
                             <td>1.0.180420</td></tr>
                         <tr>
                             <th>服务器地址</th>
-                            <td>x.xuebingsi.com</td></tr>
+                            <td>47.120.39.138</td></tr>
                         <tr>
                             <th>操作系统</th>
-                            <td>WINNT</td></tr>
+                            <td>Windows</td></tr>
                         <tr>
                             <th>运行环境</th>
                             <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td></tr>
@@ -178,7 +207,7 @@
                             <td>5.0.18</td></tr>
                         <tr>
                             <th>上传附件限制</th>
-                            <td>2M</td></tr>
+                            <td>100M</td></tr>
                         <tr>
                             <th>执行时间限制</th>
                             <td>30s</td></tr>
@@ -202,8 +231,8 @@
                                 <a href="http://x.xuebingsi.com/" target="_blank">访问官网</a></td>
                         </tr>
                         <tr>
-                            <th>开发者</th>
-                            <td>马志斌(113664000@qq.com)</td></tr>
+                            <th>开发团队</th>
+                            <td>光宗耀组(583211729@qq.com)</td></tr>
                         </tbody>
                     </table>
                 </div>

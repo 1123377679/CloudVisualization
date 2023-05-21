@@ -295,7 +295,6 @@
   * 是否显示 select选择语言的选择框，true显示； false不显示。默认为true
   * 注意,这行要放到 translate.execute(); 上面
   */
-
     translate.selectLanguageTag.show = true;
     translate.setUseVersion2(); // 这里使用自己的版本
     // translate.setAutoDiscriminateLocalLanguage('chinese_simplified'); // 自动切换国际化语言
