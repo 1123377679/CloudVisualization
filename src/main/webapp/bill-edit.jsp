@@ -22,8 +22,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" action="/BillServlet.do?action=update&id=${requestScope.bliiById.id}" method="post">
-
+        <form class="layui-form" action="/BillServlet.do?action=update&id=${requestScope.bliiById.id}" method="post" onsubmit="return checkAddAll();">
                 <div class="layui-form-item">
                     <div class="layui-form-item">
                         <label for="id" class="layui-form-label">
@@ -329,5 +328,8 @@
                 }
             }
         })
+    }
+    function checkAddAll() {
+        return checkBillName&&checkBillPhone&&checkBillNum&&checkBillFax;
     }
 </script>
