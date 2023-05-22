@@ -143,7 +143,7 @@
     }
 </script>
 <script>
-    var checkBillName = true;
+    var checkBillName = false;
     //获取输入框
     var Name = document.querySelector('#linkman');
     //用户绑定焦点事件
@@ -174,7 +174,7 @@
         })
     }
 
-    var checkBillPhone = true;
+    var checkBillPhone = false;
     //获取输入框
     var Phone = document.querySelector('#phone');
     //用户绑定焦点事件
@@ -206,7 +206,7 @@
     }
 
 
-    var checkBillNum = true;
+    var checkBillNum = false;
     //获取输入框
     var address = document.querySelector('#address');
     //用户绑定焦点事件
@@ -239,7 +239,7 @@
 
 
 
-    var checkBillFax = true;
+    var checkBillFax = false;
     //获取输入框
     var fax = document.querySelector('#fax');
     //用户绑定焦点事件
