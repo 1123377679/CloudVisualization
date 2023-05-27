@@ -31,7 +31,7 @@
         <hr class="hr15">
         <input name="twicePassword" lay-verify="required" placeholder="再次输入密码"  type="password" class="layui-input">
         <hr class="hr15">
-        <input name="sex" lay-verify="required" placeholder="性别（男或女 1或0）"  type="text" class="layui-input">
+        <input name="sex" lay-verify="required" placeholder="性别"  type="text" class="layui-input">
         <hr class="hr15">
         <input name="birthday" lay-verify="required" placeholder="生日"  type="text" class="layui-input">
         <hr class="hr15">

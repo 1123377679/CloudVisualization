@@ -125,7 +125,7 @@ public class UserServlet extends HttpServlet {
                                 req.getRequestDispatcher("/register.jsp").forward(req,resp);
                                 return;
                             }
-                            User User = new User(null,username,twicePassword,trueSex,birthday,phone,address,3,0);
+                            User User = new User(null,username,twicePassword,Integer.parseInt(sex),birthday,phone,address,3,0);
                             memberService.addUser(User);
                             //获取注册时间
                             DateTime date = DateUtil.date();
@@ -140,7 +140,6 @@ public class UserServlet extends HttpServlet {
                             req.getRequestDispatcher("/register.jsp").forward(req,resp);
                         }
                     }else {
-                        System.out.println("用户已存在");
                         //存值并且赋值
                         req.setAttribute("message","用户已存在");
                         req.getRequestDispatcher("/register.jsp").forward(req,resp);
