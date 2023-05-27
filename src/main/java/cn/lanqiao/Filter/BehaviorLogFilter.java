@@ -239,6 +239,21 @@ public class BehaviorLogFilter implements Filter {
                 default:
                     break;
             }
+        }else if (requestURI.contains("/CommodityServlet.do")){
+            actionType = "商品管理";
+            switch (param){
+                case "limit":
+                    actionDescription = "查看商品列表";
+                    break;
+                case "change":
+                    actionDescription = "修改商品上架状态";
+                    break;
+                case "add":
+                    actionDescription = "新增商品";
+                    break;
+                default:
+                    break;
+            }
         }
         return new Action(actionType,actionDescription);
     }

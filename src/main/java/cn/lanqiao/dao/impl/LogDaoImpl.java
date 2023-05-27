@@ -55,10 +55,6 @@ public class LogDaoImpl implements LogDao {
         return DButils.commonQueryCount("select count(*) from operation_log");
     }
 
-//    @Override
-//    public List<BehaviorLog> getBehaviorDepatrs(Integer pageStart, Integer pageSize) {
-//        return DButils.commonQuery(BehaviorLog.class,"select * from operation_log order by id desc limit ?,?",pageStart,pageSize);
-//    }
     @Override
     public List<BehaviorLog> getBehaviorDepatrs(String name,Integer pageStart, Integer pageSize) {
         StringBuilder stringBuilder = new StringBuilder("select * from operation_log");

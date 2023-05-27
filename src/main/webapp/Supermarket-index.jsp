@@ -164,7 +164,7 @@
                         <ul class="sub-menu">
                             <li onclick="refreshPage_d()">
                                     <%--前端发送请求,需要后台拿到action=list数据--%>
-                                <a onclick="xadmin.add_tab('用户登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                <a onclick="xadmin.add_tab('商品列表','/CommodityServlet.do?action=limit&pageIndex=1&pageSize=5')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>商品列表</cite></a>
                             </li>
