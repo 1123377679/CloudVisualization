@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="x-admin-sm">
-
 <head>
     <meta charset="UTF-8">
     <title>欢迎页面-X-admin2.2</title>
@@ -27,7 +26,9 @@
                 <label for="L_email" class="layui-form-label">
                     <span class="x-red">*</span>商品名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="name" name="name" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="shangpingname" name="name" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                <%------------  --   --- ---------------------- ----------------------     ------        --%>
+                <div class="layui-form-mid" id="nameWord" style="color: #999999"></div>
             </div>
             <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">
@@ -35,14 +36,14 @@
                 <div class="layui-input-inline">
                     <input type="text" id="barcode" name="barcode" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
                 <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                <div class="layui-form-mid" id="userNameWord" style="color: #999999">13位 EAN-13 商品条码</div>
+                <div class="layui-form-mid" id="codeWord" style="color: #999999">13位 EAN-13 商品条码</div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                         <span class="x-red">*</span>商品价格</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="price" name="price" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                        <input type="text" id="shangpingprice" name="price" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
                     <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                    <div class="layui-form-mid" id="userNameWord" style="color: #999999">（元/件）</div>
+                    <div class="layui-form-mid" id="priceWord" style="color: #999999">（元/件）</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label"></label>
@@ -78,6 +79,92 @@
 <div class="translateSelectLanguage" id="translate"></div>
 </body>
 </html>
+<script>
+    //全局变量
+    var checkAllCommodityName = false;
+    // 获取商品名称文本框元素
+    var shangpingname = $("#shangpingname");
+
+    // 商品名称文本框焦点事件处理函数
+    shangpingname.keyup(function checkshangpingname() {
+        // 获取商品名称
+        var name = shangpingname.val();
+        // 验证是否输入了商品名称
+        if (name == ""){
+            $("#nameWord").text("商品名称不能为空！");
+            $("#nameWord").css("color", "red");
+            checkAllCommodityName = false;
+        } else {
+            $("#nameWord").text("√");
+            $("#nameWord").css("color", "green");
+            checkAllCommodityName = true;
+        }
+    });
+
+
+    //全局变量
+    var checkAllBarCode = false;
+    //商品条码
+    var barcode = document.querySelector("#barcode");
+    barcode.onkeyup = function checkBarcode(){
+        //获取条码
+        var barcode = $("#barcode").val();
+        $.ajax({
+            type: "POST",
+            url: "/CommodityServlet.do",
+            data: "action=checkBarcode&barcode=" + barcode,
+            dataType: "text",
+            success: function (result) {
+                if (barcode == "") {
+                    $("#codeWord").text("商品条码不能为空！");
+                    $("#codeWord").css("color", "red");
+                    checkAllCommodityName = false;
+                }else if (result == 0){
+                    $("#codeWord").text("商品条码不合法！");
+                    $("#codeWord").css("color", "red");
+                    checkAllCommodityName = false;
+                }else if (result == 1){
+                    $("#codeWord").text("√");
+                    $("#codeWord").css("color", "green");
+                    checkAllCommodityName = true;
+                }
+            }
+        });
+    }
+
+
+    //全局变量
+    var checkAllPrice = false;
+    // 获取商品价格文本框元素
+    var shangpingprice = $("#shangpingprice");
+
+    // 商品价格文本框焦点事件处理函数
+    shangpingprice.keyup(function checkshangpingprice() {
+        // 获取商品价格
+        var price = shangpingprice.val();
+        // 验证是否输入了商品价格
+        if (price == ""){
+            $("#priceWord").text("商品价格不能为空！");
+            $("#priceWord").css("color", "red");
+            checkAllPrice = false;
+        } else {
+            $("#priceWord").text("√");
+            $("#priceWord").css("color", "green");
+            checkAllPrice = true;
+        }
+    });
+
+
+
+
+    function checkAddAll(){
+        console.log(checkAllCommodityName);
+        console.log(checkAllBarCode);
+        console.log(checkAllPrice);
+        return checkAllCommodityName&&checkAllBarCode&&checkAllPrice;
+    }
+
+</script>
 <!-- 引入多语言切换的js -->
 <script src="https://res.zvo.cn/translate/translate.js"></script>
 <script>

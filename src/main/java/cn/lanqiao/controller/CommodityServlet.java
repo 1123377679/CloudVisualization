@@ -4,6 +4,7 @@ import cn.lanqiao.pojo.BehaviorLog;
 import cn.lanqiao.pojo.Commodity;
 import cn.lanqiao.service.CommodityService;
 import cn.lanqiao.service.impl.CommodityServiceImpl;
+import cn.lanqiao.utils.Ean13Validator;
 import cn.lanqiao.utils.PageUtils;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/CommodityServlet.do")
 public class CommodityServlet extends HttpServlet {
@@ -82,6 +85,21 @@ public class CommodityServlet extends HttpServlet {
                 writer.println("<script>" +
                         "alert('添加失败');location='/commodity-add.jsp'"
                         + "</script>");
+            }
+        }
+        //商品条码校验
+        if (value.equals("checkBarcode")){
+            try {
+                String barcode = req.getParameter("barcode");
+                PrintWriter writer = resp.getWriter();
+                if (new Ean13Validator().validateEan13(barcode)) {
+                    writer.print(1);
+                } else {
+                    writer.print(0);
+                }
+            } catch (Exception e) {
+                PrintWriter writer = resp.getWriter();
+                writer.print(0);
             }
         }
     }
