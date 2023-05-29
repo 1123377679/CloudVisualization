@@ -16,4 +16,7 @@ public interface CommodityService {
 
     //添加商品
     int add(Commodity commodity);
+
+    //查询所有商品
+    List<Commodity> queryCommodity();
 }

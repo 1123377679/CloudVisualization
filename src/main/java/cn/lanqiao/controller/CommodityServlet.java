@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -92,14 +93,38 @@ public class CommodityServlet extends HttpServlet {
             try {
                 String barcode = req.getParameter("barcode");
                 PrintWriter writer = resp.getWriter();
-                if (new Ean13Validator().validateEan13(barcode)) {
-                    writer.print(1);
-                } else {
-                    writer.print(0);
+                List<Commodity> commodities = commodityService.queryCommodity();
+                List<String> list = new ArrayList<String>();
+                for (Commodity c:commodities) {
+                    list.add(c.getBarcode());
+                }
+                if (list.contains(barcode)){
+                    writer.print(2);
+                }else {
+                    if (new Ean13Validator().validateEan13(barcode)) {
+                        writer.print(1);
+                    } else {
+                        writer.print(0);
+                    }
                 }
             } catch (Exception e) {
                 PrintWriter writer = resp.getWriter();
                 writer.print(0);
+            }
+        }
+        //商品名称校验
+        if (value.equals("checkName")){
+            String name = req.getParameter("name");
+            PrintWriter writer = resp.getWriter();
+            List<Commodity> commodities = commodityService.queryCommodity();
+            List<String> list = new ArrayList<String>();
+            for (Commodity c:commodities) {
+                list.add(c.getName());
+            }
+            if (list.contains(name)){
+                writer.print(0);
+            }else {
+                writer.print(1);
             }
         }
     }

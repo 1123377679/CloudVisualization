@@ -29,5 +29,10 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityDao.add(commodity);
     }
 
+    @Override
+    public List<Commodity> queryCommodity() {
+        return commodityDao.queryCommodity();
+    }
+
 
 }

@@ -39,4 +39,9 @@ public class CommodityDaoImpl implements CommodityDao {
                 commodity.getBarcode(),
                 commodity.getPrice());
     }
+
+    @Override
+    public List<Commodity> queryCommodity() {
+        return DButils.commonQuery(Commodity.class,"select * from tb_commodity");
+    }
 }

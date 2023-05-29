@@ -28,7 +28,7 @@
                 <div class="layui-input-inline">
                     <input type="text" id="shangpingname" name="name" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
                 <%------------  --   --- ---------------------- ----------------------     ------        --%>
-                <div class="layui-form-mid" id="nameWord" style="color: #999999"></div>
+                <div class="layui-form-mid" id="nameWord" style="color: #999999">需标注商品规格</div>
             </div>
             <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">
@@ -89,16 +89,28 @@
     shangpingname.keyup(function checkshangpingname() {
         // 获取商品名称
         var name = shangpingname.val();
-        // 验证是否输入了商品名称
-        if (name == ""){
-            $("#nameWord").text("商品名称不能为空！");
-            $("#nameWord").css("color", "red");
-            checkAllCommodityName = false;
-        } else {
-            $("#nameWord").text("√");
-            $("#nameWord").css("color", "green");
-            checkAllCommodityName = true;
-        }
+        $.ajax({
+            type: "POST",
+            url: "/CommodityServlet.do",
+            data: "action=checkName&name=" + name,
+            dataType: "text",
+            success: function (result) {
+                // 验证是否输入了商品名称
+                if (name == ""){
+                    $("#nameWord").text("商品名称不能为空！");
+                    $("#nameWord").css("color", "red");
+                    checkAllCommodityName = false;
+                } else if (result == 0){
+                    $("#nameWord").text("商品名称已存在！");
+                    $("#nameWord").css("color", "red");
+                    checkAllCommodityName = false;
+                } else if (result == 1){
+                    $("#nameWord").text("√");
+                    $("#nameWord").css("color", "green");
+                    checkAllCommodityName = true;
+                }
+            }
+        });
     });
 
 
@@ -118,15 +130,19 @@
                 if (barcode == "") {
                     $("#codeWord").text("商品条码不能为空！");
                     $("#codeWord").css("color", "red");
-                    checkAllCommodityName = false;
+                    checkAllBarCode = false;
                 }else if (result == 0){
                     $("#codeWord").text("商品条码不合法！");
                     $("#codeWord").css("color", "red");
-                    checkAllCommodityName = false;
+                    checkAllBarCode = false;
                 }else if (result == 1){
                     $("#codeWord").text("√");
                     $("#codeWord").css("color", "green");
-                    checkAllCommodityName = true;
+                    checkAllBarCode = true;
+                }else if (result == 2){
+                    $("#codeWord").text("商品条码已存在！");
+                    $("#codeWord").css("color", "red");
+                    checkAllBarCode = false;
                 }
             }
         });
@@ -145,6 +161,10 @@
         // 验证是否输入了商品价格
         if (price == ""){
             $("#priceWord").text("商品价格不能为空！");
+            $("#priceWord").css("color", "red");
+            checkAllPrice = false;
+        } else if (!price.match(/^[1-9]\d*(\.\d{1,2})?$|^0(\.\d{1,2})?$/)){
+            $("#priceWord").text("商品价格格式不正确！");
             $("#priceWord").css("color", "red");
             checkAllPrice = false;
         } else {
