@@ -76,7 +76,7 @@
                                 <td>${p.orderType}</td>
                                 <td>${p.totalAmount}</td>
                                 <td class="td-status">
-                                    <c:if test="${p.paymentStatus == 0}"><span class="layui-btn layui-btn-normal layui-btn-mini">未支付</span>
+                                    <c:if test="${p.paymentStatus == 0}"><span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color: #d94054">未支付</span>
                                     </c:if>
                                     <c:if test="${p.paymentStatus == 1}"><span class="layui-btn layui-btn-normal layui-btn-mini">已支付</span>
                                     </c:if>
