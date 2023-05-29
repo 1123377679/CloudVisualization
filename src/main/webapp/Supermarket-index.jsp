@@ -144,13 +144,13 @@
                     </li>
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="供应商管理">&#xe723;</i>
+                            <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
                             <cite>订单管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li onclick="refreshPage_d()">
                                     <%--前端发送请求,需要后台拿到action=list数据--%>
-                                <a onclick="xadmin.add_tab('用户登录日志','/LogServlet.do?action=mylogs&pageIndex=1&pageSize=20')">
+                                <a onclick="xadmin.add_tab('订单列表','/Merchandise.do?action=limit&pageIndex=1&pageSize=5')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>订单列表</cite></a>
                             </li>
