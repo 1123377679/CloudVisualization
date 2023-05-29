@@ -342,26 +342,6 @@ var _hmt = _hmt || []; (function() {
         }
     }
 </script>
-<script>
-    function refreshPage_a() {
-        location.reload();
-    }
-    function refreshPage_b() {
-        location.reload();
-    }
-    function refreshPage_c() {
-        location.reload();
-    }
-    function refreshPage_d() {
-        location.reload();
-    }
-    function refreshPage_e() {
-        location.reload();
-    }
-    function refreshPage_f() {
-        location.reload();
-    }
-</script>
 </html>
 <script>
     function logout() {
