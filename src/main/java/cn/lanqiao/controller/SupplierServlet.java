@@ -336,7 +336,8 @@ public class SupplierServlet extends HttpServlet {
             workbook.write(outputStream);
             System.out.println("数据导出完毕");
             //关闭流
-            outputStream.close();}
+            outputStream.close();
+        }
         if (value.equals("downloadExcelModel")){
             //1.获取要下载的文件的绝对路径
             //在resources目录放入QQ.png，注意项目导出后resource中的文件被打包到/WEB-INF/classes下,服务器的真实路径

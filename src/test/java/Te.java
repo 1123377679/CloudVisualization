@@ -1,6 +1,7 @@
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.service.MemberService;
 import cn.lanqiao.service.impl.MemberServiceImpl;
+import org.junit.Test;
 
 import java.util.ArrayList;
 

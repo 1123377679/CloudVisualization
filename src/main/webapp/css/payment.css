@@ -1,0 +1,107 @@
+/* 左侧支付方式选择 */
+.payment-methods {
+  width: 20%;
+  float: left;
+  background-color: #F2F2F2;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.methods-header,
+.methods-content {
+  margin-bottom: 20px;
+}
+
+.methods-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.method-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.method-item .method-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #1E9FFF;
+}
+
+.method-item .method-name {
+  font-size: 16px;
+}
+
+/* 中间结算信息 */
+.payment-info {
+  width: 50%;
+  float: left;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.info-header,
+.info-content {
+  margin-bottom: 20px;
+}
+
+.info-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.layui-form-label {
+  width: 80px;
+  text-align: right;
+}
+
+.layui-input-block {
+  margin-left: 110px;
+}
+
+/* 右侧会员信息 */
+.payment-member {
+  width: 30%;
+  float: left;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.member-header,
+.member-content {
+  margin-bottom: 20px;
+}
+
+.member-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.member-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.member-label {
+  flex: 1;
+}
+
+.member-input {
+  flex: 2;
+  margin-right: 10px;
+}
+
+/* 底部按钮 */
+.payment-actions {
+  width: 100%;
+  text-align: right;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cancel-button {
+  margin-right: 20px;
+}

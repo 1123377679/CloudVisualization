@@ -75,6 +75,11 @@
 %>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
+            <a href="cashRegister.jsp" target="_blank">
+                收银系统
+            </a>
+        </li>
+        <li class="layui-nav-item">
             <a href="javascript:;">
                 <%=username%>
             </a>
@@ -89,7 +94,8 @@
             </dl>
         </li>
         <li class="layui-nav-item to-index">
-            <a href="/">前台首页</a></li>
+            <a href="/">前台首页</a>
+        </li>
     </ul>
 </div>
 <!-- 顶部结束 -->
