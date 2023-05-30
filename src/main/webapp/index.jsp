@@ -178,87 +178,132 @@
         $('.layuimini-loader').fadeOut(); // 隐藏加载层
     });
 </script>
-<%--<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=eZo1Wz4K7qMFxfGOdssD06WGxj4EtCl0"></script>--%>
-<%--<script>--%>
-<%--    var map = new BMap.Map("map-container");--%>
-<%--    map.centerAndZoom(new BMap.Point(105.438979, 28.847374), 11);--%>
-<%--    map.addControl(new BMap.NavigationControl());--%>
-<%--    map.addControl(new BMap.ScaleControl());--%>
-<%--    map.setMapStyleV2({--%>
-<%--        styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'--%>
-<%--    });--%>
 
-<%--    function geocodeOne(callback) {--%>
-<%--        var address = document.getElementById("addressOne").value;--%>
-<%--        var geocoder = new BMap.Geocoder();--%>
-<%--        geocoder.getPoint(address, function (point) {--%>
-<%--            if (point) {--%>
-<%--                var start = new BMap.Point(point.lng, point.lat);--%>
-<%--                callback(start);--%>
-<%--            } else {--%>
-<%--                alert("地址解析失败，请输入正确的地址");--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=eZo1Wz4K7qMFxfGOdssD06WGxj4EtCl0"></script>
+<script>
+    var map = new BMap.Map("map-container");
+    map.centerAndZoom(new BMap.Point(105.442813, 28.871276), 16);
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.ScaleControl());
+    map.setMapStyleV2({
+        styleId: '90dca14bb7c8c34f431642131ccde1ea'
+    });
 
-<%--    function geocodeTwo(start, callback) {--%>
-<%--        var address = document.getElementById("addressTwo").value;--%>
-<%--        var geocoder = new BMap.Geocoder();--%>
-<%--        geocoder.getPoint(address, function (point) {--%>
-<%--            if (point) {--%>
-<%--                var end = new BMap.Point(point.lng, point.lat);--%>
-<%--                callback(start, end);--%>
-<%--            } else {--%>
-<%--                alert("地址解析失败，请输入正确的地址");--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
+    function geocodeOne(callback) {
+        var city = document.getElementById("city").value;
+        var myGeo = new BMap.Geocoder();
+        myGeo.getPoint(city, function(point) {
+            if (point) {
+                callback(point);
+                map.centerAndZoom(point, 16); // 更新地图中心点
+            } else {
+                alert("地址解析失败，请输入正确的地址");
+            }
+        }, "中国");
+    }
 
-<%--    function functionHandler() {--%>
-<%--        if (map) {--%>
-<%--            map.clearOverlays();--%>
-<%--        } else {--%>
-<%--            map = new BMap.Map("map-container");--%>
-<%--            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);--%>
-<%--            map.addControl(new BMap.NavigationControl());--%>
-<%--            map.addControl(new BMap.ScaleControl());--%>
-<%--            map.setMapStyleV2({--%>
-<%--                styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'--%>
-<%--            });--%>
-<%--        }--%>
+    function geocodeTwo(start, callback) {
+        var address = document.getElementById("addressTwo").value;
+        var geocoder = new BMap.Geocoder();
+        geocoder.getPoint(address, function(point) {
+            if (point) {
+                var end = new BMap.Point(point.lng, point.lat);
+                callback(start, end);
+            } else {
+                alert("地址解析失败，请输入正确的地址");
+            }
+        });
+    }
 
-<%--        geocodeOne(function (start) {--%>
-<%--            geocodeTwo(start, function (start, end) {--%>
-<%--                test(start, end);--%>
-<%--            });--%>
-<%--        });--%>
-<%--    }--%>
+    function functionHandler() {
+        if (map) {
+            map.clearOverlays();
+        } else {
+            map = new BMap.Map("map-container");
+            map.centerAndZoom(new BMap.Point(105.442813, 28.871276), 16);
+            map.addControl(new BMap.NavigationControl());
+            map.addControl(new BMap.ScaleControl());
+            map.setMapStyleV2({
+                styleId: '90dca14bb7c8c34f431642131ccde1ea'
+            });
+        }
 
-<%--    function test(start, end) {--%>
-<%--        var startMarker = new BMap.Marker(start);--%>
-<%--        var endMarker = new BMap.Marker(end);--%>
+        geocodeOne(function(start) {
+            geocodeTwo(start, function(start, end) {
+                test(start, end);
+            });
+        });
+    }
 
-<%--        map.addOverlay(startMarker);--%>
-<%--        map.addOverlay(endMarker);--%>
+    function test(start, end) {
+        var startMarker = new BMap.Marker(start);
+        var endMarker = new BMap.Marker(end);
 
-<%--        var driving = new BMap.DrivingRoute(map, {--%>
-<%--            renderOptions: { map: map, autoViewport: true }--%>
-<%--        });--%>
-<%--        driving.search(start, end);--%>
+        map.addOverlay(startMarker);
+        map.addOverlay(endMarker);
 
-<%--        driving.setSearchCompleteCallback(function (result) {--%>
-<%--            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {--%>
-<%--                var plan = result.getPlan(0);--%>
-<%--                var route = plan.getRoute(0);--%>
-<%--                var polyline = new BMap.Polyline(route.getPath());--%>
-<%--                map.addOverlay(polyline);--%>
-<%--                map.setViewport(polyline.getPath()); // 将路线显示在地图上--%>
-<%--            } else {--%>
-<%--                alert("路线规划失败");--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            }
+        });
+        driving.search(start, end);
+
+        driving.setSearchCompleteCallback(function(result) {
+            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
+                var plan = result.getPlan(0);
+                var route = plan.getRoute(0);
+                var polyline = new BMap.Polyline(route.getPath());
+                map.addOverlay(polyline);
+                map.setViewport(polyline.getPath()); // 将路线显示在地图上
+            } else {
+                alert("路线规划失败，请检查网络连接");
+            }
+        });
+    }
+
+    function searchSupermarkets() {
+        // 搜索关键词
+        var keyword = "超市";
+        // 搜索区域范围
+        var bounds = map.getBounds();
+        var southwest = bounds.getSouthWest();
+        var northeast = bounds.getNorthEast();
+
+        var localSearch = new BMap.LocalSearch(map, {
+            renderOptions: {
+                map: map
+            }
+        });
+        localSearch.searchInBounds(keyword, new BMap.Bounds(southwest, northeast));
+
+        localSearch.setSearchCompleteCallback(function(results) {
+            if (localSearch.getStatus() == BMAP_STATUS_SUCCESS) {
+                for (var i = 0; i < results.getCurrentNumPois(); i++) {
+                    var poi = results.getPoi(i);
+                    var marker = new BMap.Marker(poi.point);
+                    map.addOverlay(marker);
+
+                    // 添加信息窗口
+                    var infoWindow = new BMap.InfoWindow("<p>" + poi.title + "</p>");
+                    marker.addEventListener("click", function() {
+                        this.openInfoWindow(infoWindow);
+                    });
+                }
+            } else {
+                alert("搜索失败，请检查网络连接");
+            }
+        });
+    }
+
+    function addSupermarkets() {
+        searchSupermarkets();
+    }
+    window.onload = function(){
+        addSupermarkets();
+    }
+</script>
 <script>
     var tiaozhuan = document.querySelector('.tiaozhuan');
     var timer;

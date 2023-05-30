@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="refresh" content="100;url='https://gitee.com/iGaoWei/big-data-view'">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
@@ -13,15 +14,12 @@
     <link rel="stylesheet" href="css/comon0.css">
 </head>
 <body>
-
 <div style="background:#000d4a url(images/bg.jpg) center top;">
     <div class="loading">
         <div class="loadbox"> <img src="picture/loading.gif"> 页面加载中... </div>
     </div>
     <div class="back"></div>
     <div class="head">
-        <a href="index.jsp" class="tiaozhuan"></a>
-        </script>
         <h1>大数据可视化展示平台通用模板</h1>
         <div class="weather"><span id="showTime"></span></div>
     </div>
@@ -144,6 +142,7 @@
 </div>
 
 
+
 </body>
 </html>
 <script>
@@ -173,4 +172,11 @@
     function autoJump() {
         window.location.href = 'index.jsp';
     }
+    $(function(){
+        $('.wrap').liMarquee({
+            direction: 'up',//身上滚动
+            //runshort: false,//内容不足时不滚动
+            scrollamount: 20//速度
+        });
+    });
 </script>
