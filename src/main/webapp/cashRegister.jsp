@@ -327,32 +327,19 @@
         </thead>
         <tbody class="goods-list">
           <!-- 商品条目根据需求自行添加 -->
-          <tr>
-            <td>可乐</td>
-            <td class="count">
-              <div class="counter">
-                <div class="subtract-btn"><i class="fa fa-minus"></i></div>
-                <div class="num">1</div>
-                <div class="add-btn"><i class="fa fa-plus"></i></div>
-              </div>
-            </td>
-            <td>¥ 3.00</td>
-            <td>¥ 3.00</td>
-            <td><a href="#">删除</a></td>
-          </tr>
-          <tr>
-            <td>可乐</td>
-            <td class="count">
-              <div class="counter">
-                <div class="subtract-btn"><i class="fa fa-minus"></i></div>
-                <div class="num">1</div>
-                <div class="add-btn"><i class="fa fa-plus"></i></div>
-              </div>
-            </td>
-            <td>¥ 3.00</td>
-            <td>¥ 3.00</td>
-            <td><a href="#">删除</a></td>
-          </tr>
+<%--          <tr>--%>
+<%--            <td>可乐</td>--%>
+<%--            <td class="count">--%>
+<%--              <div class="counter">--%>
+<%--                <div class="subtract-btn"><i class="fa fa-minus"></i></div>--%>
+<%--                <div class="num">1</div>--%>
+<%--                <div class="add-btn"><i class="fa fa-plus"></i></div>--%>
+<%--              </div>--%>
+<%--            </td>--%>
+<%--            <td>¥ 3.00</td>--%>
+<%--            <td>¥ 3.00</td>--%>
+<%--            <td><a href="#">删除</a></td>--%>
+<%--          </tr>--%>
         </tbody>
       </table>
     </div>
@@ -360,8 +347,8 @@
       <div class="title">扫码/输入商品条码</div>
       <div class="form-group">
         <label class="label">条码：</label>
-        <input type="text" class="input" placeholder="请扫描或手动输入条码" />
-        <div class="clear-btn">添加</div>
+        <input type="text" class="input" id="AddBill" placeholder="请扫描或手动输入条码" />
+        <div class="clear-btn" onclick="addButton();">添加</div>
         <div class="clear-btn">清空</div>
       </div>
     </div>
@@ -369,7 +356,7 @@
       <div class="title">结算金额：</div>
       <div class="form-group">
         <label class="label" style="width: 75px;">应付金额：</label>
-        <div class="input">¥ 0.00</div>
+        <div class="input resettable">¥ 0.00</div>
       </div>
       <div class="form-group">
         <label class="label" style="width: 77px;">实付金额：</label>
@@ -427,6 +414,27 @@
   layui.use(['layer'], function () {
     var layer = layui.layer;
 
+
+  });
+  function showPaymentWindow() {
+    layui.use('layer', function () {
+      var layer = layui.layer;
+      var index = layer.open({
+        type: 2,
+        title: '支付结算',
+        shadeClose: true,
+        shade: [0.8, '#393D49'],
+        area: ['50%', '60%'],
+        content: 'payment.jsp'
+      });
+      // layer.full(index);
+    });
+  }
+</script>
+
+<script>
+  // 绑定加减号按钮点击事件
+  function bindClickEvent() {
     // 绑定减号按钮点击事件
     $('.subtract-btn').click(function () {
       var num = parseInt($(this).siblings('.num').text());
@@ -444,7 +452,6 @@
       updateTotal($(this));
       updatePayable();
     });
-
     // 更新商品加减数量和合计金额
     function updateTotal($elem) {
       // 计算单价和数量
@@ -455,14 +462,6 @@
       $elem.closest('tr').find('td:nth-last-child(2)').text('¥ ' + total);
     }
 
-    // 更新应付金额
-    function updatePayable() {
-      var total = 0;
-      $('.goods-list tr').each(function () {
-        total += parseFloat($(this).find('td:nth-last-child(2)').text().substring(2));
-      });
-      $('.calc-box .form-group:eq(0) .input').text('¥ ' + total.toFixed(2));
-    }
 
     // 清空输入框
     $('.clear-btn').click(function () {
@@ -516,7 +515,7 @@
     // 删除商品
     $('tbody').on('click', 'a', function () {
       var $tr = $(this).closest('tr'),
-        subtotal = parseFloat($tr.find('td:nth-last-child(2)').text());
+              subtotal = parseFloat($tr.find('td:nth-last-child(2)').text());
       $tr.remove();
 
       // 计算小计和总计
@@ -525,6 +524,8 @@
       if ($('tbody tr').length == 0) {
         $('tfoot td:last-child').prev().prev().text('');
       }
+      // 更新应付金额
+      updatePayable();
     })
     $('form').submit(function (e) {
       e.preventDefault();
@@ -546,21 +547,52 @@
     $('.clear-btn').click(function () {
       $payableInput.text('¥ 0.00');
     });
-
-
-  });
-  function showPaymentWindow() {
-    layui.use('layer', function () {
-      var layer = layui.layer;
-      var index = layer.open({
-        type: 2,
-        title: '支付结算',
-        shadeClose: true,
-        shade: [0.8, '#393D49'],
-        area: ['50%', '60%'],
-        content: 'payment.jsp'
-      });
-      // layer.full(index);
+  }
+  // 更新应付金额
+  function updatePayable() {
+    var total = 0;
+    $('.goods-list tr').each(function () {
+      total += parseFloat($(this).find('td:nth-last-child(2)').text().substring(2));
+    });
+    $('.calc-box .form-group:eq(0) .input').text('¥ ' + total.toFixed(2));
+  }
+  // 获取输入框和添加按钮元素
+  // const inputBox = $('#AddBill');
+  // 添加事件监听器
+  function addButton(){
+    // 获取输入框中的值
+    let val = $('#AddBill').val();
+    $.ajax({
+      type:"POST",
+      url:"/CommodityServlet.do",
+      data:"action=addBill&val="+val,
+      dataType:"json",//服务器返回的数据类型
+      success:function(result) {
+        if (result == 0){
+         alert("您输入的条码不存在,请重新输入");
+         $('#AddBill').val('');
+        }
+        let rowHtml = "<tr>"+
+                "<td>"+result.name+"</td>"+
+                "<td class='count'>" +
+                "<div class='counter'>" +
+                "<div class='subtract-btn'><i class='fa fa-minus'></i></div>" +
+                "<div class='num'>1</div>" +
+                "<div class='add-btn'><i class='fa fa-plus'></i></div>" +
+                "</div>" +
+                "</td>" +
+                "<td>¥ " + result.price.toFixed(2)  + "</td>" +
+                "<td>¥ " + result.price.toFixed(2)  + "</td>" +
+                "<td><a href='#'>删除</a></td>" +
+                "</tr>";
+        // 将 HTML 字符串插入到表格中
+        $('.goods-list').append(rowHtml);
+        // 绑定新生成的加减号按钮点击事件
+        bindClickEvent();
+        // 更新应付金额
+        updatePayable();
+      }
     });
   }
+
 </script>

@@ -34,5 +34,14 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityDao.queryCommodity();
     }
 
+    @Override
+    public Commodity queryCommodityByCode(String barcode) {
+        return commodityDao.queryCommodityByCode(barcode);
+    }
+
+    @Override
+    public int queryBarcodeExist(String barcode) {
+        return commodityDao.queryBarcodeExist(barcode);
+    }
 
 }

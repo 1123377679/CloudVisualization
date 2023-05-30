@@ -316,7 +316,7 @@ var _hmt = _hmt || []; (function() {
     s.parentNode.insertBefore(hm, s);
 })();</script>
 
-<div class="translateSelectLanguage" id="translate" onclick="refreshPage()"></div>
+<div class="translateSelectLanguage" id="translate" onclick="refreshPage()" style="top: 7px;left: 600px;"></div>
 </body>
 <!-- 引入多语言切换的js -->
 <script src="https://res.zvo.cn/translate/translate.js"></script>

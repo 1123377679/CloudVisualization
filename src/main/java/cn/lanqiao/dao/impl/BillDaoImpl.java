@@ -2,8 +2,6 @@ package cn.lanqiao.dao.impl;
 
 import cn.lanqiao.dao.BillDao;
 import cn.lanqiao.pojo.Bill;
-import cn.lanqiao.pojo.Supplier;
-import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
 import java.util.ArrayList;

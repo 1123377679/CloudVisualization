@@ -1,11 +1,11 @@
 package cn.lanqiao.controller;
 
-import cn.lanqiao.pojo.BehaviorLog;
 import cn.lanqiao.pojo.Commodity;
 import cn.lanqiao.service.CommodityService;
 import cn.lanqiao.service.impl.CommodityServiceImpl;
 import cn.lanqiao.utils.Ean13Validator;
 import cn.lanqiao.utils.PageUtils;
+import com.alibaba.fastjson.JSON;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 @WebServlet("/CommodityServlet.do")
 public class CommodityServlet extends HttpServlet {
@@ -126,6 +126,40 @@ public class CommodityServlet extends HttpServlet {
             }else {
                 writer.print(1);
             }
+        }
+
+
+
+        //扫描或添加条码
+        if(value.equals("addBill")){
+            String val = req.getParameter("val");
+            System.out.println(val);
+            //查询条码是否存在
+            int i1 = commodityService.queryBarcodeExist(val);
+            if (i1 == 0){
+                resp.getWriter().write("0");
+            }else if (i1 >= 1){
+                //根据条码查询判断是否存在
+                Commodity i = commodityService.queryCommodityByCode(val);
+                //判断查询的条码是否存在
+                if (i != null) {
+                    // 将商品信息封装到 Map 对象中
+                    Map<String, Object> resultMap = new HashMap<>();
+                    resultMap.put("name", i.getName());
+                    resultMap.put("price", i.getPrice());
+                    // 其他属性依此类推
+                    // 将 Map 对象转换为 JSON 字符串
+                    String jsonResult = JSON.toJSONString(resultMap);
+                    // 发送响应
+                    resp.setContentType("application/json");
+                    resp.setCharacterEncoding("UTF-8");
+                    resp.getWriter().write(jsonResult);
+                }
+            }
+            //查询这个条码的商品名称和商品价格
+            //通过JSON的方式发送给前端
+
+
         }
     }
 }

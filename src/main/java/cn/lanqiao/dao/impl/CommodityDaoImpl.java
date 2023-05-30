@@ -44,4 +44,16 @@ public class CommodityDaoImpl implements CommodityDao {
     public List<Commodity> queryCommodity() {
         return DButils.commonQuery(Commodity.class,"select * from tb_commodity");
     }
+
+    @Override
+    public Commodity queryCommodityByCode(String barcode) {
+        return DButils.commonQuery(Commodity.class,"select name, price from tb_commodity where barcode =?",barcode).get(0);
+    }
+
+    @Override
+    public int queryBarcodeExist(String barcode) {
+        return DButils.commonQueryCount("select  count(*) from tb_commodity where barcode=?",barcode);
+    }
+
+
 }

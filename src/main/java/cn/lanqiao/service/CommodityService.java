@@ -19,4 +19,10 @@ public interface CommodityService {
 
     //查询所有商品
     List<Commodity> queryCommodity();
+
+    //查询条码
+    Commodity queryCommodityByCode(String barcode);
+
+    //查询该条码是否存在
+    int queryBarcodeExist(String barcode);
 }
