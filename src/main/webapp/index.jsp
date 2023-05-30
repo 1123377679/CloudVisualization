@@ -38,23 +38,23 @@
             text-decoration: none;
         }
 
-        #addressOne{
+        /*#addressOne{*/
 
-            position: absolute;
-            top: 14px;
-            left: 104px;
-            color: white;
-            text-decoration: none;
-            height: 30px;
-        }
-        #addressTwo{
-            position: absolute;
-            top: 13px;
-            left: 385px;
-            color: white;
-            text-decoration: none;
-            height: 30px;
-        }
+        /*    position: absolute;*/
+        /*    top: 14px;*/
+        /*    left: 104px;*/
+        /*    color: white;*/
+        /*    text-decoration: none;*/
+        /*    height: 30px;*/
+        /*}*/
+        /*#addressTwo{*/
+        /*    position: absolute;*/
+        /*    top: 13px;*/
+        /*    left: 385px;*/
+        /*    color: white;*/
+        /*    text-decoration: none;*/
+        /*    height: 30px;*/
+        /*}*/
         .queding{
             position: absolute;
             left: 34%;
@@ -71,9 +71,10 @@
     <div class="layuimini-loader-inner"></div>
 </div>
 <header>
-    <label class="qidian">请输入起点:</label><input id="addressOne" type="text" style="color:black;"><br>
-    <label class="zhongdian">请输入终点：</label><input id="addressTwo" type="text" style="color:black;"><br>
-    <button class="queding" onclick="functionHandler()">确定</button>
+    <a href="index2.jsp" class="tiaozhuan"></a>
+<%--    <label class="qidian">请输入起点:</label><input id="addressOne" type="text" style="color:black;"><br>--%>
+<%--    <label class="zhongdian">请输入终点：</label><input id="addressTwo" type="text" style="color:black;"><br>--%>
+<%--    <button class="queding" onclick="functionHandler()">确定</button>--%>
     <h1 style="position: absolute;top: 1px;left: 39%">大数据超市可视化界面</h1>
     <a class="echars-login" href="/login.jsp">超市管理登录</a>
     <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
@@ -177,85 +178,113 @@
         $('.layuimini-loader').fadeOut(); // 隐藏加载层
     });
 </script>
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=eZo1Wz4K7qMFxfGOdssD06WGxj4EtCl0"></script>
+<%--<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=eZo1Wz4K7qMFxfGOdssD06WGxj4EtCl0"></script>--%>
+<%--<script>--%>
+<%--    var map = new BMap.Map("map-container");--%>
+<%--    map.centerAndZoom(new BMap.Point(105.438979, 28.847374), 11);--%>
+<%--    map.addControl(new BMap.NavigationControl());--%>
+<%--    map.addControl(new BMap.ScaleControl());--%>
+<%--    map.setMapStyleV2({--%>
+<%--        styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'--%>
+<%--    });--%>
+
+<%--    function geocodeOne(callback) {--%>
+<%--        var address = document.getElementById("addressOne").value;--%>
+<%--        var geocoder = new BMap.Geocoder();--%>
+<%--        geocoder.getPoint(address, function (point) {--%>
+<%--            if (point) {--%>
+<%--                var start = new BMap.Point(point.lng, point.lat);--%>
+<%--                callback(start);--%>
+<%--            } else {--%>
+<%--                alert("地址解析失败，请输入正确的地址");--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+
+<%--    function geocodeTwo(start, callback) {--%>
+<%--        var address = document.getElementById("addressTwo").value;--%>
+<%--        var geocoder = new BMap.Geocoder();--%>
+<%--        geocoder.getPoint(address, function (point) {--%>
+<%--            if (point) {--%>
+<%--                var end = new BMap.Point(point.lng, point.lat);--%>
+<%--                callback(start, end);--%>
+<%--            } else {--%>
+<%--                alert("地址解析失败，请输入正确的地址");--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+
+<%--    function functionHandler() {--%>
+<%--        if (map) {--%>
+<%--            map.clearOverlays();--%>
+<%--        } else {--%>
+<%--            map = new BMap.Map("map-container");--%>
+<%--            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);--%>
+<%--            map.addControl(new BMap.NavigationControl());--%>
+<%--            map.addControl(new BMap.ScaleControl());--%>
+<%--            map.setMapStyleV2({--%>
+<%--                styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'--%>
+<%--            });--%>
+<%--        }--%>
+
+<%--        geocodeOne(function (start) {--%>
+<%--            geocodeTwo(start, function (start, end) {--%>
+<%--                test(start, end);--%>
+<%--            });--%>
+<%--        });--%>
+<%--    }--%>
+
+<%--    function test(start, end) {--%>
+<%--        var startMarker = new BMap.Marker(start);--%>
+<%--        var endMarker = new BMap.Marker(end);--%>
+
+<%--        map.addOverlay(startMarker);--%>
+<%--        map.addOverlay(endMarker);--%>
+
+<%--        var driving = new BMap.DrivingRoute(map, {--%>
+<%--            renderOptions: { map: map, autoViewport: true }--%>
+<%--        });--%>
+<%--        driving.search(start, end);--%>
+
+<%--        driving.setSearchCompleteCallback(function (result) {--%>
+<%--            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {--%>
+<%--                var plan = result.getPlan(0);--%>
+<%--                var route = plan.getRoute(0);--%>
+<%--                var polyline = new BMap.Polyline(route.getPath());--%>
+<%--                map.addOverlay(polyline);--%>
+<%--                map.setViewport(polyline.getPath()); // 将路线显示在地图上--%>
+<%--            } else {--%>
+<%--                alert("路线规划失败");--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+<%--</script>--%>
 <script>
-    var map = new BMap.Map("map-container");
-    map.centerAndZoom(new BMap.Point(105.438979, 28.847374), 11);
-    map.addControl(new BMap.NavigationControl());
-    map.addControl(new BMap.ScaleControl());
-    map.setMapStyleV2({
-        styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'
+    var tiaozhuan = document.querySelector('.tiaozhuan');
+    var timer;
+    var timeout = 5; // 定义自动跳转的时间，单位为秒
+
+    document.addEventListener('mousemove', function() {
+        // 如果已经开始倒计时，则退出
+        if (timer) {
+            return;
+        }
+        tiaozhuan.innerHTML = '准备跳转';
+        timer = setTimeout(function() {
+            autoJump();
+        }, timeout * 1000);
     });
 
-    function geocodeOne(callback) {
-        var address = document.getElementById("addressOne").value;
-        var geocoder = new BMap.Geocoder();
-        geocoder.getPoint(address, function (point) {
-            if (point) {
-                var start = new BMap.Point(point.lng, point.lat);
-                callback(start);
-            } else {
-                alert("地址解析失败，请输入正确的地址");
-            }
-        });
-    }
-
-    function geocodeTwo(start, callback) {
-        var address = document.getElementById("addressTwo").value;
-        var geocoder = new BMap.Geocoder();
-        geocoder.getPoint(address, function (point) {
-            if (point) {
-                var end = new BMap.Point(point.lng, point.lat);
-                callback(start, end);
-            } else {
-                alert("地址解析失败，请输入正确的地址");
-            }
-        });
-    }
-
-    function functionHandler() {
-        if (map) {
-            map.clearOverlays();
-        } else {
-            map = new BMap.Map("map-container");
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-            map.addControl(new BMap.NavigationControl());
-            map.addControl(new BMap.ScaleControl());
-            map.setMapStyleV2({
-                styleId: 'f04ee1f54845ee4f96a3d5b8908437c4'
-            });
+    document.addEventListener('mouseout', function() {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+            tiaozhuan.innerHTML = '取消跳转';
         }
+    });
 
-        geocodeOne(function (start) {
-            geocodeTwo(start, function (start, end) {
-                test(start, end);
-            });
-        });
-    }
-
-    function test(start, end) {
-        var startMarker = new BMap.Marker(start);
-        var endMarker = new BMap.Marker(end);
-
-        map.addOverlay(startMarker);
-        map.addOverlay(endMarker);
-
-        var driving = new BMap.DrivingRoute(map, {
-            renderOptions: { map: map, autoViewport: true }
-        });
-        driving.search(start, end);
-
-        driving.setSearchCompleteCallback(function (result) {
-            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
-                var plan = result.getPlan(0);
-                var route = plan.getRoute(0);
-                var polyline = new BMap.Polyline(route.getPath());
-                map.addOverlay(polyline);
-                map.setViewport(polyline.getPath()); // 将路线显示在地图上
-            } else {
-                alert("路线规划失败");
-            }
-        });
+    function autoJump() {
+        window.location.href = 'index2.jsp';
     }
 </script>
 </body>

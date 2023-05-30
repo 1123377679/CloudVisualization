@@ -183,7 +183,7 @@
                 if (result==0){
                     $("#checkSuppliername").text("√");
                     $("#checkSuppliername").css("color","green");
-                    checkSupplierPhone =false;
+                    checkSupplierPhone =true;
 
                 }else if(suppliername=="") {
                     $("#checkSuppliername").text("不能为空");
@@ -193,7 +193,7 @@
                 }else if (result==1){
                     $("#checkSuppliername").text("已经存在该供应商名称" );
                     $("#checkSuppliername").css("color","red");
-                    checkSupplierPhone =true;
+                    checkSupplierPhone =false;
 
                 }else if (result==2){
                     $("#checkSuppliername").text("供应商名称必须为中文");
