@@ -269,7 +269,7 @@
         if (timer) {
             return;
         }
-        tiaozhuan.innerHTML = '准备跳转';
+        tiaozhuan.innerHTML = '';
         timer = setTimeout(function() {
             autoJump();
         }, timeout * 1000);
@@ -279,7 +279,7 @@
         if (timer) {
             clearTimeout(timer);
             timer = null;
-            tiaozhuan.innerHTML = '取消跳转';
+            tiaozhuan.innerHTML = '';
         }
     });
 
