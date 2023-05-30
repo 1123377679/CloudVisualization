@@ -20,6 +20,7 @@
     </div>
     <div class="back"></div>
     <div class="head">
+        <a href="index.jsp" class="tiaozhuan"></a>
         <h1>大数据可视化展示平台通用模板</h1>
         <div class="weather"><span id="showTime"></span></div>
     </div>
