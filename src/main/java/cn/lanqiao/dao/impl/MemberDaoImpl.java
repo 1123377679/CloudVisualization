@@ -102,5 +102,16 @@ public class MemberDaoImpl implements MemberDao {
     public int checkPassword(Integer userId,String password) {
         return DButils.commonQueryCount("SELECT COUNT(*) as count FROM tb_user WHERE id = ? AND password = ?",userId, password);
     }
+
+    @Override
+    public int checkUserPhone(String phone) {
+        return DButils.commonQueryCount("select count(*) from tb_user where phone = ?",phone);
+    }
+
+    @Override
+    public String getUserNameByPhone(String number) {
+        return DButils.getUserNameByPhone("select username from tb_user where phone = ?",number);
+    }
+
 }
 

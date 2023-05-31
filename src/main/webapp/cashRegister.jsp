@@ -288,7 +288,7 @@
       align-items: center;
       font-size: 16px;
       color: #fff;
-      background-color: #00a0e9;
+      background-color: #ffffff;
       border: none;
       border-radius: 4px;
       width: 274px;
@@ -360,8 +360,8 @@
       </div>
       <div class="form-group">
         <label class="label" style="width: 77px;">实付金额：</label>
-        <div class="input resettable">¥ 0.00</div>
-        <div class="clear-btn" onclick="$('input[name=name]').val('')">
+        <div class="input out resettable" contenteditable="true">¥ 0.00</div>
+        <div class="clear-btn" onclick="updateRealPayable();">
           <i class="fas fa-times"></i>
         </div>
       </div>
@@ -396,7 +396,7 @@
             <div class="key">00</div>
             <div class="key">0</div>
             <div class="key">.</div>
-            <button class="alipay-btn"><span>支付宝支付</span><i class="fab fa-alipay"></i></button>
+            <button class="alipay-btn"></button>
           </div>
         </div>
       </div>
@@ -424,7 +424,7 @@
         title: '支付结算',
         shadeClose: true,
         shade: [0.8, '#393D49'],
-        area: ['50%', '60%'],
+        area: ['70%', '80%'],
         content: 'payment.jsp'
       });
       // layer.full(index);
@@ -452,6 +452,7 @@
       updateTotal($(this));
       updatePayable();
     });
+
     // 更新商品加减数量和合计金额
     function updateTotal($elem) {
       // 计算单价和数量
@@ -555,6 +556,10 @@
       total += parseFloat($(this).find('td:nth-last-child(2)').text().substring(2));
     });
     $('.calc-box .form-group:eq(0) .input').text('¥ ' + total.toFixed(2));
+    // 将 total 存储在 LocalStorage 中
+    localStorage.setItem('total', total);
+    // sessionStorage.setItem('total', total);
+    <%--console.log(`Total is ${total}`);--%>
   }
   // 获取输入框和添加按钮元素
   // const inputBox = $('#AddBill');
@@ -591,8 +596,20 @@
         bindClickEvent();
         // 更新应付金额
         updatePayable();
+        //更新实付金额
+        updateRealPayable();
       }
     });
   }
-
+  //回显实付金额
+  function updateRealPayable(){ 
+    // 存储输入框的值到 localStorage 中
+    $('.out').on('input', function() {
+      var value = $(this).text();
+      if (value === ''){
+        value = '¥ 0.00';
+      }
+      localStorage.setItem('inputValue', value);
+    });
+  }
 </script>

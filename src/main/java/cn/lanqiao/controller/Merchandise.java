@@ -2,10 +2,14 @@ package cn.lanqiao.controller;
 
 import cn.lanqiao.pojo.Merchan;
 import cn.lanqiao.pojo.User;
+import cn.lanqiao.service.AlipayService;
 import cn.lanqiao.service.MerchanService;
 
+import cn.lanqiao.service.impl.AlipayServiceImpl;
 import cn.lanqiao.service.impl.MerchanServiceImpl;
+import cn.lanqiao.utils.OrderUtils;
 import cn.lanqiao.utils.PageUtils;
+import com.alibaba.fastjson.JSONObject;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
@@ -18,12 +22,13 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/Merchandise.do")
 public class Merchandise extends HttpServlet {
     MerchanService merchanService = new MerchanServiceImpl();
-
+    AlipayService alipayService = new AlipayServiceImpl();
     @SneakyThrows
     @Override
     public void service(ServletRequest req, ServletResponse resp) throws ServletException, IOException {
@@ -185,6 +190,41 @@ public class Merchandise extends HttpServlet {
                 writer.print(2);
             }
         }
+        //现金支付
+        if (value.equals("caSay")) {
+            //存储值
+            String s = OrderUtils.generateOrderId();
+            String total = req.getParameter("total");
+            String subject = "支付宝";
+            String remarks = req.getParameter("remarks");
+            //支付金额
+            String value1 = req.getParameter("value");
+            //生成时间
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            //转换数据类型
+            BigDecimal totalAmount = new BigDecimal(total);
+            BigDecimal Amount = new BigDecimal(value1);
+            Merchan merchan = new Merchan(null, s, subject, remarks, totalAmount, 1, timestamp, Amount, 0);
+            int add = alipayService.add(merchan);
+            String payment = req.getParameter("payment_method");
 
+            String phone = req.getParameter("phone");
+            System.out.println(phone);
+
+            if (payment.equals("cash")) { // 如果付款方式为现金，则处理现金支付成功的逻辑
+                // 处理现金支付成功的逻辑
+                // ...
+                // 返回 JSON 响应
+                JSONObject responseJson = new JSONObject();
+                responseJson.put("success", true);
+                responseJson.put("message", "现金支付成功！");
+                responseJson.put("redirect", "cashRegister.jsp"); // 添加一个重定向字段
+                resp.setContentType("application/json;charset=UTF-8");
+                PrintWriter writer = resp.getWriter();
+                writer.print(responseJson);
+                writer.flush();
+            }
+        }
     }
 }

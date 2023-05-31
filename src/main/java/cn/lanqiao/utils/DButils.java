@@ -398,4 +398,44 @@ public class DButils {
         }
         return field;
     }
+    //根据手机号查找用户名
+    // 根据手机号查询用户名，并返回 String 类型结果
+    public static String getUserNameByPhone(String sql, Object... params) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // 获取数据库连接
+            conn = getConnection();
+            // 编译 SQL 语句
+            stmt = conn.prepareStatement(sql);
+
+            // 设置参数值
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    stmt.setObject(i + 1, params[i]);
+                }
+            }
+
+            // 执行查询
+            rs = stmt.executeQuery();
+
+            // 处理查询结果
+            if (rs.next()) {
+                return rs.getString("username");
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // 释放资源
+            DButils.close(conn, stmt, rs);
+        }
+
+        // 查询失败或出现异常情况时返回 null
+        return null;
+    }
+
 }

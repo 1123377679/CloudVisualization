@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 //getset方法
@@ -14,7 +15,7 @@ import java.sql.Timestamp;
 //有参的构造函数
 @AllArgsConstructor
 public class Merchan {
-    private int id;
+    private Integer id;
     private String orderNo;
     private String memberName;
     private String orderType;

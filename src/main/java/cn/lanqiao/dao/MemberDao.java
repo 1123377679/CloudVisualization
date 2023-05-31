@@ -32,4 +32,8 @@ public interface MemberDao {
     ArrayList<Integer> getCount(User user);
     //查询密码
     int checkPassword(Integer userId,String password);
+    //查询手机号是否存在
+    int checkUserPhone(String phone);
+    //根据手机号查询用户名
+    String getUserNameByPhone(String number);
 }

@@ -76,5 +76,15 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.checkPassword(userId,password);
     }
 
+    @Override
+    public int checkUserPhone(String phone) {
+        return memberDao.checkUserPhone(phone);
+    }
+
+    @Override
+    public String getUserNameByPhone(String number) {
+        return memberDao.getUserNameByPhone(number);
+    }
+
 
 }
