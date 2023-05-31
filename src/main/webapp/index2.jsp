@@ -12,6 +12,16 @@
     <script type="text/javascript" src="js/jquery.limarquee.js"></script>
     <script type="text/javascript" src="js/jquery.cxselect.min.js"></script>
     <link rel="stylesheet" href="css/comon0.css">
+    <style>
+        .echars-login {
+            position: absolute;
+            top: 24%;
+            left: 71%;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 <div style="background:#000d4a url(images/bg.jpg) center top;">
@@ -22,6 +32,7 @@
     <div class="head">
         <a href="index.jsp" class="tiaozhuan"></a>
         <h1>大数据可视化展示平台通用模板</h1>
+        <a class="echars-login" href="/login.jsp">超市管理登录</a>
         <div class="weather"><span id="showTime"></span></div>
     </div>
     <script>

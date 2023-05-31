@@ -186,7 +186,7 @@
     map.addControl(new BMap.NavigationControl());
     map.addControl(new BMap.ScaleControl());
     map.setMapStyleV2({
-        styleId: '90dca14bb7c8c34f431642131ccde1ea'
+        styleId: 'b645642c4fc36f5396394e6cbac80878'
     });
 
     function geocodeOne(callback) {
@@ -224,7 +224,7 @@
             map.addControl(new BMap.NavigationControl());
             map.addControl(new BMap.ScaleControl());
             map.setMapStyleV2({
-                styleId: '90dca14bb7c8c34f431642131ccde1ea'
+                styleId: 'b645642c4fc36f5396394e6cbac80878'
             });
         }
 
