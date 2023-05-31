@@ -182,86 +182,12 @@
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=eZo1Wz4K7qMFxfGOdssD06WGxj4EtCl0"></script>
 <script>
     var map = new BMap.Map("map-container");
-    map.centerAndZoom(new BMap.Point(105.442813, 28.871276), 16);
+    map.centerAndZoom(new BMap.Point(105.442813, 28.871276), 16); // 地图缩放级别设置为16
     map.addControl(new BMap.NavigationControl());
     map.addControl(new BMap.ScaleControl());
     map.setMapStyleV2({
         styleId: 'b645642c4fc36f5396394e6cbac80878'
     });
-
-    function geocodeOne(callback) {
-        var city = document.getElementById("city").value;
-        var myGeo = new BMap.Geocoder();
-        myGeo.getPoint(city, function(point) {
-            if (point) {
-                callback(point);
-                map.centerAndZoom(point, 16); // 更新地图中心点
-            } else {
-                alert("地址解析失败，请输入正确的地址");
-            }
-        }, "中国");
-    }
-
-    function geocodeTwo(start, callback) {
-        var address = document.getElementById("addressTwo").value;
-        var geocoder = new BMap.Geocoder();
-        geocoder.getPoint(address, function(point) {
-            if (point) {
-                var end = new BMap.Point(point.lng, point.lat);
-                callback(start, end);
-            } else {
-                alert("地址解析失败，请输入正确的地址");
-            }
-        });
-    }
-
-    function functionHandler() {
-        if (map) {
-            map.clearOverlays();
-        } else {
-            map = new BMap.Map("map-container");
-            map.centerAndZoom(new BMap.Point(105.442813, 28.871276), 16);
-            map.addControl(new BMap.NavigationControl());
-            map.addControl(new BMap.ScaleControl());
-            map.setMapStyleV2({
-                styleId: 'b645642c4fc36f5396394e6cbac80878'
-            });
-        }
-
-        geocodeOne(function(start) {
-            geocodeTwo(start, function(start, end) {
-                test(start, end);
-            });
-        });
-    }
-
-    function test(start, end) {
-        var startMarker = new BMap.Marker(start);
-        var endMarker = new BMap.Marker(end);
-
-        map.addOverlay(startMarker);
-        map.addOverlay(endMarker);
-
-        var driving = new BMap.DrivingRoute(map, {
-            renderOptions: {
-                map: map,
-                autoViewport: true
-            }
-        });
-        driving.search(start, end);
-
-        driving.setSearchCompleteCallback(function(result) {
-            if (driving.getStatus() == BMAP_STATUS_SUCCESS) {
-                var plan = result.getPlan(0);
-                var route = plan.getRoute(0);
-                var polyline = new BMap.Polyline(route.getPath());
-                map.addOverlay(polyline);
-                map.setViewport(polyline.getPath()); // 将路线显示在地图上
-            } else {
-                alert("路线规划失败，请检查网络连接");
-            }
-        });
-    }
 
     function searchSupermarkets() {
         // 搜索关键词
@@ -297,11 +223,8 @@
         });
     }
 
-    function addSupermarkets() {
-        searchSupermarkets();
-    }
     window.onload = function(){
-        addSupermarkets();
+        searchSupermarkets();
     }
 </script>
 <script>
