@@ -549,9 +549,9 @@ public class MemberServlet extends HttpServlet {
 
                     ImportExcelUtils.validCellValue(sheet,row,++colNum,"权限");
                     String cellValue = ImportExcelUtils.getCellValue(sheet, row, colNum - 1);
-                    if ("1".equals(cellValue)){
+                    if ("超级管理员".equals(cellValue)){
                         user.setType(1);
-                    }else if ("2".equals(cellValue)){
+                    }else if ("超市收银员".equals(cellValue)){
                         user.setType(2);
                     }else {
                         user.setType(3);

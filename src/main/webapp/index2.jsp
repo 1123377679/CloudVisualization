@@ -182,11 +182,11 @@
     function autoJump() {
         window.location.href = 'index.jsp';
     }
-    $(function(){
-        $('.wrap').liMarquee({
-            direction: 'up',//身上滚动
-            //runshort: false,//内容不足时不滚动
-            scrollamount: 20//速度
-        });
-    });
+    // $(function(){
+    //     $('.wrap').liMarquee({
+    //         direction: 'up',//身上滚动
+    //         //runshort: false,//内容不足时不滚动
+    //         scrollamount: 20//速度
+    //     });
+    // });
 </script>

@@ -83,10 +83,10 @@
                 <td>${p.address}</td>
                 <td>
                   <c:if test="${p.type == 1}">
-                    管理员
+                    超级管理员
                   </c:if>
                   <c:if test="${p.type == 2}">
-                    经理
+                    超市收银员
                   </c:if>
                   <c:if test="${p.type == 3}">
                     普通用户
