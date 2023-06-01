@@ -5,7 +5,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="100;url='https://gitee.com/iGaoWei/big-data-view'">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
