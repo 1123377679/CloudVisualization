@@ -61,10 +61,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${s.type == 1}">
-                                            管理员
+                                            超级管理员
                                         </c:when>
                                         <c:when test="${s.type == 2}">
-                                            经理
+                                            超市收银员
                                         </c:when>
                                         <c:when test="${s.type == 3}">
                                             普通用户
