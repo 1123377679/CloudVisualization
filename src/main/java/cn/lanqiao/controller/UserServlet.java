@@ -93,7 +93,7 @@ public class UserServlet extends HttpServlet {
                 String oncePassword = req.getParameter("oncePassword");
                 String twicePassword = req.getParameter("twicePassword");
                 String sex = req.getParameter("sex");
-                int trueSex = -1;
+                int trueSex = 0;
                 String birthday = req.getParameter("birthday");
                 String phone = req.getParameter("phone");
                 String address = req.getParameter("address");
@@ -125,7 +125,7 @@ public class UserServlet extends HttpServlet {
                                 req.getRequestDispatcher("/register.jsp").forward(req,resp);
                                 return;
                             }
-                            User User = new User(null,username,twicePassword,Integer.parseInt(sex),birthday,phone,address,3,0);
+                            User User = new User(null,username,twicePassword,trueSex,birthday,phone,address,3,0);
                             memberService.addUser(User);
                             //获取注册时间
                             DateTime date = DateUtil.date();
