@@ -55,35 +55,65 @@
         .codrops-demos a.current-demo {
             border-color: #383a3c;
         }
+        .layui-input-block {
+            margin-left: 39px;
+            margin-top: -7px;
+            min-height: 37px;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            /* padding: 9px 14px; */
+            margin-left: -66px;
+            margin-top: -8px;
+            width: 80px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+        }
     </style>
 </head>
 <body class="login-bg">
 <canvas id="canvas"></canvas>
-<div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 40%;transform: translateX(-40%);">
+<div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 35%;;transform: translateX(-40%);max-width: 31%;">
     <div class="message">超市管理系统用户注册</div>
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form" action="/userServlet.do?action=register">
-        <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <label class="layui-form-label">用户名:</label>
+        <input id="username" name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" style="height: 34px;width: 245px;display: inline-block;margin-top: -6px;"><span id="usernameSpan"></span>
         <hr class="hr15">
-        <input name="oncePassword" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <label class="layui-form-label">密码:</label>
+        <input id="password" name="oncePassword" lay-verify="required" placeholder="密码"  type="password" class="layui-input" style="height: 34px;width: 245px;display: inline-block;margin-top: -6px;"><span id="passwordSpan"></span>
         <hr class="hr15">
-        <input name="twicePassword" lay-verify="required" placeholder="再次输入密码"  type="password" class="layui-input">
+        <label class="layui-form-label">确认密码:</label>
+        <input id="twicePassword" name="twicePassword" lay-verify="required" placeholder="再次输入密码"  type="password" class="layui-input" style="height: 34px;width: 245px;display: inline-block;margin-top: -6px;"><span id="twiceSpan"></span>
         <hr class="hr15">
-        <input name="sex" lay-verify="required" placeholder="性别"  type="text" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label"style="float: left;display: block;margin-left: -66px;margin-top: -2px;width: 80px;font-weight: 400;line-height: 20px;text-align: right;">生日:</label>
+            <div class="layui-input-block" style="margin-left: 0px;min-height: 0px;">
+                <input id="birthday" name="birthday" placeholder="生日" type="text" class="layui-input" lay-verify="required" style="height: 34px;width: 245px;margin-top: -6px;">
+            </div>
+        </div>
+        <label class="layui-form-label">联系电话:</label>
+        <input id="phone" name="phone" lay-verify="required" placeholder="联系电话"  type="text" class="layui-input" style="height: 34px;width: 245px;display: inline-block;margin-top: -6px;"><span id="phoneSpan"></span>
         <hr class="hr15">
-        <input name="birthday" lay-verify="required" placeholder="生日"  type="text" class="layui-input">
+        <label class="layui-form-label">家庭住址:</label>
+        <input id="address" name="address" lay-verify="required" placeholder="家庭住址"  type="text" class="layui-input" style="height: 34px;width: 245px;display: inline-block;margin-top: -6px;"><span id="addressSpan"></span>
         <hr class="hr15">
-        <input name="phone" lay-verify="required" placeholder="联系电话"  type="text" class="layui-input">
-        <hr class="hr15">
-        <input name="address" lay-verify="required" placeholder="家庭住址"  type="text" class="layui-input">
-        <hr class="hr15">
+        <label class="layui-form-label">性别:</label>
+        <div class="layui-input-block" style="height: 34px;">
+            <input type="radio" name="sex" value="男" title="男" checked="">
+            <input type="radio" name="sex" value="女" title="女">
+        </div>
+
         <%--  验证码  --%>
-        <input id="yanzhengm" style="width: 131px;" type="text" name="usercode" placeholder="请输入验证码" required/>
+        <label class="layui-form-label" style="float: left;display: block;margin-left: -66px;margin-top: 5px;width: 80px;font-weight: 400;line-height: 20px;text-align: right;">验证码:</label>
+        <input id="yanzhengm" style="width: 131px;margin-left: 0px" type="text" name="usercode" placeholder="请输入验证码" required/>
         <!--验证码图片-->
-        <img src="/CodeServlet" onclick="changeImage(this);" style="position: relative;cursor: pointer;"/>
-        <input value="注册" lay-submit lay-filter="login" style="width:100%;margin-top: 15px" type="submit">
-        <input value="返回登录" style="width:100%;margin-top: 15px;" type="button" onclick="location.href='/login.jsp';">
+        <img src="/CodeServlet" onclick="changeImage(this);" style="position: relative;cursor: pointer; width: 156px"/>
+        <input value="注册" lay-submit lay-filter="login" style="width:43%;margin-top: 15px" type="submit">
+        <input value="返回登录" style="width:44%;margin-top: 15px;margin-left: 29px;" type="button" onclick="location.href='/login.jsp';">
 <%--        <input value="忘记密码？" lay-submit lay-filter="login" style="width:32%;margin-top: 15px;margin-left: 68%;" type="submit">--%>
 <%--        <hr class="hr20" >--%>
     </form>
@@ -109,9 +139,157 @@
 </body>
 </html>
 <script>
+    layui.use('form', function(){
+        var form = layui.form;
+        var birthdayInput = document.getElementById('birthday');
+        // 初始化生日输入框的 laydate 组件
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#birthday',
+                position: 'fixed' // 设置弹层固定位置
+            });
+            laydate.render({
+                elem: birthdayInput
+            });
+        });
+    });
     function changeImage(img) {
         //图片重新加载src地址，因为图片是一个GET请求，浏览器有缓存  time 表示是一个随机参数 ，防止浏览器缓存
         img.src="/CodeServlet?time="+new Date();
+    }
+    //校验用户名
+    var checkUsername = false;
+    var RegisterUsername = document.querySelector("#username");
+    //焦点事件
+    RegisterUsername.onkeyup = function checkRegisterUsername(){
+        //用户输入的用户名
+        var username = $("#username").val();
+        //验证用户输入的密码是否匹配
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserName&username="+username,
+            dataType:"text",
+            success:function (result) {
+                if (result == 1) {
+                    $("#usernameSpan").text("用户名已存在!");
+                    $("#usernameSpan").css("color","red");
+                    checkUsername = false;
+                } else if (username == "") {
+                    $("#usernameSpan").text("用户姓名不能为空！");
+                    $("#usernameSpan").css("color", "red");
+                    checkUsername = false;
+                } else if(result == 0){
+                    $("#usernameSpan").text("√");
+                    $("#usernameSpan").css("color","green");
+                    checkUsername = true;
+                }else if(result == 2){
+                    $("#usernameSpan").text("用户姓名输入错误!");
+                    $("#usernameSpan").css("color","red");
+                    checkUsername = false;
+                }
+            }
+        });
+    }
+    //校验密码
+    var checkPassword = false;
+    var RegisterPassword = document.querySelector("#password");
+    RegisterPassword.onkeyup = function checkRegisterPassword(){
+        //用户输入的密码
+        var password = $("#password").val();
+        //验证用户输入的密码是否正确，Jquery版本的Ajax请求
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkAllWord&newPassword="+password,
+            dataType: "text",
+            success: function (result) {
+                if (password == "") {
+                    $("#passwordSpan").text("新的密码不能为空!");
+                    $("#passwordSpan").css("color", "red");
+                    checkPassword = false;
+                } else if (result == 1) {
+                    $("#passwordSpan").text("√");
+                    $("#passwordSpan").css("color", "green");
+                    checkPassword = true;
+                } else if (result == 2) {
+                    $("#passwordSpan").text("6到11位字符加数字!");
+                    $("#passwordSpan").css("color", "red");
+                    checkPassword = false;
+                }
+            }
+        });
+    }
+    //校验确认密码框
+    var checktwicePassword = false;
+    var RegistertwicePassword = document.querySelector("#twicePassword");
+    RegistertwicePassword.onkeyup = function RegistertwicePassword(){
+        //用户输入的密码
+        let password = $("#password").val();
+        let twicePassword = $("#twicePassword").val();
+        if (twicePassword == ""){
+            $("#twiceSpan").text("确认密码不能为空!");
+            $("#twiceSpan").css("color","red");
+            checktwicePassword = false;
+        } else if (password != twicePassword) {
+            $("#twiceSpan").text("密码输入不相同!");
+            $("#twiceSpan").css("color", "red");
+            checktwicePassword = false;
+        }  else {
+            $("#twiceSpan").text("√");
+            $("#twiceSpan").css("color", "green");
+            checktwicePassword = true;
+        }
+    }
+    //校验电话
+    var checkPhone = false;
+    var RegisterPhone = document.querySelector("#phone");
+    RegisterPhone.onkeyup = function RegisterPhone(){
+        //用户输入的电话
+        let number = $("#phone").val();
+        $.ajax({
+            type: "POST",
+            url: "/MemberServlet.do",
+            data: "action=checkUserPhone&userphone="+number,
+            dataType:"text",
+            success:function (result) {
+                if (number == "") {
+                    $("#phoneSpan").text("电话号码不能为空！");
+                    $("#phoneSpan").css("color", "red");
+                    checkPhone = false;
+                } else if(result == 0){
+                    $("#phoneSpan").text("√");
+                    $("#phoneSpan").css("color","green");
+                    checkPhone = true;
+                }else if(result == 2){
+                    $("#phoneSpan").text("6到11位的数字！");
+                    $("#phoneSpan").css("color","red");
+                    checkPhone = false;
+                }
+            }
+        });
+    }
+    //校验用户地址
+    var checkAddress = false;
+    var RegisterAddress = document.querySelector("#address");
+    RegisterAddress.onkeyup = function RegisterAddress(){
+        //用户输入的地址
+        let address = $("#address").val().trim();
+        var addressReg = /^[\u4e00-\u9fa5]{0,8}$/; // 检查是否为纯中文字符的正则表达式
+        if (address == ""){
+            $("#addressSpan").text("地址不能为空！");
+            $("#addressSpan").css("color", "red");
+            checkAddress = false;
+        }else if (!addressReg.test(address)){
+            $("#addressSpan").text("地址需要中文!");
+            $("#addressSpan").css("color", "red");
+            checkAddress = false;
+        }else {
+            $("#addressSpan").text("√");
+            $("#addressSpan").css("color","green");
+            checkAddress = true;
+        }
     }
 </script>
 <script>
