@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>大数据超市可视化界面</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
