@@ -49,6 +49,9 @@
 
                 <div class="layui-card-header">
                     <button class="layui-btn" onclick="xadmin.open('新增商品','/commodity-add.jsp',600,400)"><i class="layui-icon"></i>新增</button>
+                    <button class="layui-btn" onclick="exportExcel();"><i class="layui-icon"></i>导出数据</button>
+                    <button class="layui-btn" onclick="downloadExcelModel()"><i class="layui-icon"></i>下载模板</button>
+                    <button type="button" class="layui-btn" id="test3" name="file"><i class="layui-icon"></i>上传文件</button>
                 </div>
 
                 <div class="layui-card-body layui-table-body layui-table-main">
@@ -76,8 +79,10 @@
                                     <a title="修改上架状态" href="javascript:deleteUsers(${l.id});">
                                         <i class="layui-icon">&#xe631;</i>
                                     </a>
+                                    <a title="删除" href="javascript:deleteMember(${l.id});">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </a>
                                 </td>
-
                             </tr>
                         </c:forEach>
 
@@ -220,6 +225,17 @@
     function goPage(select) {
         var pageSize = $(select).val();
         location.href = "/CommodityServlet.do?action=limit&pageIndex=1&pageSize=" + pageSize;
+    }
+
+    //删除功能
+    function deleteMember(id) {
+        layer.msg('确定要删除吗?',{
+            time:20000,//20s后自动关闭
+            btn:['确定','取消'], //按钮
+            yes:function(index, layero){
+                self.location = '/CommodityServlet.do?action=delete&id=' + id;
+            }
+        })
     }
 </script>
 </html>

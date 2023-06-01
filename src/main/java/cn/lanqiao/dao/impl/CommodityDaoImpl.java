@@ -15,7 +15,7 @@ public class CommodityDaoImpl implements CommodityDao {
 
     @Override
     public List<Commodity> getDepatrs(String name,Integer pageStart, Integer pageSize) {
-        StringBuilder stringBuilder = new StringBuilder("select * from tb_commodity");
+        StringBuilder stringBuilder = new StringBuilder("select * from tb_commodity where isdelete = 0");
         List<Object> parms = new ArrayList<Object>();
         if (name != null && !"".equals(name)){
             stringBuilder.append(" where name like ?");
@@ -53,6 +53,11 @@ public class CommodityDaoImpl implements CommodityDao {
     @Override
     public int queryBarcodeExist(String barcode) {
         return DButils.commonQueryCount("select  count(*) from tb_commodity where barcode=?",barcode);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return DButils.commonUpdate("update tb_commodity set isdelete = 1 where id =?", id);
     }
 
 

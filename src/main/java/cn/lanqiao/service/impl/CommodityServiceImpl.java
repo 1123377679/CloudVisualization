@@ -44,4 +44,9 @@ public class CommodityServiceImpl implements CommodityService {
         return commodityDao.queryBarcodeExist(barcode);
     }
 
+    @Override
+    public int deleteById(String id) {
+        return commodityDao.deleteById(id);
+    }
+
 }

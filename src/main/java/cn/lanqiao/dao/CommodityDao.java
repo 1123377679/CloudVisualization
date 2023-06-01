@@ -27,6 +27,7 @@ public interface CommodityDao {
     //查询该条码是否存在
     int queryBarcodeExist(String barcode);
 
-
+    //删除功能
+    int deleteById(String id);
 
 }

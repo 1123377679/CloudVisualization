@@ -68,6 +68,7 @@ public class CommodityServlet extends HttpServlet {
                         "</script>");
             }
         }
+        //新增商品
         if (value.equals("add")){
             String name = req.getParameter("name");
             String barcode = req.getParameter("barcode");
@@ -127,9 +128,6 @@ public class CommodityServlet extends HttpServlet {
                 writer.print(1);
             }
         }
-
-
-
         //扫描或添加条码
         if(value.equals("addBill")){
             String val = req.getParameter("val");
@@ -160,6 +158,23 @@ public class CommodityServlet extends HttpServlet {
             //通过JSON的方式发送给前端
 
 
+        }
+        //删除商品
+        if (value.equals("delete")) {
+            String id = req.getParameter("id");
+            int i = commodityService.deleteById(id);
+            PrintWriter writer = resp.getWriter();
+            if (i>0){
+                writer.print("<script>"+
+                        "alert('商品信息删除成功!');"+
+                        "window.location.href = '/CommodityServlet.do?action=limit&pageIndex=1&pageSize=5'"+
+                        "</script>");
+            }else {
+                writer.print("<script>"+
+                        "alert('商品信息删除失败!');"+
+                        "window.location.href = '/CommodityServlet.do?action=limit&pageIndex=1&pageSize=5'"+
+                        "</script>");
+            }
         }
     }
 }

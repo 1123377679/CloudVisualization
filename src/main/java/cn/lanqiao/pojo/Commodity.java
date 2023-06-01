@@ -15,6 +15,7 @@ public class Commodity {
     private String barcode;
     private BigDecimal price;
     private Boolean status;
+    private Integer isdelete;
 
     public Commodity(Integer id, String name, String barcode, BigDecimal price) {
         this.id = id;
