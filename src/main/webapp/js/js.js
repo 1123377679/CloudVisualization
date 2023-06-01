@@ -29,13 +29,13 @@ function echarts_1() {
                             fontSize:12
                         },
                         orient:'vertical',
-                        data:['图例1','图例2','图例3','图例4']
+                        data:['玩具文娱','水果','食品','生活用品']
                     },
                    calculable : true,
                     series : [
                         {
                             name:' ',
-							color: ['#62c98d', '#2f89cf', '#4cb9cf', '#53b666', '#62c98d', '#205acf', '#c9c862', '#c98b62', '#c962b9', '#7562c9','#c96262'],	
+							color: ['#62c98d', '#2f89cf', '#4cb9cf', '#53b666', '#62c98d', '#205acf', '#c9c862', '#c98b62', '#c962b9', '#7562c9','#c96262'],
                             type:'pie',
                             radius : [30, 70],
                             center : ['35%', '50%'],
@@ -59,10 +59,10 @@ function echarts_1() {
                             },
 
                             data:[
-                                {value:10, name:'图例1'},
-                                {value:15, name:'图例2'},
-                                {value:25, name:'图例3'},
-                                {value:30, name:'图例4'}
+                                {value:10, name:'玩具文娱'},
+                                {value:15, name:'水果'},
+                                {value:25, name:'食品'},
+                                {value:30, name:'生活用品'}
                             ]
                         },
                     ]
@@ -95,7 +95,7 @@ function echarts_2() {
                             fontSize:12
                         },
                         orient:'vertical',
-                        data:['图例1','图例2','图例3','图例4']
+                        data:['20-29','30-39','40-49','50以上']
                     },
                    calculable : true,
                     series : [
@@ -125,10 +125,10 @@ function echarts_2() {
                             },
 
                             data:[
-                                {value:50, name:'图例1'},
-                                {value:45, name:'图例2'},
-                                {value:35, name:'图例3'},
-                                {value:30, name:'图例4'}
+                                {value:50, name:'20-29'},
+                                {value:45, name:'30-39'},
+                                {value:35, name:'40-49'},
+                                {value:30, name:'50以上'}
                             ]
                         },
                     ]

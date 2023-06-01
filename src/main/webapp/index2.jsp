@@ -30,7 +30,7 @@
     <div class="back"></div>
     <div class="head">
         <a href="index.jsp" class="tiaozhuan"></a>
-        <h1>大数据可视化展示平台通用模板</h1>
+        <h1>超市商品信息</h1>
         <a class="echars-login" href="/login.jsp">超市管理登录</a>
         <div class="weather"><span id="showTime"></span></div>
     </div>
@@ -83,17 +83,17 @@
             </li>
             <li>
                 <div class="boxall" style="height:545px">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">销售量对比</div>
                     <div class="navboxall" id="echart4"></div>
                 </div>
             </li>
             <li>
                 <div class="boxall" style="height:260px">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">商品年销售占比</div>
                     <div class="navboxall" id="echart1"> </div>
                 </div>
                 <div class="boxall" style="height:270px">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">年龄分布</div>
                     <div class="navboxall"  id="echart2"> </div>
                 </div>
             </li>
@@ -101,36 +101,35 @@
         <ul class="clearfix">
             <li>
                 <div class="boxall" style="height:390px;">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">订单信息</div>
                     <div class="navboxall" >
                         <div class="wraptit"> <span>订单号</span><span>订单金额</span><span>计划时间</span><span>当前状态</span> </div>
                         <div class="wrap">
                             <ul>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>25596438107</span><span>20.00</span><span>食品</span><span>已支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>28017594631	</span><span>22.00</span><span>家居用品</span><span>未支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>21035984657</span><span>10.00</span><span>食品</span><span>已支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>20635978415</span><span>30.00</span><span>家居用品	</span><span>未支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>23451789690</span><span>24.00</span><span>酒水饮料	</span><span>已支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>24371095876</span><span>34.00</span><span>玩具文娱</span><span>已支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>26019345817</span><span>13.00</span><span>食品</span><span>已支付</span></p>
                                 </li>
                                 <li>
-                                    <p><span>100021415</span><span>199</span><span>手机</span><span>18小时</span></p>
+                                    <p><span>20981346572</span><span>199.00</span><span>家电数码	</span><span>已支付</span></p>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
@@ -138,13 +137,13 @@
             </li>
             <li style="width:38%">
                 <div class="boxall" style="height:390px">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">商品结算率</div>
                     <div class="navboxall" id="echart3"></div>
                 </div>
             </li>
             <li style="width:38%">
                 <div class="boxall" style="height:390px">
-                    <div class="alltitle">标题样式</div>
+                    <div class="alltitle">销售额对比</div>
                     <div class="navboxall" id="echart5"></div>
                 </div>
             </li>
