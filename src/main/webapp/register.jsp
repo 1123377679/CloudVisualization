@@ -177,7 +177,7 @@
                     $("#usernameSpan").css("color","red");
                     checkUsername = false;
                 } else if (username == "") {
-                    $("#usernameSpan").text("用户姓名不能为空！");
+                    $("#usernameSpan").text("姓名不能为空！");
                     $("#usernameSpan").css("color", "red");
                     checkUsername = false;
                 } else if(result == 0){
@@ -229,7 +229,7 @@
         let password = $("#password").val();
         let twicePassword = $("#twicePassword").val();
         if (twicePassword == ""){
-            $("#twiceSpan").text("确认密码不能为空!");
+            $("#twiceSpan").text("不能为空!");
             $("#twiceSpan").css("color","red");
             checktwicePassword = false;
         } else if (password != twicePassword) {
@@ -255,7 +255,7 @@
             dataType:"text",
             success:function (result) {
                 if (number == "") {
-                    $("#phoneSpan").text("电话号码不能为空！");
+                    $("#phoneSpan").text("不能为空！");
                     $("#phoneSpan").css("color", "red");
                     checkPhone = false;
                 } else if(result == 0){
@@ -278,7 +278,7 @@
         let address = $("#address").val().trim();
         var addressReg = /^[\u4e00-\u9fa5]{0,8}$/; // 检查是否为纯中文字符的正则表达式
         if (address == ""){
-            $("#addressSpan").text("地址不能为空！");
+            $("#addressSpan").text("不能为空！");
             $("#addressSpan").css("color", "red");
             checkAddress = false;
         }else if (!addressReg.test(address)){
