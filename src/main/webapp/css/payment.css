@@ -2,7 +2,7 @@
 .payment-methods {
   width: 20%;
   float: left;
-  background-color: #F2F2F2;
+  /*background-color: #F2F2F2;*/
   padding: 20px;
   box-sizing: border-box;
 }
@@ -21,6 +21,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  border: 2px solid #dfdfdf;
+  width: 150px;
+  height: 50px;
+
 }
 
 .method-item .method-icon {
@@ -49,6 +53,7 @@
 .info-header {
   font-size: 18px;
   font-weight: bold;
+  margin-left: 4px;
 }
 
 .layui-form-label {

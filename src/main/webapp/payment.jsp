@@ -31,12 +31,16 @@
       <div class="methods-header">选择支付方式</div>
       <div class="methods-content">
         <div class="method-item method-cash">
-          <div class="method-icon"><i class="layui-icon layui-icon-rmb"></i></div>
+          <div class="method-icon">
+            <div class="icon" style="background-image: url('/images/pay.png');background-size: contain;background-repeat:no-repeat;width: 35px;height: 35px;margin-left: 8px;"></div>
+          </div>
           <div class="method-name">现金支付</div>
           <input type="radio"  name="payment_method" value="cash" title="" checked>
         </div>
         <div class="method-item method-alipay">
-          <div class="method-icon"><i class="layui-icon layui-icon-flag"></i></div>
+          <div class="method-icon">
+            <div class="con" style="background-image: url('/images/pay2.png');background-size: contain;background-repeat:no-repeat;width: 30px;height: 30px;margin-left: 9px;"></div>
+          </div>
           <div class="method-name">支付宝支付</div>
           <input type="radio" name="payment_method" value="alipay" title="">
         </div>
@@ -46,23 +50,23 @@
       <div class="payment-info">
         <div class="info-header">结算信息</div>
         <div class="info-content">
-          <div class="layui-form-item">
-            <label class="layui-form-label">应付金额:</label>
-            <div class="layui-input-block price">
+          <div class="layui-form-item" style="border: 2px solid #dfdfdf;">
+            <label class="layui-form-label" style="margin-left: -30px">应付金额:</label>
+            <div class="layui-input-block price" style="margin-left: 1px">
             </div>
             <%--            <input type="text" name="price" required lay-verify="required|number" placeholder="请输入商品价格"--%>
             <%--              autocomplete="off" class="layui-input" id="price">--%>
           </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label">实付金额:</label>
-            <div class="layui-input-block output">
+          <div class="layui-form-item" style="border: 2px solid #dfdfdf;">
+            <label class="layui-form-label" style="margin-left: -30px">实付金额:</label>
+            <div class="layui-input-block output" style="margin-left: 1px;line-height: 39px;">
             </div>
             <%--            <input type="text" name="pay_amount" required lay-verify="required|number" placeholder="请输入实付金额"--%>
             <%--              autocomplete="off" class="layui-input">--%>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label">备注信息:</label>
-            <div class="layui-input-block">
+            <label class="layui-form-label" style="margin-left: -30px">备注信息:</label>
+            <div class="layui-input-block" style="margin-left:2px;line-height: 39px;">
               <textarea name="remarks" placeholder="请输入备注信息" class="layui-textarea"></textarea>
             </div>
           </div>
@@ -86,8 +90,8 @@
 
     <!-- 底部：确认收款/取消 -->
     <div class="payment-actions">
-      <button class="layui-btn layui-btn-danger cancel-button">取消</button>
-      <button class="layui-btn pay-button" onclick="confirmPayment()">确认收款</button>
+      <button class="layui-btn layui-btn-danger cancel-button" style="margin-top: 128px;">取消</button>
+      <button class="layui-btn pay-button" onclick="confirmPayment()" style="margin-top: 128px;">确认收款</button>
     </div>
   </div>
   <!-- 引入layui核心库 -->
