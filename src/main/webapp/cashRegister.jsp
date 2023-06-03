@@ -450,6 +450,7 @@
         $(this).siblings('.num').text(num - 1);
         updateTotal($(this));
         updatePayable();
+        e.stopPropagation();
       }
     });
 
@@ -459,6 +460,7 @@
       $(this).siblings('.num').text(num + 1);
       updateTotal($(this));
       updatePayable();
+      e.stopPropagation();
     });
 
     // 更新商品加减数量和合计金额

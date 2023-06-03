@@ -98,7 +98,7 @@
     var arrBillCount = [];
     //url,data
     $.get("/SupplierServlet.do?action=supplierEchars",function (result){
-      console.log(result);
+      // console.log(result);
       //遍历后端发送过来的值
         for (var i = 0 ;i<result.length; i++){
             //将遍历出来的值存到新数组中

@@ -50,9 +50,6 @@ public class AlipayTest extends HttpServlet {
 		AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
 		alipayRequest.setReturnUrl(AlipayConfig.return_url);
 		alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
-
-
-
 		//前端传过来的金额
 		//随机生成一个11位的订单号，而且不能重复
 		//取前端输入的备注信息
