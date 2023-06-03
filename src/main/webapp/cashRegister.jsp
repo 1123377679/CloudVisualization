@@ -17,8 +17,9 @@
   <style>
     /* 设置样式 */
     body {
-      background-image: url("/images/3.jpg");
+      background-image: url("/images/背景图.webp");
       background-repeat: repeat;
+      background-size: cover;
       font-size: 14px;
       background-color: #f4f4f4;
     }
@@ -60,7 +61,7 @@
     td {
       padding: 10px;
       text-align: center;
-      border: 1px solid #e6e6e6;
+      border-bottom: 1px solid #e6e6e6;
     }
 
     thead th {
@@ -126,11 +127,11 @@
 
     .input-box .input {
       display: inline-block;
-      width: 200px;
+      width: 210px;
       height: 36px;
       line-height: 36px;
       border: 1px solid #ddd;
-      padding: 0 10px;
+      padding: 0 34px;
       box-sizing: border-box;
     }
 
@@ -301,6 +302,13 @@
       margin-left: 8px;
       font-size: 20px;
     }
+
+    #AddBill {
+      background-image: url(/images/条形码.png);
+      background-repeat: no-repeat;
+      background-position: 5px 5px;
+    }
+
   </style>
 </head>
 
@@ -344,9 +352,9 @@
       </table>
     </div>
     <div class="input-box">
-      <div class="title">扫码/输入商品条码</div>
+<%--      <div class="title">扫码/输入商品条码</div>--%>
       <div class="form-group">
-        <label class="label">条码：</label>
+<%--        <label class="label">条码：</label>--%>
         <input type="text" class="input" id="AddBill" placeholder="请扫描或手动输入条码" />
         <div class="clear-btn" onclick="addButton();">添加</div>
         <div class="clear-btn">清空</div>
