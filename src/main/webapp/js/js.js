@@ -271,7 +271,7 @@ option = {
         }
     },
     legend: {
-        data: ['2017年', '2018年'],
+        data: ['2022年', '2023年'],
         align: 'right',
         right: '40%',
 		top:'0%',
@@ -345,7 +345,7 @@ option = {
         }
     }],
     series: [{
-        name: '2017年',
+        name: '2022年',
         type: 'bar',
         data: [2, 3, 3, 9, 15, 12, 6, 4, 6, 7, 4, 10],
         barWidth:'15', //柱子宽度
@@ -358,7 +358,7 @@ option = {
             }
         }
     }, {
-        name: '2018年',
+        name: '2023年',
         type: 'bar',
 		data: [1, 4, 5, 11, 12, 9, 5, 6, 5, 6, 3, 9],
 		barWidth:'15',
@@ -393,7 +393,7 @@ option = {
         }
     },
     legend: {
-        data: ['2017年', '2018年'],
+        data: ['2022年', '2023年'],
         align: 'right',
         right: '40%',
 		top:'0%',
@@ -465,7 +465,7 @@ option = {
         }
     }],
     series: [{
-        name: '2017年',
+        name: '2022年',
         type: 'line',
 		
         data: [2, 6, 3, 8, 5, 8, 10, 13, 8, 5, 6, 9],
@@ -479,7 +479,7 @@ option = {
             }
         }
     }, {
-        name: '2018年',
+        name: '2023年',
         type: 'line',
         data: [5, 2, 6, 4, 5, 12, 5, 17, 9, 2, 6, 3],
 		barWidth:'15',
