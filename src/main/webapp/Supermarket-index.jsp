@@ -299,7 +299,7 @@ var _hmt = _hmt || []; (function() {
     .translateSelectLanguage{
         position: absolute;
         top: 8px;
-        left: 708px;
+        left: 542px;
         text-decoration: none;
         font-size: 14px;
         border: none;
