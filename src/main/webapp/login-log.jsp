@@ -49,7 +49,7 @@
                                 <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                             </th>
                             <th>日志编号</th>
-                            <th>用户名称</th>
+                            <th>员工名称</th>
                             <th>登录城市</th>
                             <th>登录Ip</th>
                             <th>登录时间</th>

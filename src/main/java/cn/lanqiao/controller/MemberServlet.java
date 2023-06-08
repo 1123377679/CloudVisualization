@@ -275,7 +275,7 @@ public class MemberServlet extends HttpServlet {
         if (value.equals("checkUserPhone")) {
             //用户输入的电话号码
             String userphone = req.getParameter("userphone");
-            String  userphone2 = "^(1\\d{10})|((\\d{3,4}-)?\\d{7,8}(-\\d{1,6})?)$|^400\\d{7}$|^800\\d{7}|^\\d{3,6}|(0\\d{10})$";
+            String  userphone2 = "^(1[3-9]\\d{9})|(6\\d{4})|(0\\d{2,3}-?\\d{7,8})$";
             //判断
             PrintWriter writer = resp.getWriter();
             if (userphone.matches(userphone2)) {
