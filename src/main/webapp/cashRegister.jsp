@@ -17,11 +17,32 @@
   <style>
     /* 设置样式 */
     body {
-      background-image: url("/images/背景图.webp");
-      background-repeat: repeat;
-      background-size: cover;
-      font-size: 14px;
-      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .video-container video{
+    <%
+    this.getClass().getClassLoader().getResourceAsStream("/images/hai.mp4");
+    %>
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translateX(-50%) translateY(-50%);
     }
 
     .header {
@@ -313,6 +334,12 @@
 </head>
 
 <body>
+<div class="video-container">
+  <video autoplay loop muted>
+    <source src="/images/hai.mp4" type="video/mp4">
+    </video>
+</div>
+
   <div class="header">
     <h2>超市收银系统</h2>
     <div class="nav">
