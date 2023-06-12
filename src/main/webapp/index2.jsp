@@ -15,8 +15,8 @@
     <style>
         .echars-login {
             position: absolute;
-            top: 24%;
-            left: 71%;
+            top: 21%;
+            left: 67%;
             color: white;
             text-decoration: none;
             font-size: 18px;

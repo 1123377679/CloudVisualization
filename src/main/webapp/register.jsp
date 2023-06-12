@@ -75,7 +75,7 @@
 </head>
 <body class="login-bg">
 <canvas id="canvas"></canvas>
-<div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 35%;;transform: translateX(-40%);max-width: 31%;">
+<div class="login layui-anim layui-anim-up" style="position: fixed;top: -7%;bottom: 7%;left: 35%;;transform: translateX(-40%);max-width: 34%;">
     <div class="message">超市管理系统用户注册</div>
     <div id="darkbannerwrap"></div>
 
