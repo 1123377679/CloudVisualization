@@ -441,6 +441,11 @@
   <!-- 引入layui文件 -->
   <script src="https://cdn.bootcdn.net/ajax/libs/layui/2.6.9/layui.js"></script>
 
+<script type="text/javascript">
+  if (window != top) {
+    top.location.href = location.href;
+  }
+</script>
 
 </body>
 
