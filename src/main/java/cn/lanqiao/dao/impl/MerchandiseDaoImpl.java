@@ -5,7 +5,9 @@ import cn.lanqiao.pojo.Merchan;
 import cn.lanqiao.pojo.User;
 import cn.lanqiao.utils.DButils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MerchandiseDaoImpl implements MerchandiseDao {
@@ -57,5 +59,10 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     @Override
     public int checkName(String name) {
         return DButils.commonQueryCount( "select count(*) from tb_order where memberName =?",name);
+    }
+
+    @Override
+    public List<Merchan> getOrders() {
+        return DButils.commonQuery(Merchan.class, "select orderNo,totalAmount,orderType,paymentStatus FROM tb_order");
     }
 }

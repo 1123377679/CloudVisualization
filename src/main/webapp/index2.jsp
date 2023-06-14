@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 
 <!doctype html>
 <html>
@@ -104,33 +105,30 @@
                 <div class="boxall" style="height:390px;">
                     <div class="alltitle">订单信息</div>
                     <div class="navboxall" >
-                        <div class="wraptit"> <span>订单号</span><span>订单金额</span><span>计划时间</span><span>当前状态</span> </div>
+                        <div class="wraptit"> <span>订单号</span><span>订单金额</span><span>订单类型</span><span>当前状态</span> </div>
                         <div class="wrap">
-                            <ul>
-                                <li>
-                                    <p><span>25596438107</span><span>20.00</span><span>食品</span><span>已支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>28017594631	</span><span>22.00</span><span>家居用品</span><span>未支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>21035984657</span><span>10.00</span><span>食品</span><span>已支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>20635978415</span><span>30.00</span><span>家居用品	</span><span>未支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>23451789690</span><span>24.00</span><span>酒水饮料	</span><span>已支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>24371095876</span><span>34.00</span><span>玩具文娱</span><span>已支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>26019345817</span><span>13.00</span><span>食品</span><span>已支付</span></p>
-                                </li>
-                                <li>
-                                    <p><span>20981346572</span><span>199.00</span><span>家电数码	</span><span>已支付</span></p>
-                                </li>
+                            <ul id="wrap_ul">
+<%--                                <li>--%>
+<%--                                    <p><span>28017594631	</span><span>22.00</span><span>家居用品</span><span>未支付</span></p>--%>
+<%--                                </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>21035984657</span><span>10.00</span><span>食品</span><span>已支付</span></p>--%>
+<%--                            </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>20635978415</span><span>30.00</span><span>家居用品	</span><span>未支付</span></p>--%>
+<%--                            </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>23451789690</span><span>24.00</span><span>酒水饮料	</span><span>已支付</span></p>--%>
+<%--                            </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>24371095876</span><span>34.00</span><span>玩具文娱</span><span>已支付</span></p>--%>
+<%--                            </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>26019345817</span><span>13.00</span><span>食品</span><span>已支付</span></p>--%>
+<%--                            </li>--%>
+<%--                                <li>--%>
+<%--                                    <p><span>20981346572</span><span>199.00</span><span>家电数码	</span><span>已支付</span></p>--%>
+<%--                            </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -190,4 +188,38 @@
             scrollamount: 20//速度
         });
     });
+    //发送ajax请求:获取订单信息
+    // 获取ul元素
+    var wrapUl = $('#wrap_ul');
+    $(function (){
+        $.ajax({
+            type: "POST",
+            url: "/Merchandise.do",
+            data: "action=orderLimit",
+            dataType:"json",
+            success:function (result) {
+                // console.log(result);
+                // 循环追加数据
+                $.each(result,function (index,item){
+                    var liElem = $('<li></li>');
+                    var pElem = $('<p></p>');
+                    // 构建span元素
+                    var spanOrderNo = $('<span></span>').text(item.orderNo);
+                    var spanTotalAmount = $('<span></span>').text(item.totalAmount.toFixed(2));
+                    var spanOrderType = $('<span></span>').text(item.orderType);
+                    var spanPaymentStatus = $('<span></span>').text(item.paymentStatus==1 ? '已支付' : '未支付');
+
+                    // 将span元素添加到p元素中
+                    pElem.append(spanOrderNo).append(spanTotalAmount).append(spanOrderType).append(spanPaymentStatus);
+
+                    // 将p元素添加到li元素中
+                    liElem.append(pElem);
+
+                    // 将li元素添加到ul元素中
+                    wrapUl.append(liElem);
+                })
+            }
+        });
+    })
+
 </script>

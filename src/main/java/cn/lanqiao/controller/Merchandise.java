@@ -10,6 +10,7 @@ import cn.lanqiao.service.impl.MerchanServiceImpl;
 import cn.lanqiao.utils.OrderUtils;
 import cn.lanqiao.utils.PageUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
@@ -37,6 +38,15 @@ public class Merchandise extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         //用来获取前端的请求
         String value = req.getParameter("action");
+        if(value.equals("orderLimit")){
+//            System.out.println("前端请求过来了");
+            List<Merchan> orders = merchanService.getOrders();
+            //将集合转换成JSON发送到前端
+            String json = JSON.toJSONString(orders);
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
         //做分页页面查询功能和模糊查询功能
         if (value.equals("limit")) {
             //前端发送当前页面的请求

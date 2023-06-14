@@ -5,6 +5,7 @@ import cn.lanqiao.dao.impl.MerchandiseDaoImpl;
 import cn.lanqiao.pojo.Merchan;
 import cn.lanqiao.service.MerchanService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class MerchanServiceImpl implements MerchanService {
@@ -37,5 +38,10 @@ public class MerchanServiceImpl implements MerchanService {
     @Override
     public int checkName(String name) {
         return merchandiseDao.checkName(name);
+    }
+
+    @Override
+    public List<Merchan> getOrders() {
+        return merchandiseDao.getOrders();
     }
 }

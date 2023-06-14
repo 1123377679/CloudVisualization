@@ -1,8 +1,10 @@
 package cn.lanqiao.dao;
 
+import cn.lanqiao.controller.Merchandise;
 import cn.lanqiao.pojo.Merchan;
 import cn.lanqiao.pojo.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface MerchandiseDao {
@@ -18,4 +20,6 @@ public interface MerchandiseDao {
     int deleteById(String id);
     //判断会员名字是否重复
     int checkName(String name);
+    //查询订单信息
+    List<Merchan>  getOrders();
 }

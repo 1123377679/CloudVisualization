@@ -2,6 +2,7 @@ package cn.lanqiao.service;
 
 import cn.lanqiao.pojo.Merchan;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface MerchanService {
@@ -17,4 +18,6 @@ public interface MerchanService {
     int deleteById(String id);
     //判断会员名字是否重复
     int checkName(String name);
+    //查询订单信息
+    List<Merchan>  getOrders();
 }
