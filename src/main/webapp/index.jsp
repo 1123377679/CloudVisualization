@@ -229,31 +229,33 @@
 </script>
 <script>
     var tiaozhuan = document.querySelector('.tiaozhuan');
-    var timer;
-    var timeout = 5; // 定义自动跳转的时间，单位为秒
+    let mouseTimer = null;
+    let jumpTimer = null;
 
-    document.addEventListener('mousemove', function() {
-        // 如果已经开始倒计时，则退出
-        if (timer) {
-            return;
+    window.addEventListener('mousemove', function() {
+        clearTimeout(jumpTimer);
+
+        if (!mouseTimer) {
+            console.log('鼠标开始移动');
         }
-        tiaozhuan.innerHTML = '';
-        timer = setTimeout(function() {
+
+        clearTimeout(mouseTimer);
+
+        mouseTimer = setTimeout(function() {
+            console.log('鼠标已停止移动');
             autoJump();
-        }, timeout * 1000);
-    });
-
-    document.addEventListener('mouseout', function() {
-        if (timer) {
-            clearTimeout(timer);
-            timer = null;
-            tiaozhuan.innerHTML = '';
-        }
+            mouseTimer = null;
+        }, 5000);
     });
 
     function autoJump() {
         window.location.href = 'index2.jsp';
     }
+
+    jumpTimer = setTimeout(function() {
+        console.log('5秒时间到，自动跳转到新页面');
+        autoJump();
+    }, 10000);
 </script>
 </body>
 </html>

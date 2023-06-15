@@ -21,29 +21,7 @@
       padding: 0;
     }
 
-    .video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-    }
 
-    .video-container video{
-    <%
-    this.getClass().getClassLoader().getResourceAsStream("/images/hai.mp4");
-    %>
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: -1;
-      transform: translateX(-50%) translateY(-50%);
-    }
 
     .header {
       height: 60px;
@@ -329,16 +307,39 @@
       background-repeat: no-repeat;
       background-position: 5px 5px;
     }
+    #background-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translateX(-50%) translateY(-50%);
+    }
 
+    <%--.video-container video{--%>
+    <%--<%--%>
+    <%--this.getClass().getClassLoader().getResourceAsStream("/images/hai.mp4");--%>
+    <%--%>--%>
+    <%--  position: absolute;--%>
+    <%--  top: 50%;--%>
+    <%--  left: 50%;--%>
+    <%--  min-width: 100%;--%>
+    <%--  min-height: 100%;--%>
+    <%--  width: auto;--%>
+    <%--  height: auto;--%>
+    <%--  z-index: -1;--%>
+    <%--  transform: translateX(-50%) translateY(-50%);--%>
+    <%--}--%>
   </style>
 </head>
 
 <body>
-<div class="video-container">
-  <video autoplay loop muted>
+  <video id="background-video" autoplay loop muted>
     <source src="/images/hai.mp4" type="video/mp4">
     </video>
-</div>
 
   <div class="header">
     <h2>超市收银系统</h2>
@@ -451,6 +452,8 @@
 
 </html>
 <script>
+  var vid = document.getElementById("background-video");
+  vid.play();
   layui.use(['layer'], function () {
     var layer = layui.layer;
 
