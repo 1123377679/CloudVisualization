@@ -88,9 +88,6 @@
                   <c:if test="${p.type == 2}">
                     超市收银员
                   </c:if>
-                  <c:if test="${p.type == 3}">
-                    普通用户
-                  </c:if>
                 </td>
                 <td class="td-manage">
                   <a title="查看详情"  onclick="xadmin.open('查看详情','MemberServlet.do?action=details&id=${p.id}',600,400)" href="javascript:;">

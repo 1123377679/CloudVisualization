@@ -111,11 +111,11 @@ public class MemberServlet extends HttpServlet {
             String username = req.getParameter("userName");         //用户名
             String oldpassword = req.getParameter("oldpassword");   //用户密码
             String newpassword = req.getParameter("newpassword");   //确认用户密码
-            String sex = req.getParameter("sex");               //用户性别
-            String birthday = req.getParameter("birthday");     //用户生日
+            String sex = req.getParameter("sex");                   //用户性别
+            String birthday = req.getParameter("birthday");         //用户生日
             String phone = req.getParameter("userphone");           //用户手机号码
             String address = req.getParameter("userAddress");       //用户地址
-            String type = req.getParameter("userlei");             //用户类别
+            String type = req.getParameter("userlei");              //用户类别
             //将值赋值给实体类
             User user = new User(Integer.parseInt(id), username, oldpassword, Integer.parseInt(sex), birthday, phone, address, Integer.parseInt(type), 0);
             int i = memberService.updateById(user);

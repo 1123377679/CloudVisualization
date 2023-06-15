@@ -40,10 +40,7 @@
            超级管理员
         </c:if>
         <c:if test="${requestScope.users.type == 2}">
-            经理
-        </c:if>
-        <c:if test="${requestScope.users.type == 3}">
-            普通员工
+            超市收银员
         </c:if>
     </span>
 </div>

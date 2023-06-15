@@ -81,8 +81,7 @@
                     <label class="layui-form-label">用户类别</label>
                     <div class="layui-input-block">
                         <input type="radio" name="userlei" value="1" title="管理员" checked="">
-                        <input type="radio" name="userlei" value="2" title="经理">
-                        <input type="radio" name="userlei" value="3" title="普通用户">
+                        <input type="radio" name="userlei" value="2" title="收银员">
                     </div>
                 </div>
                 <div class="layui-form-item">

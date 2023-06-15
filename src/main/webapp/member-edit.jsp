@@ -75,8 +75,7 @@
                     <label class="layui-form-label">用户类别</label>
                     <div class="layui-input-block">
                         <input type="radio" name="userlei" value="1" title="管理员" ${requestScope.userById.type == 1?"checked":""}>
-                        <input type="radio" name="userlei" value="2" title="经理" ${requestScope.userById.type == 2?"checked":""}>
-                        <input type="radio" name="userlei" value="3" title="普通用户" ${requestScope.userById.type == 3?"checked":""}>
+                        <input type="radio" name="userlei" value="2" title="收银员" ${requestScope.userById.type == 2?"checked":""}>
                     </div>
                 </div>
                 <div class="layui-form-item">
