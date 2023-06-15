@@ -62,10 +62,10 @@
                         <div class="sycm">
                             <ul class="clearfix">
                                 <li>
-                                    <h2>22864</h2>
+                                    <h2 id="total-amount"></h2>
                                     <span>总金额</span></li>
                                 <li>
-                                    <h2>1572</h2>
+                                    <h2 id="total-count"></h2>
                                     <span>数量</span></li>
 
                             </ul>
@@ -107,29 +107,7 @@
                     <div class="navboxall" >
                         <div class="wraptit"> <span>订单号</span><span>订单金额</span><span>订单类型</span><span>当前状态</span> </div>
                         <div class="wrap">
-                            <ul id="wrap_ul">
-<%--                                <li>--%>
-<%--                                    <p><span>28017594631	</span><span>22.00</span><span>家居用品</span><span>未支付</span></p>--%>
-<%--                                </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>21035984657</span><span>10.00</span><span>食品</span><span>已支付</span></p>--%>
-<%--                            </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>20635978415</span><span>30.00</span><span>家居用品	</span><span>未支付</span></p>--%>
-<%--                            </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>23451789690</span><span>24.00</span><span>酒水饮料	</span><span>已支付</span></p>--%>
-<%--                            </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>24371095876</span><span>34.00</span><span>玩具文娱</span><span>已支付</span></p>--%>
-<%--                            </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>26019345817</span><span>13.00</span><span>食品</span><span>已支付</span></p>--%>
-<%--                            </li>--%>
-<%--                                <li>--%>
-<%--                                    <p><span>20981346572</span><span>199.00</span><span>家电数码	</span><span>已支付</span></p>--%>
-<%--                            </li>--%>
-                            </ul>
+                            <ul id="wrap_ul"></ul>
                         </div>
                     </div>
                 </div>
@@ -167,7 +145,7 @@
         tiaozhuan.innerHTML = '';
         timer = setTimeout(function() {
             autoJump();
-        }, timeout * 1000);
+        }, timeout * 100000);
     });
 
     document.addEventListener('mouseout', function() {
@@ -221,5 +199,42 @@
             }
         });
     })
+    //发送ajax请求:总数
+    // 获取ul元素
+    var totalCountElem = $('#total-count');
+    $(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/SupplierServlet.do',
+            data: 'action=orderLimitt',
+            dataType: 'JSON',
+            success: function(response) {
+                var orderCount = parseInt(response);
+                // console.log(orderCount)
+                totalCountElem.text(orderCount);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('请求失败：' + textStatus);
+            }
+        });
+    });
+    //金额
+    var totalCountEle = $('#total-amount');
+    $(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/SupplierServlet.do',
+            data: 'action=orderLimito',
+            dataType: 'JSON',
+            success: function(response) {
+                var orderCountm = parseInt(response);
+                // console.log(orderCountm)
+                totalCountEle.text(orderCountm);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('请求失败：' + textStatus);
+            }
+        });
+    });
 
 </script>

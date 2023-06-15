@@ -1,12 +1,15 @@
 package cn.lanqiao.controller;
 
+import cn.lanqiao.pojo.Merchan;
 import cn.lanqiao.pojo.Supplier;
 import cn.lanqiao.pojo.JsonResult;
 import cn.lanqiao.service.BillService;
 import cn.lanqiao.service.MemberService;
+import cn.lanqiao.service.OrderService;
 import cn.lanqiao.service.SupplierService;
 import cn.lanqiao.service.impl.BillServiceImpl;
 import cn.lanqiao.service.impl.MemberServiceImpl;
+import cn.lanqiao.service.impl.OrderServicelmpI;
 import cn.lanqiao.service.impl.SupplierServiceImpl;
 import cn.lanqiao.utils.DateUtils;
 import cn.lanqiao.utils.ImportExcelUtils;
@@ -16,6 +19,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.formula.functions.Count;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -45,6 +49,7 @@ public class SupplierServlet extends HttpServlet {
     SupplierService supplierService=  new SupplierServiceImpl();
     MemberService memberService=new MemberServiceImpl();
     BillService billService = new BillServiceImpl();
+    OrderService orderService=new OrderServicelmpI();
 
     public SupplierServlet() {
     }
@@ -60,7 +65,27 @@ public class SupplierServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=utf-8");
         //用来获取前端的请求
+        //总数
         String value = req.getParameter("action");
+        if(value.equals("orderLimitt")){
+            System.out.println("前端请求过来了");
+            int ordero = orderService.getCountm();
+            //将集合转换成JSON发送到前端
+            String json = JSON.toJSONString(ordero);
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
+        //金额
+        if(value.equals("orderLimito")){
+            System.out.println("前端请求过来了");
+            int ordero = orderService.getCounto();
+            //将集合转换成JSON发送到前端
+            String json = JSON.toJSONString(ordero);
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
         //分页查询
         if (value.equals("limit")){
             //前端发送当前页面的请求
@@ -428,6 +453,34 @@ public class SupplierServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        //第二个页面的柱状图
+        if (value.equals("orderEchars")){
+             System.out.println("过来了");
+            List<Integer> countByOrder = orderService.getCountByOrder();
+            System.out.println(countByOrder);
+            //将JSONArray这个流存储到页面上去，转成JSON格式
+            String json = JSON.toJSONString(countByOrder);
+            //发送一个编码格式
+            //try...catch
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
+        //折线图
+        if (value.equals("orderEcharsThree")){
+            System.out.println("过来了");
+            List<Integer> countByOrdert = orderService.getCountByOrdert();
+            System.out.println(countByOrdert);
+            //将JSONArray这个流存储到页面上去，转成JSON格式
+            String json = JSON.toJSONString(countByOrdert);
+            //发送一个编码格式
+            //try...catch
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
+
+
         //饼图
         if (value.equals("userEchars")){
 //            System.out.println("前端发送请求过来了");
@@ -483,6 +536,12 @@ public class SupplierServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+//        //销量
+//        if (value.equals("orderCountm")){
+//            System.out.println("前端发送请求过来了");
+//
+//        }
+
     }
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //执行excel文件导入操作
