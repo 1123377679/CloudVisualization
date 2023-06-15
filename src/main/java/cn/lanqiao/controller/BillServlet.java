@@ -15,6 +15,8 @@ import cn.lanqiao.utils.ExprotCellStyle;
 import cn.lanqiao.utils.ImportExcelUtils;
 import cn.lanqiao.utils.PageUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -37,6 +39,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -465,7 +468,26 @@ public class BillServlet extends HttpServlet {
                 resp.getWriter().write("0");
             }
         }
+
+
+
+        //第二个页面的柱状图
+        if (value.equals("SalesComparison")){
+            //System.out.println("过来了");
+            List<Integer> getSalesComparison = billService.getSalesComparison();
+            System.out.println(getSalesComparison);
+            //将JSONArray这个流存储到页面上去，转成JSON格式
+            String json = JSON.toJSONString(getSalesComparison);
+            //发送一个编码格式
+            //try...catch
+            PrintWriter writer = resp.getWriter();
+            writer.print(json);
+            writer.flush();
+        }
+
+
     }
+        //这个是后端
 
     private void extracted(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //执行excel文件导入操作

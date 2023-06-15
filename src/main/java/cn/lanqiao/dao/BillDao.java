@@ -24,4 +24,7 @@ public interface BillDao {
     Map<String ,Integer > getsupplierarea();
     //根据供应商名字查询账单编号
     int  getbillsum(String name);
+
+
+    List<Integer> getSalesComparison();
 }

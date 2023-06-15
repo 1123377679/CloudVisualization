@@ -71,7 +71,7 @@
     <div class="layuimini-loader-inner"></div>
 </div>
 <header>
-    <a href="index2.jsp" class="tiaozhuan">1233</a>
+    <a href="index2.jsp" class="tiaozhuan"></a>
 <%--    <label class="qidian">请输入起点:</label><input id="addressOne" type="text" style="color:black;"><br>--%>
 <%--    <label class="zhongdian">请输入终点：</label><input id="addressTwo" type="text" style="color:black;"><br>--%>
 <%--    <button class="queding" onclick="functionHandler()">确定</button>--%>
@@ -227,33 +227,33 @@
         searchSupermarkets();
     }
 </script>
-<%--<script>--%>
-<%--    var tiaozhuan = document.querySelector('.tiaozhuan');--%>
-<%--    var timer;--%>
-<%--    var timeout = 5; // 定义自动跳转的时间，单位为秒--%>
+<script>
+    var tiaozhuan = document.querySelector('.tiaozhuan');
+    var timer;
+    var timeout = 5; // 定义自动跳转的时间，单位为秒
 
-<%--    document.addEventListener('mousemove', function() {--%>
-<%--        // 如果已经开始倒计时，则退出--%>
-<%--        if (timer) {--%>
-<%--            return;--%>
-<%--        }--%>
-<%--        tiaozhuan.innerHTML = '';--%>
-<%--        timer = setTimeout(function() {--%>
-<%--            autoJump();--%>
-<%--        }, timeout * 1000);--%>
-<%--    });--%>
+    document.addEventListener('mousemove', function() {
+        // 如果已经开始倒计时，则退出
+        if (timer) {
+            return;
+        }
+        tiaozhuan.innerHTML = '';
+        timer = setTimeout(function() {
+            autoJump();
+        }, timeout * 1000);
+    });
 
-<%--    document.addEventListener('mouseout', function() {--%>
-<%--        if (timer) {--%>
-<%--            clearTimeout(timer);--%>
-<%--            timer = null;--%>
-<%--            tiaozhuan.innerHTML = '';--%>
-<%--        }--%>
-<%--    });--%>
+    document.addEventListener('mouseout', function() {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+            tiaozhuan.innerHTML = '';
+        }
+    });
 
-<%--    function autoJump() {--%>
-<%--        window.location.href = 'index2.jsp';--%>
-<%--    }--%>
-<%--</script>--%>
+    function autoJump() {
+        window.location.href = 'index2.jsp';
+    }
+</script>
 </body>
 </html>

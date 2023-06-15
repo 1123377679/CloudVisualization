@@ -145,7 +145,7 @@
         tiaozhuan.innerHTML = '';
         timer = setTimeout(function() {
             autoJump();
-        }, timeout * 100000);
+        }, timeout * 1000);
     });
 
     document.addEventListener('mouseout', function() {

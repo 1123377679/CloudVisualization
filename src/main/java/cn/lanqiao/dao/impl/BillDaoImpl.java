@@ -90,7 +90,7 @@ public class BillDaoImpl implements BillDao {
 
     @Override
     public Map<String, Integer> getsupplierarea() {
-        String sql = "SELECT address as supplierArea, SUM(1) AS supplierCount FROM tb_supplier GROUP BY address";
+        String sql = "SELECT address as supplierArea, SUM(1) AS supplierCount FROM tb_supplier GROUP BY address;";
         return DButils.commonQueryArea(sql);
     }
 
@@ -98,5 +98,13 @@ public class BillDaoImpl implements BillDao {
     public int getbillsum(String name) {
         return DButils.getOrderIdBySupplierName("SELECT DISTINCT b.providerid FROM tb_bills b JOIN tb_supplier s ON b.providerid = s.id WHERE s.name = ?",name);
     }
+
+    @Override
+    public List<Integer> getSalesComparison() {
+        String sql = "SELECT COUNT(*) AS count,MONTH(createdAt) AS groupField FROM tb_order WHERE YEAR(createdAt) = YEAR(CURDATE()) GROUP BY MONTH(createdAt) ORDER BY MONTH(createdAt)";
+        ArrayList<Integer> integers = DButils.commonQueryOrder(sql);
+        return integers;
+    }
+
 
 }

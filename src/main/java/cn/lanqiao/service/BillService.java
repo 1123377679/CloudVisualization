@@ -28,4 +28,8 @@ public interface BillService {
     Map<String ,Integer > getsupplierarea();
     //根据供应商名字查询账单编号
     int  getbillsum(String name);
+    //查询年份和销售额
+    List<Integer> getSalesComparison();
+
+
 }

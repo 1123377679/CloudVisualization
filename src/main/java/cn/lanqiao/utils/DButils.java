@@ -191,31 +191,6 @@ public class DButils {
         }
         return -1;
     }
-    public static ArrayList<Integer> commonQueryOrder(String sql) {
-
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = getConnection();
-            statement = connection.prepareStatement(sql);
-            resultSet = statement.executeQuery();
-
-            ArrayList<Integer> list = new ArrayList<>();
-
-            while (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                list.add(count);
-            }
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DButils.close(connection, statement, resultSet);
-        }
-        return null;
-    }
 
     //查询数据
     public static <T> ArrayList<T> commonQuery(Class<T> clazz, String sql, Object... param) {
@@ -301,33 +276,31 @@ public class DButils {
         }
         return map;
     }
-    //查询供应商底下的账单信息(供应商的名字和供应商对应的账单数量)
-    public static Map<String,Integer> commonQueryCountMapt(String sql){
+
+    public static ArrayList<Integer> commonQueryOrder(String sql) {
+
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        //创建一个map集合
-        Map<String,Integer> map = new HashMap<>();
+
         try {
-            connection = getConnection();//获取驱动连接
-            statement = connection.prepareStatement(sql);//编译sql
-            resultSet = statement.executeQuery();//执行sql
-            //处理sql里面的值
-            while (resultSet.next()){
-                //供应商名字
-                String month = resultSet.getString("month");
-                //账单数量
-                int count = resultSet.getInt("count");
-                //存入map集合中
-                map.put(month,count);
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+
+            ArrayList<Integer> list = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                list.add(count);
             }
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            //关闭所有的流
-            DButils.close(connection,statement,resultSet);
+        } finally {
+            DButils.close(connection, statement, resultSet);
         }
-        return map;
+        return null;
     }
 
     //查询会员列表的生日信息

@@ -67,5 +67,10 @@ public class BillServiceImpl implements BillService {
         return billDao.getbillsum(name);
     }
 
+    @Override
+    public List<Integer> getSalesComparison() {
+        return billDao.getSalesComparison();
+    }
+
 
 }

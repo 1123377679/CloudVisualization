@@ -191,8 +191,6 @@ $(function () {
                     axisLine: {show: false},
                     position: 'bottom',
                     offset: 20,
-
-
                 }],
 
                 yAxis: [{
@@ -501,100 +499,138 @@ $(function () {
                             color: "#fff",
                             fontSize: '16',
 
-                        },
-
-                        itemGap: 35
-                    },
-                    grid: {
-                        left: '0%',
-                        top: '40px',
-                        right: '0%',
-                        bottom: '2%',
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "rgba(255,255,255,.1)",
-                                width: 1,
-                                type: "solid"
-                            },
-                        },
-                        axisTick: {
-                            show: false,
-                        },
-                        axisLabel: {
-                            interval: 0,
-                            // rotate:50,
-                            show: true,
-                            splitNumber: 15,
-                            textStyle: {
-                                color: "rgba(255,255,255,.6)",
-                                fontSize: '16',
-                            },
-                        },
-                    }],
-                    yAxis: [{
-                        type: 'value',
-                        axisLabel: {
-                            //formatter: '{value} %'
-                            show: true,
-                            textStyle: {
-                                color: "rgba(255,255,255,.6)",
-                                fontSize: '16',
-                            },
-                        },
-                        axisTick: {
-                            show: false,
-                        },
-                        axisLine: {
-                            show: true,
-                            lineStyle: {
-                                color: "rgba(255,255,255,.1	)",
-                                width: 1,
-                                type: "solid"
-                            },
-                        },
-                        splitLine: {
-                            lineStyle: {
-                                color: "rgba(255,255,255,.1)",
-                            }
-                        }
-                    }],
+        },
+ 
+        itemGap: 35
+    },
+    grid: {
+        left: '0%',
+		top:'40px',
+        right: '0%',
+        bottom: '2%',
+       containLabel: true
+    },
+    xAxis: [{
+        type: 'category',
+      		data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        axisLine: {
+            show: true,
+         lineStyle: {
+                color: "rgba(255,255,255,.1)",
+                width: 1,
+                type: "solid"
+            },
+        },
+        axisTick: {
+            show: false,
+        },
+		axisLabel:  {
+                interval: 0,
+               // rotate:50,
+                show: true,
+                splitNumber: 15,
+                textStyle: {
+ 					color: "rgba(255,255,255,.6)",
+                    fontSize: '16',
+                },
+            },
+    }],
+    yAxis: [{
+        type: 'value',
+        axisLabel: {
+           //formatter: '{value} %'
+			show:true,
+			 textStyle: {
+ 					color: "rgba(255,255,255,.6)",
+                    fontSize: '16',
+                },
+        },
+        axisTick: {
+            show: false,
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: "rgba(255,255,255,.1	)",
+                width: 1,
+                type: "solid"
+            },
+        },
+        splitLine: {
+            lineStyle: {
+               color: "rgba(255,255,255,.1)",
+            }
+        }
+    }],
+    series: [{
+        name: '2022年',
+        type: 'line',
+		
+        data: [2, 6, 3, 8, 5, 8, 10, 13, 8, 5, 6, 9],
+       
+        itemStyle: {
+            normal: {
+                color:'#2f89cf',
+                opacity: 1,
+				
+				barBorderRadius: 5,
+            }
+        }
+    }, {
+        name: '2023年',
+        type: 'line',
+        data: [],//[5, 2, 6, 4, 5, 12, 5, 17, 9, 2, 6, 3],
+		barWidth:'15',
+       // barGap: 1,
+        itemStyle: {
+            normal: {
+                color:'#62c98d',
+                opacity: 1,
+				barBorderRadius: 5,
+            }
+        }
+    },
+	]
+};
+       //发送ajax请求
+    $(function (){
+        var arrCount = [];
+        // 发送AJAX异步请求去Servlet后台获取用户数量的数据
+        $.get("/BillServlet.do?action=SalesComparison",function (result){
+            for (var i = 0; i<result.length;i++){
+                arrCount.push(result[i]);
+                myChart.hideLoading(); //隐藏加载动画
+                myChart.setOption({
                     series: [{
                         name: '2022年',
                         type: 'line',
-
                         data: [2, 6, 3, 8, 5, 8, 10, 13, 8, 5, 6, 9],
-
                         itemStyle: {
                             normal: {
-                                color: '#2f89cf',
+                                color:'#2f89cf',
                                 opacity: 1,
-
                                 barBorderRadius: 5,
                             }
                         }
                     }, {
                         name: '2023年',
                         type: 'line',
-                        data: [5, 2, 6, 4, 5, 12, 5, 17, 9, 2, 6, 3],
-                        barWidth: '15',
+                        data: arrCount,//[5, 2, 6, 4, 5, 12, 5, 17, 9, 2, 6, 3],
+                        barWidth:'15',
                         // barGap: 1,
                         itemStyle: {
                             normal: {
-                                color: '#62c98d',
+                                color:'#62c98d',
                                 opacity: 1,
                                 barBorderRadius: 5,
                             }
                         }
                     },
                     ]
-                };
-
+                });
+            }
+        },"json")
+    });
 
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
