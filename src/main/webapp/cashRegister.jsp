@@ -19,6 +19,9 @@
     body {
       margin: 0;
       padding: 0;
+      background-image: url("/images/背景图.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
 
@@ -337,9 +340,9 @@
 </head>
 
 <body>
-  <video id="background-video" autoplay loop muted>
-    <source src="/images/hai.mp4" type="video/mp4">
-    </video>
+<%--  <video id="background-video" autoplay loop muted>--%>
+<%--    <source src="/images/hai.mp4" type="video/mp4">--%>
+<%--    </video>--%>
 
   <div class="header">
     <h2>超市收银系统</h2>
